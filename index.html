@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sierra Cuthill - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,199 +13,180 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #015B10 0%, #028A0F 100%);
-            min-height: 100vh;
-            color: white;
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            padding: 40px 0;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            margin-bottom: 40px;
-            backdrop-filter: blur(10px);
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .nav-links {
+        .split-layout {
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
+            height: 100vh;
         }
 
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            font-weight: bold;
-        }
-
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .about-section {
-            background: rgba(255, 255, 255, 0.95);
-            color: #015B10;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .about-section h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #015B10;
-        }
-
-        .about-section p {
-            line-height: 1.6;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
-
-        .resume-section {
-            background: rgba(255, 255, 255, 0.95);
-            color: #015B10;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            text-align: center;
-        }
-
-        .resume-section h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #015B10;
-        }
-
-        .resume-button {
-            display: inline-block;
-            background: linear-gradient(45deg, #015B10, #028A0F);
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 25px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .resume-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-
-        .profile-image {
-            width: 100%;
-            max-width: 300px;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            margin: 20px auto;
-            display: block;
-        }
-
-        .image-placeholder {
-            width: 100%;
-            max-width: 300px;
-            height: 400px;
-            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
-            border-radius: 20px;
+        .left-panel {
+            width: 40%;
+            background: #015B10;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #666;
-            font-size: 1.2rem;
-            margin: 20px auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        footer {
+        .logo {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+        }
+
+        .circular-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            position: relative;
+        }
+
+        .right-panel {
+            width: 60%;
+            background: white;
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .main-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: #8B7355;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .subheading {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #8B7355;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #8B7355;
+            margin-bottom: 50px;
+            max-width: 500px;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-button {
+            background: white;
+            border: 2px solid #015B10;
+            color: #015B10;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
             text-align: center;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
+            max-width: 200px;
+        }
+
+        .nav-button:hover {
+            background: #015B10;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(1, 91, 16, 0.3);
+        }
+
+        @media (max-width: 1024px) {
+            .split-layout {
+                flex-direction: column;
+            }
+            
+            .left-panel {
+                width: 100%;
+                height: 50vh;
+            }
+            
+            .right-panel {
+                width: 100%;
+                height: 50vh;
+                padding: 40px 30px;
+            }
+            
+            .circular-image {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .main-heading {
+                font-size: 2.5rem;
+            }
         }
 
         @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
+            .main-heading {
+                font-size: 2rem;
             }
             
-            h1 {
-                font-size: 2.5rem;
+            .subheading {
+                font-size: 1.2rem;
             }
             
-            .nav-links {
-                flex-direction: column;
-                align-items: center;
+            .right-panel {
+                padding: 30px 20px;
+            }
+            
+            .circular-image {
+                width: 150px;
+                height: 150px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Sierra Cuthill</h1>
-            <nav class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#resume">Resume</a>
-                <a href="#contact">Contact</a>
-            </nav>
-        </header>
-
-        <main class="main-content">
-            <section class="about-section" id="about">
-                <h2>About Me</h2>
-                <p>Born in Rhode Island in 2003, I am a passionate Business Analytics and Information Management Technology major with a drive to make data-driven decisions that create real impact.</p>
-                
-                <p>When I'm not diving deep into analytics and technology, you'll find me on the soccer field, where I've learned the importance of teamwork, strategy, and perseverance. I also love spending quality time with friends, whether we're exploring new places or just enjoying good conversation.</p>
-                
-                <p>My goal is to bridge the gap between complex data and actionable business insights, helping organizations make smarter decisions through the power of analytics and technology.</p>
-            </section>
-
-            <section class="resume-section" id="resume">
-                <h2>Resume</h2>
-                <p>Download my resume to learn more about my professional experience, skills, and achievements.</p>
-                <a href="#" class="resume-button">Download Resume</a>
-                
-                <img src="Headshot.jpg" alt="Sierra Cuthill" class="profile-image">
-            </section>
-        </main>
-
-        <footer>
-            <p>&copy; 2024 Sierra Cuthill. All rights reserved.</p>
-        </footer>
+    <div class="split-layout">
+        <div class="left-panel">
+            <div class="logo">🌿</div>
+            <img src="Headshot.jpg" alt="Sierra Cuthill" class="circular-image">
+        </div>
+        
+        <div class="right-panel">
+            <h1 class="main-heading">Lost in Data?</h1>
+            <h2 class="subheading">I can make sense of the bits and bytes</h2>
+            
+            <p class="description">
+                Here is a walk-through of all the things I'm passionate about. Whether its wrangling data to figure out a complex problem or exploring the great outdoors: I'm always looking for ways to improve and learn things along the way.
+            </p>
+            
+            <div class="button-group">
+                <a href="#about" class="nav-button">Learn more</a>
+                <a href="#resume" class="nav-button">Resume</a>
+                <a href="#projects" class="nav-button">Projects</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>
