@@ -1,13 +1,210 @@
 <!DOCTYPE html>
-<html>
-<body style="background-color: #015B10;">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sierra Cuthill - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<h1 style ="font-size: 45px;">Sierra Cuthill</h1>
-<p><img src="Me.jpg" width="200" height = "300"></p>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #015B10 0%, #028A0F 100%);
+            min-height: 100vh;
+            color: white;
+        }
 
-<p>Born in Rhode Island in 2003
-<br> I am a Business Analytics and Information Management Technolgy Major
-<br> I like to play soccer and hang out with my friends </p>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .about-section {
+            background: rgba(255, 255, 255, 0.95);
+            color: #015B10;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .about-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #015B10;
+        }
+
+        .about-section p {
+            line-height: 1.6;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .resume-section {
+            background: rgba(255, 255, 255, 0.95);
+            color: #015B10;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .resume-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #015B10;
+        }
+
+        .resume-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #015B10, #028A0F);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .resume-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .profile-image {
+            width: 100%;
+            max-width: 300px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin: 20px auto;
+            display: block;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            max-width: 300px;
+            height: 400px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.2rem;
+            margin: 20px auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sierra Cuthill</h1>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#resume">Resume</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <section class="about-section" id="about">
+                <h2>About Me</h2>
+                <p>Born in Rhode Island in 2003, I am a passionate Business Analytics and Information Management Technology major with a drive to make data-driven decisions that create real impact.</p>
+                
+                <p>When I'm not diving deep into analytics and technology, you'll find me on the soccer field, where I've learned the importance of teamwork, strategy, and perseverance. I also love spending quality time with friends, whether we're exploring new places or just enjoying good conversation.</p>
+                
+                <p>My goal is to bridge the gap between complex data and actionable business insights, helping organizations make smarter decisions through the power of analytics and technology.</p>
+            </section>
+
+            <section class="resume-section" id="resume">
+                <h2>Resume</h2>
+                <p>Download my resume to learn more about my professional experience, skills, and achievements.</p>
+                <a href="#" class="resume-button">Download Resume</a>
+                
+                <img src="Headshot.jpg" alt="Sierra Cuthill" class="profile-image">
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Sierra Cuthill. All rights reserved.</p>
+        </footer>
+    </div>
 </body>
 </html>
