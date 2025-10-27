@@ -43,19 +43,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 10;
         }
 
 
 
-        .oval-image {
-            width: 400px;
-            height: 500px;
-            border-radius: 50%;
+        .rectangular-image {
+            width: 100%;
+            height: 100vh;
             object-fit: cover;
-            border: 8px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            z-index: 10;
-            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 5;
+            opacity: 0.3;
         }
 
 
@@ -68,11 +69,12 @@
             justify-content: center;
             align-items: flex-end;
             position: relative;
+            z-index: 10;
         }
 
         .main-heading {
             font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             font-weight: 600;
             color: #231C07;
             margin-bottom: 15px;
@@ -82,7 +84,7 @@
 
         .subheading {
             font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             color: #231C07;
             margin-bottom: 25px;
             font-weight: 400;
@@ -90,7 +92,7 @@
         }
 
         .description {
-            font-size: 1rem;
+            font-size: 1.1rem;
             line-height: 1.5;
             color: #231C07;
             margin-bottom: 30px;
@@ -143,9 +145,8 @@
                 padding-top: 60px;
             }
             
-            .oval-image {
-                width: 300px;
-                height: 400px;
+            .rectangular-image {
+                height: 50vh;
             }
             
             .main-heading {
@@ -166,9 +167,8 @@
                 padding: 30px 20px;
             }
             
-            .oval-image {
-                width: 250px;
-                height: 320px;
+            .rectangular-image {
+                height: 50vh;
             }
         }
     </style>
@@ -177,8 +177,9 @@
     <div class="angled-background"></div>
     
     <div class="split-layout">
+        <img src="Headshot.jpg" alt="Sierra Cuthill" class="rectangular-image">
+        
         <div class="left-panel">
-            <img src="Headshot.jpg" alt="Sierra Cuthill" class="oval-image">
         </div>
         
         <div class="right-panel">
