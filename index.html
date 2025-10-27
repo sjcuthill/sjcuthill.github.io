@@ -27,7 +27,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #8E3333 0%, #A04747 25%, #B85A5A 50%, #D0D0D0 50%, #E0E0E0 75%, #F0F0F0 100%);
+            background: linear-gradient(135deg, #8E3333 0%, #8E3333 50%, #E0E0E0 50%, #E0E0E0 100%);
             z-index: -1;
         }
 
@@ -46,27 +46,10 @@
         }
 
 
-        .logo {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .logo video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
 
         .oval-image {
-            width: 500px;
-            height: 600px;
+            width: 400px;
+            height: 500px;
             border-radius: 50%;
             object-fit: cover;
             border: 8px solid rgba(255, 255, 255, 0.1);
@@ -75,76 +58,64 @@
             position: relative;
         }
 
-        .image-gradient-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(142, 51, 51, 0.1) 0%, rgba(160, 71, 71, 0.05) 50%, rgba(255, 255, 255, 0.1) 100%);
-            border-radius: 50%;
-            z-index: 11;
-            pointer-events: none;
-        }
 
         .right-panel {
             width: 60%;
             background: transparent;
-            padding: 80px 60px;
+            padding: 40px 40px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: flex-end;
             position: relative;
-            padding-top: 120px;
         }
 
         .main-heading {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-size: 2.8rem;
             font-weight: 600;
             color: #231C07;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             line-height: 1.1;
             text-align: right;
         }
 
         .subheading {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: #231C07;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
             font-weight: 400;
             text-align: right;
         }
 
         .description {
-            font-size: 1.1rem;
-            line-height: 1.6;
+            font-size: 1rem;
+            line-height: 1.5;
             color: #231C07;
-            margin-bottom: 50px;
-            max-width: 500px;
+            margin-bottom: 30px;
+            max-width: 450px;
             text-align: right;
         }
 
         .button-group {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
         }
 
         .nav-button {
             background: rgba(35, 28, 7, 0.1);
             border: 2px solid rgba(35, 28, 7, 0.3);
             color: #231C07;
-            padding: 15px 30px;
+            padding: 12px 25px;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 500;
-            font-size: 1rem;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
             text-align: center;
-            max-width: 200px;
+            max-width: 180px;
             backdrop-filter: blur(10px);
         }
 
@@ -173,8 +144,8 @@
             }
             
             .oval-image {
-                width: 350px;
-                height: 450px;
+                width: 300px;
+                height: 400px;
             }
             
             .main-heading {
@@ -196,8 +167,8 @@
             }
             
             .oval-image {
-                width: 280px;
-                height: 350px;
+                width: 250px;
+                height: 320px;
             }
         }
     </style>
@@ -207,15 +178,7 @@
     
     <div class="split-layout">
         <div class="left-panel">
-            <div class="logo">
-                <video autoplay muted>
-                    <source src="Sierra Logo.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div style="position: relative; display: inline-block;">
-                <img src="Headshot.jpg" alt="Sierra Cuthill" class="oval-image">
-                <div class="image-gradient-overlay"></div>
-            </div>
+            <img src="Headshot.jpg" alt="Sierra Cuthill" class="oval-image">
         </div>
         
         <div class="right-panel">
@@ -231,9 +194,10 @@
             </p>
             
             <div class="button-group">
-                <a href="#about" class="nav-button">Learn more</a>
+                <a href="#about" class="nav-button">About me</a>
                 <a href="resume.html" class="nav-button">Resume</a>
                 <a href="#projects" class="nav-button">Projects</a>
+                <a href="#showcase" class="nav-button">Showcase</a>
             </div>
         </div>
     </div>
