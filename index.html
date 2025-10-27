@@ -16,6 +16,17 @@
             font-family: 'Inter', sans-serif;
             height: 100vh;
             overflow: hidden;
+            position: relative;
+        }
+
+        .angled-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #8E3333 0%, #8E3333 50%, #E0E0E0 50%, #E0E0E0 100%);
+            z-index: -1;
         }
 
         .split-layout {
@@ -25,11 +36,35 @@
 
         .left-panel {
             width: 40%;
-            background: #8E3333;
+            background: transparent;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .header-nav {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .header-nav a {
+            color: #E0E0E0;
+            text-decoration: none;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .header-nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         .logo {
@@ -63,7 +98,7 @@
 
         .right-panel {
             width: 60%;
-            background: #E0E0E0;
+            background: transparent;
             padding: 80px 60px;
             display: flex;
             flex-direction: column;
@@ -103,9 +138,9 @@
         }
 
         .nav-button {
-            background: #E0E0E0;
-            border: 2px solid #8E3333;
-            color: #8E3333;
+            background: rgba(35, 28, 7, 0.1);
+            border: 2px solid rgba(35, 28, 7, 0.3);
+            color: #231C07;
             padding: 15px 30px;
             text-decoration: none;
             border-radius: 8px;
@@ -114,13 +149,14 @@
             transition: all 0.3s ease;
             text-align: center;
             max-width: 200px;
+            backdrop-filter: blur(10px);
         }
 
         .nav-button:hover {
-            background: #8E3333;
-            color: #E0E0E0;
+            background: rgba(35, 28, 7, 0.2);
+            border-color: rgba(35, 28, 7, 0.5);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(142, 51, 51, 0.3);
+            box-shadow: 0 5px 15px rgba(35, 28, 7, 0.2);
         }
 
         @media (max-width: 1024px) {
@@ -170,6 +206,8 @@
     </style>
 </head>
 <body>
+    <div class="angled-background"></div>
+    
     <div class="split-layout">
         <div class="left-panel">
             <div class="logo">
@@ -177,6 +215,11 @@
                     <source src="Sierra Logo.mp4" type="video/mp4">
                 </video>
             </div>
+            <nav class="header-nav">
+                <a href="index.html">Home</a>
+                <a href="resume.html">Resume</a>
+                <a href="#projects">Projects</a>
+            </nav>
             <img src="Headshot.jpg" alt="Sierra Cuthill" class="oval-image">
         </div>
         
