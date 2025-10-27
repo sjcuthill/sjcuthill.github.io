@@ -27,8 +27,19 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #8E3333 0%, #8E3333 50%, #E0E0E0 50%, #E0E0E0 100%);
+            background: #E0E0E0;
             z-index: -1;
+        }
+
+        .red-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #8E3333 0%, #8E3333 50%, transparent 50%, transparent 100%);
+            z-index: 5;
+            clip-path: polygon(0 0, 40% 0, 0 100%);
         }
 
         .split-layout {
@@ -49,14 +60,16 @@
 
 
         .rectangular-image {
-            width: 40%;
-            height: 100vh;
+            width: 200px;
+            height: 250px;
             object-fit: cover;
             position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 5;
-            opacity: 0.6;
+            top: 30px;
+            left: 30px;
+            z-index: 10;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            clip-path: polygon(0 0, 100% 0, 0 100%);
         }
 
 
@@ -146,8 +159,11 @@
             }
             
             .rectangular-image {
-                width: 100%;
-                height: 50vh;
+                width: 150px;
+                height: 200px;
+                top: 20px;
+                left: 20px;
+                clip-path: polygon(0 0, 100% 0, 0 100%);
             }
             
             .main-heading {
@@ -169,14 +185,18 @@
             }
             
             .rectangular-image {
-                width: 100%;
-                height: 50vh;
+                width: 120px;
+                height: 160px;
+                top: 15px;
+                left: 15px;
+                clip-path: polygon(0 0, 100% 0, 0 100%);
             }
         }
     </style>
 </head>
 <body>
     <div class="angled-background"></div>
+    <div class="red-border"></div>
     
     <div class="split-layout">
         <img src="Headshot.jpg" alt="Sierra Cuthill" class="rectangular-image">
