@@ -27,7 +27,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #8E3333 0%, #8E3333 50%, #E0E0E0 50%, #E0E0E0 100%);
+            background: linear-gradient(135deg, #8E3333 0%, #A04747 25%, #B85A5A 50%, #D0D0D0 50%, #E0E0E0 75%, #F0F0F0 100%);
             z-index: -1;
         }
 
@@ -73,6 +73,18 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             z-index: 10;
             position: relative;
+        }
+
+        .image-gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(142, 51, 51, 0.1) 0%, rgba(160, 71, 71, 0.05) 50%, rgba(255, 255, 255, 0.1) 100%);
+            border-radius: 50%;
+            z-index: 11;
+            pointer-events: none;
         }
 
         .right-panel {
@@ -200,16 +212,18 @@
                     <source src="Sierra Logo.mp4" type="video/mp4">
                 </video>
             </div>
-            <img src="Headshot.jpg" alt="Sierra Cuthill" class="oval-image">
+            <div style="position: relative; display: inline-block;">
+                <img src="Headshot.jpg" alt="Sierra Cuthill" class="oval-image">
+                <div class="image-gradient-overlay"></div>
+            </div>
         </div>
         
         <div class="right-panel">
             <h1 class="main-heading">Oh hi there!</h1>
-            <h2 class="subheading">I'm Sierra: a data analyst and web developer.</h2>
-            <h2 class="subheading">And welcome to my portfolio!</h2>
+            <h2 class="subheading">I'm Sierra... Welcome to my portfolio!</h2>
             
             <p class="description">
-                I specialize in transforming complex data into clear, actionable insights and building interactive, user-friendly web experiences. Here, you’ll find a collection of my projects showcasing skills in data visualization, analytics, and front-end development.
+                I am a data analyst and web developer who specializes in transforming complex data into clear, actionable insights and building interactive, user-friendly web experiences. Here, you’ll find a collection of my projects showcasing skills in data visualization, analytics, and front-end development.
             </p>
 
             <p class="description">
