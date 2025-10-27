@@ -14,32 +14,42 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #E0E0E0;
-            color: #231C07;
-            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .angled-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #8E3333 0%, #8E3333 50%, #E0E0E0 50%, #E0E0E0 100%);
+            z-index: -1;
+        }
+
+        .content-container {
+            position: relative;
+            z-index: 1;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .header {
-            background: #8E3333;
-            padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            padding: 30px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         .logo video {
@@ -58,92 +68,115 @@
             color: #E0E0E0;
             text-decoration: none;
             font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 25px;
             transition: all 0.3s ease;
-        }
-
-        .nav-links a:hover {
             background: rgba(255, 255, 255, 0.1);
         }
 
-        .main-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
-        .page-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            color: #8E3333;
-            text-align: center;
-            margin-bottom: 40px;
+        .resume-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
         }
 
         .resume-container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            max-width: 90%;
+            max-height: 80vh;
             overflow: hidden;
-            margin-bottom: 40px;
+            position: relative;
         }
 
-        .resume-embed {
+        .resume-image {
             width: 100%;
-            height: 80vh;
-            border: none;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #8E3333;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button:hover {
+            background: #8E3333;
+            color: white;
+            transform: translateY(-2px);
         }
 
         .download-section {
-            text-align: center;
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
         }
 
         .download-button {
-            display: inline-block;
             background: #8E3333;
             color: #E0E0E0;
             padding: 15px 30px;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 25px;
             font-weight: 500;
-            font-size: 1.1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(142, 51, 51, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .download-button:hover {
             background: #6B2525;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(142, 51, 51, 0.4);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
-        .back-button {
-            display: inline-block;
-            background: #E0E0E0;
-            color: #8E3333;
-            padding: 12px 24px;
-            text-decoration: none;
-            border: 2px solid #8E3333;
-            border-radius: 8px;
-            font-weight: 500;
-            margin-right: 20px;
-            transition: all 0.3s ease;
-        }
+        @media (max-width: 1024px) {
+            .header {
+                padding: 20px 30px;
+            }
 
-        .back-button:hover {
-            background: #8E3333;
-            color: #E0E0E0;
+            .nav-links {
+                gap: 20px;
+            }
+
+            .nav-links a {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+
+            .resume-content {
+                padding: 20px;
+            }
+
+            .resume-container {
+                max-width: 95%;
+                padding: 20px;
+            }
         }
 
         @media (max-width: 768px) {
-            .nav-container {
+            .header {
                 flex-direction: column;
                 gap: 20px;
+                padding: 20px;
             }
 
             .nav-links {
@@ -151,19 +184,31 @@
                 justify-content: center;
             }
 
-            .page-title {
-                font-size: 2rem;
+            .resume-content {
+                padding: 15px;
             }
 
-            .resume-embed {
-                height: 60vh;
+            .back-button {
+                position: static;
+                margin: 20px auto;
+                display: block;
+                text-align: center;
+                width: fit-content;
+            }
+
+            .download-section {
+                position: static;
+                text-align: center;
+                margin-top: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="nav-container">
+    <div class="angled-background"></div>
+    
+    <div class="content-container">
+        <header class="header">
             <div class="logo">
                 <video autoplay muted>
                     <source src="Sierra Logo.mp4" type="video/mp4">
@@ -175,21 +220,19 @@
                 <a href="resume.html">Resume</a>
                 <a href="#projects">Projects</a>
             </nav>
-        </div>
-    </header>
+        </header>
 
-    <main class="main-content">
-        <h1 class="page-title">Resume</h1>
+        <main class="resume-content">
+            <div class="resume-container">
+                <img src="Sierra Cuthill Resume.jpg" alt="Sierra Cuthill Resume" class="resume-image">
+            </div>
+        </main>
+
+        <a href="index.html" class="back-button">← Back to Home</a>
         
-        <div class="resume-container">
-            <iframe src="Sierra Cuthill Resume.pdf" class="resume-embed" type="application/pdf">
-                <p>Your browser doesn't support PDFs. <a href="Sierra Cuthill Resume.pdf">Download the resume</a> instead.</p>
-            </iframe>
-        </div>
-
         <div class="download-section">
-            <a href="Sierra Cuthill Resume.pdf" class="download-button" download>Download PDF Resume</a>
+            <a href="Sierra Cuthill Resume.pdf" class="download-button" download>Download PDF</a>
         </div>
-    </main>
+    </div>
 </body>
 </html>
