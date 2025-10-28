@@ -39,7 +39,9 @@
             height: 100%;
             background: #8E3333;
             z-index: 5;
-            clip-path: polygon(0 0, 100% 0, 0 25%);
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            transform: skewY(-28deg);
+            transform-origin: top left;
         }
 
         .split-layout {
@@ -60,8 +62,8 @@
 
 
         .rectangular-image {
-            width: 600px;
-            height: 700px;
+            width: 800px;
+            height: 900px;
             object-fit: cover;
             position: absolute;
             top: 0;
@@ -69,7 +71,9 @@
             z-index: 10;
             border-radius: 0;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            clip-path: polygon(0 0, 100% 0, 0 25%);
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            transform: skewY(-28deg);
+            transform-origin: top left;
         }
 
 
@@ -159,11 +163,13 @@
             }
             
             .rectangular-image {
-                width: 500px;
-                height: 600px;
+                width: 700px;
+                height: 800px;
                 top: 0;
                 left: 0;
-                clip-path: polygon(0 0, 100% 0, 0 25%);
+                clip-path: polygon(0 0, 100% 0, 0 100%);
+                transform: skewY(-28deg);
+                transform-origin: top left;
             }
             
             .main-heading {
@@ -185,11 +191,13 @@
             }
             
             .rectangular-image {
-                width: 400px;
-                height: 500px;
+                width: 600px;
+                height: 700px;
                 top: 0;
                 left: 0;
-                clip-path: polygon(0 0, 100% 0, 0 25%);
+                clip-path: polygon(0 0, 100% 0, 0 100%);
+                transform: skewY(-28deg);
+                transform-origin: top left;
             }
         }
     </style>
