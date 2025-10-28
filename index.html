@@ -27,21 +27,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #E0E0E0;
+            background: linear-gradient(135deg, #8E3333 0%, #8E3333 50%, #E0E0E0 50%, #E0E0E0 100%);
             z-index: -1;
-        }
-
-        .red-border {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #8E3333;
-            z-index: 5;
-            clip-path: polygon(0 0, 70% 0, 0 100%);
-            transform: skewY(-28deg);
-            transform-origin: top left;
         }
 
         .split-layout {
@@ -62,18 +49,14 @@
 
 
         .rectangular-image {
-            width: 800px;
-            height: 900px;
+            width: 100%;
+            height: 100vh;
             object-fit: cover;
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 10;
-            border-radius: 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            clip-path: polygon(0 0, 55% 0, 0 100%);
-            transform: skewY(-28deg);
-            transform-origin: top left;
+            z-index: 5;
+            opacity: 0.3;
         }
 
 
@@ -163,13 +146,7 @@
             }
             
             .rectangular-image {
-                width: 700px;
-                height: 800px;
-                top: 0;
-                left: 0;
-                clip-path: polygon(0 0, 55% 0, 0 100%);
-                transform: skewY(-28deg);
-                transform-origin: top left;
+                height: 50vh;
             }
             
             .main-heading {
@@ -191,20 +168,13 @@
             }
             
             .rectangular-image {
-                width: 600px;
-                height: 700px;
-                top: 0;
-                left: 0;
-                clip-path: polygon(0 0, 55% 0, 0 100%);
-                transform: skewY(-28deg);
-                transform-origin: top left;
+                height: 50vh;
             }
         }
     </style>
 </head>
 <body>
     <div class="angled-background"></div>
-    <div class="red-border"></div>
     
     <div class="split-layout">
         <img src="Headshot.jpg" alt="Sierra Cuthill" class="rectangular-image">
