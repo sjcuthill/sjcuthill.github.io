@@ -26,14 +26,24 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 75%;
             background: linear-gradient(135deg, #8E3333 0%, #8E3333 50%, #E0E0E0 50%, #E0E0E0 100%);
             z-index: -1;
         }
 
+        .bottom-red-section {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 25%;
+            background: #8E3333;
+            z-index: 1;
+        }
+
         .split-layout {
             display: flex;
-            height: 100vh;
+            height: 75vh;
         }
 
         .left-panel {
@@ -50,7 +60,7 @@
 
         .rectangular-image {
             width: 100%;
-            height: 100vh;
+            height: 75vh;
             object-fit: contain;
             position: absolute;
             top: 0;
@@ -66,7 +76,7 @@
         .right-panel {
             width: 60%;
             background: transparent;
-            padding: 40px 40px;
+            padding: 40px 40px 20px 40px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -104,15 +114,19 @@
         }
 
         .button-group {
+            position: absolute;
+            bottom: 20px;
+            right: 40px;
             display: flex;
             flex-direction: column;
             gap: 10px;
+            z-index: 15;
         }
 
         .nav-button {
-            background: rgba(35, 28, 7, 0.1);
-            border: 2px solid rgba(35, 28, 7, 0.3);
-            color: #231C07;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
             padding: 12px 25px;
             text-decoration: none;
             border-radius: 8px;
@@ -125,10 +139,10 @@
         }
 
         .nav-button:hover {
-            background: rgba(35, 28, 7, 0.2);
-            border-color: rgba(35, 28, 7, 0.5);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(35, 28, 7, 0.2);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
         }
 
         @media (max-width: 1024px) {
@@ -190,19 +204,22 @@
             <h2 class="subheading">I'm Sierra... Welcome to my portfolio!</h2>
             
             <p class="description">
-                I am a data analyst and web developer who specializes in transforming complex data into clear, actionable insights and building interactive, user-friendly web experiences. Here, you’ll find a collection of my projects showcasing skills in data visualization, analytics, and front-end development.
+                I am a data analyst and web developer who specializes in transforming complex data into clear, actionable insights and building interactive, user-friendly web experiences. Here, you'll find a collection of my projects showcasing skills in data visualization, analytics, and front-end development.
             </p>
 
             <p class="description">
                Feel free to explore my projects, resume, and learn a little bit more about me! 
             </p>
             
-            <div class="button-group">
-                <a href="#about" class="nav-button">About me</a>
-                <a href="resume.html" class="nav-button">Resume</a>
-                <a href="#projects" class="nav-button">Projects</a>
-                <a href="#showcase" class="nav-button">Showcase</a>
-            </div>
+        </div>
+    </div>
+    
+    <div class="bottom-red-section">
+        <div class="button-group">
+            <a href="#about" class="nav-button">About me</a>
+            <a href="resume.html" class="nav-button">Resume</a>
+            <a href="#projects" class="nav-button">Projects</a>
+            <a href="#showcase" class="nav-button">Showcase</a>
         </div>
     </div>
 </body>
