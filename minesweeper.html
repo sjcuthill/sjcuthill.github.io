@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+    <link rel="icon" type="image/png" href="Favicon.png?v=3">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; background: #f3f3f3; }
+        header { width: 100%; padding: 16px; background: #8E3333; color: white; text-align: center; }
+        .board { display: grid; gap: 4px; background: #ddd; padding: 8px; border-radius: 8px; margin-top: 20px; }
+        .cell { width: 36px; height: 36px; background: #fff; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; user-select: none; font-weight: 600; }
+        .cell.revealed { background: #eaeaea; cursor: default; }
+        .panel { margin-top: 14px; display: flex; gap: 10px; align-items: center; }
+        button { background: #8E3333; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; }
+        a.back { margin-top: 16px; color: #231C07; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Minesweeper</h2>
+    </header>
+    <div class="panel">
+        <span>9x9 • 10 mines</span>
+        <button id="reset">Reset</button>
+    </div>
+    <div id="board" class="board"></div>
+    <a class="back" href="games.html">← Back to Games</a>
+
+    <script>
+        const rows = 9, cols = 9, minesCount = 10;
+        let board, mineSet, revealedCount, gameOver;
+
+        const boardEl = document.getElementById('board');
+        const resetBtn = document.getElementById('reset');
+        boardEl.style.gridTemplateColumns = `repeat(${cols}, 36px)`;
+
+        function init() {
+            board = Array.from({ length: rows }, () => Array.from({ length: cols }, () => ({ mine:false, adj:0, el:null, revealed:false, flagged:false })));
+            mineSet = new Set();
+            revealedCount = 0;
+            gameOver = false;
+            boardEl.innerHTML = '';
+
+            // place mines
+            while (mineSet.size < minesCount) {
+                const r = Math.floor(Math.random()*rows);
+                const c = Math.floor(Math.random()*cols);
+                const key = `${r},${c}`;
+                if (!mineSet.has(key)) {
+                    mineSet.add(key);
+                    board[r][c].mine = true;
+                }
+            }
+
+            // compute adjacents
+            for (let r=0;r<rows;r++) {
+                for (let c=0;c<cols;c++) {
+                    if (board[r][c].mine) continue;
+                    board[r][c].adj = neighbors(r,c).filter(([nr,nc]) => board[nr][nc].mine).length;
+                }
+            }
+
+            // render
+            for (let r=0;r<rows;r++) {
+                for (let c=0;c<cols;c++) {
+                    const div = document.createElement('div');
+                    div.className = 'cell';
+                    div.addEventListener('click', () => onReveal(r,c));
+                    div.addEventListener('contextmenu', (e) => { e.preventDefault(); onFlag(r,c); });
+                    board[r][c].el = div;
+                    boardEl.appendChild(div);
+                }
+            }
+        }
+
+        function neighbors(r,c) {
+            const res = [];
+            for (let dr=-1; dr<=1; dr++) {
+                for (let dc=-1; dc<=1; dc++) {
+                    if (dr===0 && dc===0) continue;
+                    const nr=r+dr, nc=c+dc;
+                    if (nr>=0 && nr<rows && nc>=0 && nc<cols) res.push([nr,nc]);
+                }
+            }
+            return res;
+        }
+
+        function onReveal(r,c) {
+            if (gameOver) return;
+            const cell = board[r][c];
+            if (cell.revealed || cell.flagged) return;
+            cell.revealed = true;
+            cell.el.classList.add('revealed');
+            if (cell.mine) {
+                cell.el.textContent = '💣';
+                endGame(false);
+                return;
+            }
+            revealedCount++;
+            if (cell.adj > 0) {
+                cell.el.textContent = cell.adj;
+            } else {
+                // flood fill
+                neighbors(r,c).forEach(([nr,nc]) => {
+                    if (!board[nr][nc].revealed) onReveal(nr,nc);
+                });
+            }
+            checkWin();
+        }
+
+        function onFlag(r,c) {
+            if (gameOver) return;
+            const cell = board[r][c];
+            if (cell.revealed) return;
+            cell.flagged = !cell.flagged;
+            cell.el.textContent = cell.flagged ? '🚩' : '';
+        }
+
+        function endGame(win) {
+            gameOver = true;
+            // reveal all mines
+            board.flat().forEach(cell => {
+                if (cell.mine) {
+                    cell.el.textContent = '💣';
+                    cell.el.classList.add('revealed');
+                }
+            });
+            setTimeout(() => alert(win ? 'You win! 🎉' : 'Boom! 💥'), 50);
+        }
+
+        function checkWin() {
+            if (revealedCount === rows*cols - minesCount) endGame(true);
+        }
+
+        resetBtn.addEventListener('click', init);
+        init();
+    </script>
+</body>
+</html>
+
+

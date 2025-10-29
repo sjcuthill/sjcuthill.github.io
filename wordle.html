@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle</title>
+    <link rel="icon" type="image/png" href="Favicon.png?v=3">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; margin:0; display:flex; flex-direction:column; align-items:center; min-height:100vh; background:#fafafa; }
+        header { width:100%; padding:16px; background:#8E3333; color:white; text-align:center; }
+        .board { display:grid; grid-template-columns: repeat(5, 56px); gap:8px; margin-top:20px; }
+        .tile { width:56px; height:56px; border:2px solid #ddd; display:flex; align-items:center; justify-content:center; font-size:1.2rem; font-weight:700; background:white; border-radius:8px; }
+        .tile.correct { background:#6aaa64; color:white; border-color:#6aaa64; }
+        .tile.present { background:#c9b458; color:white; border-color:#c9b458; }
+        .tile.absent { background:#787c7e; color:white; border-color:#787c7e; }
+        .controls { margin-top:16px; }
+        input { padding:8px 10px; border-radius:6px; border:1px solid #ccc; width:160px; }
+        button { padding:8px 12px; border:none; background:#8E3333; color:white; border-radius:6px; cursor:pointer; margin-left:8px; }
+        .message { margin-top:12px; min-height:24px; }
+        a.back { margin-top: 16px; color:#231C07; text-decoration:none; }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Wordle</h2>
+    </header>
+    <div class="board" id="board"></div>
+    <div class="controls">
+        <input id="guess" maxlength="5" placeholder="type 5 letters" />
+        <button id="enter">Enter</button>
+    </div>
+    <div class="message" id="message"></div>
+    <a class="back" href="games.html">← Back to Games</a>
+
+    <script>
+        const words = ['APPLE','ROBOT','TRAIN','SHARE','QUEST','BERRY','MUSIC','LIGHT','EARTH','CLOUD'];
+        const answer = words[Math.floor(Math.random()*words.length)];
+        const rows = 6, cols = 5;
+        let currentRow = 0;
+        const boardEl = document.getElementById('board');
+        const guessEl = document.getElementById('guess');
+        const enterBtn = document.getElementById('enter');
+        const messageEl = document.getElementById('message');
+
+        // setup grid
+        for (let i=0;i<rows*cols;i++) {
+            const div = document.createElement('div');
+            div.className = 'tile';
+            boardEl.appendChild(div);
+        }
+
+        function setMessage(msg){ messageEl.textContent = msg; }
+
+        function evaluate(guess) {
+            const res = Array(cols).fill('absent');
+            const answerCounts = {};
+            for (let i=0;i<cols;i++) {
+                const ch = answer[i];
+                answerCounts[ch] = (answerCounts[ch]||0)+1;
+            }
+            // first pass: correct
+            for (let i=0;i<cols;i++) {
+                if (guess[i] === answer[i]) {
+                    res[i] = 'correct';
+                    answerCounts[guess[i]]--;
+                }
+            }
+            // second pass: present
+            for (let i=0;i<cols;i++) {
+                if (res[i] === 'correct') continue;
+                const ch = guess[i];
+                if (answerCounts[ch] > 0) {
+                    res[i] = 'present';
+                    answerCounts[ch]--;
+                }
+            }
+            return res;
+        }
+
+        function submit() {
+            const raw = guessEl.value.trim().toUpperCase();
+            if (raw.length !== 5) { setMessage('Enter a 5-letter word'); return; }
+            const tiles = Array.from(boardEl.children).slice(currentRow*cols, currentRow*cols+cols);
+            const result = evaluate(raw);
+            for (let i=0;i<cols;i++) {
+                tiles[i].textContent = raw[i];
+                tiles[i].classList.add(result[i]);
+            }
+            if (raw === answer) { setMessage('You got it! 🎉'); enterBtn.disabled = true; guessEl.disabled = true; return; }
+            currentRow++;
+            guessEl.value = '';
+            if (currentRow === rows) {
+                setMessage(`Answer was ${answer}`);
+                enterBtn.disabled = true; guessEl.disabled = true;
+            } else {
+                setMessage('');
+            }
+        }
+
+        enterBtn.addEventListener('click', submit);
+        guessEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') submit(); });
+        guessEl.focus();
+    </script>
+</body>
+</html>
+
+
