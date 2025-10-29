@@ -59,6 +59,7 @@
             margin-bottom: 1%;
             margin-left: 1%;
             transform: translateY(-50%) translateX(1%);
+            pointer-events: none; /* prevent blocking clicks below */
         }
 
         .social-icons-row {
@@ -68,6 +69,12 @@
             align-items: center;
             margin-left: -9%;
             transform: translateY(-30%);
+        }
+
+        .social-icons-row a {
+            position: relative;
+            z-index: 30;          /* ensure links sit on top */
+            pointer-events: auto; /* explicitly clickable */
         }
 
         .social-icon {
