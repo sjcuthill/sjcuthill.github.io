@@ -10,7 +10,7 @@
         body { font-family: 'Inter', sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; background: #f3f3f3; }
         header { width: 100%; padding: 16px; background: #8E3333; color: white; text-align: center; }
         .board { display: grid; gap: 4px; background: #ddd; padding: 8px; border-radius: 8px; margin-top: 20px; }
-        .cell { width: 36px; height: 36px; background: #fff; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; user-select: none; font-weight: 600; }
+        .cell { width: 32px; height: 32px; background: #fff; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; user-select: none; font-weight: 600; }
         .cell.revealed { background: #eaeaea; cursor: default; }
         .panel { margin-top: 14px; display: flex; gap: 10px; align-items: center; }
         button { background: #8E3333; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; }
@@ -22,19 +22,19 @@
         <h2>Minesweeper</h2>
     </header>
     <div class="panel">
-        <span>9x9 • 10 mines</span>
+        <span>16x16 • 40 mines</span>
         <button id="reset">Reset</button>
     </div>
     <div id="board" class="board"></div>
     <a class="back" href="games.html">← Back to Games</a>
 
     <script>
-        const rows = 9, cols = 9, minesCount = 10;
+        const rows = 16, cols = 16, minesCount = 40;
         let board, mineSet, revealedCount, gameOver;
 
         const boardEl = document.getElementById('board');
         const resetBtn = document.getElementById('reset');
-        boardEl.style.gridTemplateColumns = `repeat(${cols}, 36px)`;
+        boardEl.style.gridTemplateColumns = `repeat(${cols}, 32px)`;
 
         function init() {
             board = Array.from({ length: rows }, () => Array.from({ length: cols }, () => ({ mine:false, adj:0, el:null, revealed:false, flagged:false })));
