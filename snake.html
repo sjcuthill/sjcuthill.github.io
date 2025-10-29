@@ -14,6 +14,7 @@
         button { padding:8px 12px; border:none; background:#8E3333; color:white; border-radius:6px; cursor:pointer; }
         .score { margin-left: 8px; }
         a.back { margin-top: 16px; color:#231C07; text-decoration:none; }
+        .hint { margin-top: 10px; color:#444; }
     </style>
 </head>
 <body>
@@ -21,6 +22,7 @@
         <h2>Snake</h2>
     </header>
     <canvas id="game" width="400" height="400"></canvas>
+    <div class="hint" id="hint">Press the arrow keys to start</div>
     <div class="panel">
         <button id="restart">Restart</button>
         <span class="score">Score: <span id="score">0</span></span>
@@ -37,7 +39,7 @@
         const restartBtn = document.getElementById('restart');
 
         const gridSize = 20; // 20x20 grid on 400px
-        let snake, dir, food, score, loopId, speed;
+        let snake, dir, food, score, loopId, speed, started;
 
         function init() {
             snake = [{x:10,y:10}];
@@ -45,9 +47,12 @@
             food = spawnFood();
             score = 0;
             speed = 120;
+            started = false;
             scoreEl.textContent = score;
             if (loopId) clearInterval(loopId);
-            loopId = setInterval(tick, speed);
+            hintEl.textContent = 'Press the arrow keys to start';
+            hintEl.style.display = 'block';
+            draw();
         }
 
         function spawnFood() {
@@ -132,15 +137,27 @@
 
         function gameOver() {
             clearInterval(loopId);
+            started = false;
+            hintEl.textContent = 'Game over! Press Restart';
+            hintEl.style.display = 'block';
             alert('Game over! Score: ' + score);
         }
 
+        const hintEl = document.getElementById('hint');
+
         window.addEventListener('keydown', e => {
             const key = e.key;
-            if (key === 'ArrowUp' && dir.y!==1) { dir = {x:0,y:-1}; }
-            else if (key === 'ArrowDown' && dir.y!==-1) { dir = {x:0,y:1}; }
-            else if (key === 'ArrowLeft' && dir.x!==1) { dir = {x:-1,y:0}; }
-            else if (key === 'ArrowRight' && dir.x!==-1) { dir = {x:1,y:0}; }
+            let changed = false;
+            if (key === 'ArrowUp' && dir.y!==1) { dir = {x:0,y:-1}; changed = true; }
+            else if (key === 'ArrowDown' && dir.y!==-1) { dir = {x:0,y:1}; changed = true; }
+            else if (key === 'ArrowLeft' && dir.x!==1) { dir = {x:-1,y:0}; changed = true; }
+            else if (key === 'ArrowRight' && dir.x!==-1) { dir = {x:1,y:0}; changed = true; }
+
+            if (!started && changed) {
+                started = true;
+                hintEl.style.display = 'none';
+                loopId = setInterval(tick, speed);
+            }
         });
 
         restartBtn.addEventListener('click', init);
