@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accident Severity Prediction - Sierra Cuthill</title>
+    <link rel="icon" type="image/png" href="../Favicon.png">
+    <link rel="shortcut icon" type="image/png" href="../Favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            position: relative;
+            color: #231C07;
+            background: #E0E0E0;
+        }
+
+        .red-band {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 40vh;
+            background: #8E3333;
+            z-index: 0;
+        }
+
+        .content-container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header { position: absolute; top: 30px; right: 30px; z-index: 20; }
+        .nav-links { display: flex; gap: 15px; }
+        .nav-links a {
+            color: #ffffff; text-decoration: none; font-weight: 600; padding: 12px 20px; border-radius: 25px;
+            transition: all 0.3s ease; background: rgba(255, 255, 255, 0.12); border: 2px solid rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(10px); text-align: center; min-width: 100px; font-size: 0.9rem;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255, 255, 255, 0.22); border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .page {
+            flex: 1;
+            padding: calc(40vh + 40px) 24px 60px 24px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .article {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            padding: 40px 42px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 18px;
+            color: #8E3333;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        .meta {
+            color: #8E3333;
+            font-weight: 500;
+            margin-bottom: 22px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            margin: 28px 0 10px 0;
+        }
+
+        p, li { font-size: 1.02rem; line-height: 1.7; }
+        p + p { margin-top: 12px; }
+
+        ul {
+            margin: 8px 0 0 20px;
+        }
+
+        li + li { margin-top: 6px; }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 8px 0 6px 0;
+        }
+
+        .tag {
+            background: rgba(142, 51, 51, 0.12);
+            color: #8E3333;
+            border: 1px solid rgba(142, 51, 51, 0.25);
+            border-radius: 999px;
+            padding: 5px 12px;
+            font-size: 0.78rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .header { top: 15px; right: 15px; }
+            .nav-links { gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+            .nav-links a { padding: 8px 12px; font-size: 0.85rem; min-width: 80px; }
+            .page { padding: calc(40vh + 24px) 16px 24px 16px; }
+            .article { padding: 24px 20px; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="red-band"></div>
+
+    <div class="content-container">
+        <header class="header">
+            <nav class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../About/about.html">About</a>
+                <a href="../Resume/resume.html">Resume</a>
+                <a href="projects.html" class="active">Projects</a>
+            </nav>
+        </header>
+
+        <main class="page">
+            <article class="article">
+                <a class="back" href="projects.html">← All projects</a>
+                <h1>US Accident Severity Prediction Using PySpark</h1>
+                <p class="meta">Machine learning pipeline · Distributed data processing</p>
+
+                <h2>Overview</h2>
+                <p>Developed a machine learning pipeline using PySpark to analyze and predict traffic accident severity from a large-scale U.S. accident dataset. The project combined distributed data processing, feature engineering, model tuning, and statistical analysis to identify the factors that contribute most to roadway accident severity.</p>
+
+                <h2>Problem</h2>
+                <p>Traffic accidents are influenced by a variety of environmental, roadway, and weather-related factors. The goal of this project was to determine which factors have the strongest relationship with accident severity and evaluate how accurately machine learning models can predict severity using those variables.</p>
+
+                <h2>My Role</h2>
+                <p>Designed and implemented the entire analytics workflow, including:</p>
+                <ul>
+                    <li>Data ingestion using PySpark</li>
+                    <li>Data cleaning and preprocessing</li>
+                    <li>Feature engineering</li>
+                    <li>Decision Tree model development</li>
+                    <li>Hyperparameter tuning with cross-validation</li>
+                    <li>Feature importance analysis</li>
+                    <li>Data visualization and performance evaluation</li>
+                </ul>
+
+                <h2>Technologies</h2>
+                <div class="tags">
+                    <span class="tag">PySpark</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Pandas</span>
+                    <span class="tag">Matplotlib</span>
+                    <span class="tag">Seaborn</span>
+                    <span class="tag">Google Colab</span>
+                    <span class="tag">Machine Learning</span>
+                </div>
+
+                <h2>Process</h2>
+                <h2>Data Engineering</h2>
+                <ul>
+                    <li>Loaded and processed a large U.S. accident dataset using PySpark.</li>
+                    <li>Cleaned inconsistent ZIP code formats.</li>
+                    <li>Converted categorical and Boolean features into machine learning compatible formats.</li>
+                    <li>Removed non-essential columns and handled missing data.</li>
+                    <li>Prepared 20+ roadway, geographic, and weather variables for modeling.</li>
+                </ul>
+
+                <h2>Machine Learning Pipeline</h2>
+                <p>Built a regression model to predict accident severity using factors such as:</p>
+                <ul>
+                    <li>Visibility</li>
+                    <li>Temperature</li>
+                    <li>Precipitation</li>
+                    <li>Road features</li>
+                    <li>Traffic control devices</li>
+                    <li>Geographic location</li>
+                    <li>Crash distance</li>
+                </ul>
+                <p>The dataset was split into training and testing sets and trained using a Decision Tree Regressor.</p>
+
+                <h2>Model Optimization</h2>
+                <p>Improved model performance through:</p>
+                <ul>
+                    <li>Hyperparameter tuning</li>
+                    <li>Grid search optimization</li>
+                    <li>3-fold cross-validation</li>
+                </ul>
+                <p>Parameters evaluated included maximum tree depth and minimum instances per node.</p>
+
+                <h2>Exploratory Analysis</h2>
+                <p>Tested several hypotheses regarding weather conditions, road infrastructure, and traffic controls. Created specialized models that isolated weather-only predictors and road feature-only predictors. This provided additional insight into how different categories of variables influence accident severity.</p>
+
+                <h2>Key Findings</h2>
+                <ul>
+                    <li>Geographic and distance-related features were significantly stronger predictors than expected.</li>
+                    <li>Many weather variables had less impact on severity than originally hypothesized.</li>
+                    <li>Separate weather-only and roadway-only models helped isolate the contribution of specific feature groups.</li>
+                    <li>Feature importance analysis revealed which variables most strongly influenced model predictions.</li>
+                </ul>
+
+                <h2>Visualizations</h2>
+                <p>Produced multiple analytical visualizations, including:</p>
+                <ul>
+                    <li>Feature importance rankings</li>
+                    <li>Correlation heatmaps</li>
+                    <li>Predicted vs. actual severity scatterplots</li>
+                    <li>Residual analysis plots</li>
+                    <li>Error distribution histograms</li>
+                </ul>
+
+                <h2>What I Learned</h2>
+                <ul>
+                    <li>Distributed data processing with PySpark</li>
+                    <li>Large-scale data cleaning techniques</li>
+                    <li>Model evaluation using RMSE</li>
+                    <li>Cross-validation and hyperparameter tuning</li>
+                    <li>Interpretation of machine learning models through feature importance analysis</li>
+                    <li>Communicating insights through data visualization</li>
+                </ul>
+            </article>
+        </main>
+    </div>
+</body>
+</html>

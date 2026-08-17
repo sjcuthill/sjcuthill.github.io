@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Sierra Cuthill</title>
+    <link rel="icon" type="image/png" href="../Favicon.png">
+    <link rel="shortcut icon" type="image/png" href="../Favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            position: relative;
+            color: #231C07;
+            background: #E0E0E0;
+            padding-bottom: 80px;
+        }
+
+        .red-band {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40vh;
+            background: #8E3333;
+            z-index: 0;
+        }
+
+        .content-container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            z-index: 20;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.12);
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            min-width: 100px;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: rgba(255, 255, 255, 0.22);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-title {
+            position: absolute;
+            top: 110px;
+            left: 30px;
+            z-index: 10;
+            max-width: 640px;
+        }
+
+        .page-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.2rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            line-height: 1.05;
+            color: #ffffff;
+        }
+
+        .page-title .lead {
+            font-size: 1.45rem;
+            line-height: 1.5;
+            color: #ffffff;
+        }
+
+        .page {
+            flex: 1;
+            padding: calc(40vh + 40px) 40px 80px 40px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .projects-wrap {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+        }
+
+        .card {
+            text-decoration: none;
+            color: #000000;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 28px;
+            background: transparent;
+            transition: transform 0.3s ease;
+        }
+
+        a.card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card-media {
+            width: 280px;
+            height: 180px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-media img {
+            width: 280px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 14px;
+            display: block;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+        }
+
+        .card-media img.portrait {
+            width: auto;
+            height: 180px;
+            max-width: 180px;
+            object-fit: contain;
+            object-position: center;
+            background: transparent;
+            box-shadow: none;
+            border-radius: 0;
+        }
+
+        .card-media img.square {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-media.align-start {
+            justify-content: flex-start;
+        }
+
+        .card-media img.wide {
+            width: 280px;
+            height: auto;
+            max-height: 120px;
+            object-fit: contain;
+            background: transparent;
+            box-shadow: none;
+            border-radius: 0;
+        }
+
+        .card-media img.wide.smaller {
+            width: 220px;
+            max-height: 90px;
+            margin-left: 28px;
+        }
+
+        .card-body.lowered {
+            padding-top: 22px;
+        }
+
+        .card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin: 0;
+            color: #000000;
+            white-space: nowrap;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .tag {
+            background: transparent;
+            color: #8E3333;
+            border: none;
+            padding: 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                top: 15px;
+                right: 15px;
+            }
+
+            .nav-links {
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+
+            .nav-links a {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+                min-width: 80px;
+            }
+
+            .page-title {
+                position: relative;
+                top: auto;
+                left: auto;
+                max-width: 100%;
+                padding: 90px 16px 0 16px;
+            }
+
+            .page-title h1 {
+                font-size: 2.8rem;
+            }
+
+            .page-title .lead {
+                font-size: 1.2rem;
+            }
+
+            .page {
+                padding: 64px 16px 32px 16px;
+            }
+
+            .card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .card-media {
+                width: 100%;
+                height: 200px;
+            }
+
+            .card-media:empty {
+                display: none;
+            }
+
+            .card-media img {
+                width: 100%;
+                height: 200px;
+            }
+
+            .card-media img.portrait {
+                width: auto;
+                height: 200px;
+                max-width: 200px;
+            }
+
+            .card-media img.square {
+                width: 200px;
+                height: 200px;
+            }
+
+            .card-media img.wide {
+                width: 260px;
+                max-height: 100px;
+            }
+
+            .card h2 {
+                font-size: 1.55rem;
+                white-space: normal;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="red-band"></div>
+
+    <div class="content-container">
+        <div class="page-title">
+            <h1>Projects</h1>
+            <p class="lead">Here are some things that have taken up my time over the past couple of years. Some for fun, some ... not so much</p>
+        </div>
+
+        <header class="header">
+            <nav class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../About/about.html">About</a>
+                <a href="../Resume/resume.html">Resume</a>
+                <a href="projects.html" class="active">Projects</a>
+            </nav>
+        </header>
+
+        <main class="page">
+            <div class="projects-wrap">
+                <div class="list">
+                    <a class="card" href="accident-severity.html">
+                        <div class="card-media">
+                            <img src="../Personal%20Website%20Pics/car%20crash.jpg" alt="Two cars after a head-on collision on a wet road">
+                        </div>
+                        <div class="card-body">
+                            <h2>Accident Severity Prediction with PySpark</h2>
+                            <div class="tags">
+                                <span class="tag">PySpark</span>
+                                <span class="tag">Python</span>
+                                <span class="tag">Machine Learning</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="card" href="capstone.html">
+                        <div class="card-media">
+                            <img class="portrait" src="../Personal%20Website%20Pics/EcoLoopLogo.png" alt="EcoLoop capstone logo">
+                        </div>
+                        <div class="card-body">
+                            <h2>Capstone Project</h2>
+                        </div>
+                    </a>
+
+                    <a class="card" href="music-visualisations.html">
+                        <div class="card-media">
+                            <img class="wide" src="../Personal%20Website%20Pics/spotify%20logo.png" alt="Spotify logo">
+                        </div>
+                        <div class="card-body lowered">
+                            <h2>Music Visualisations</h2>
+                        </div>
+                    </a>
+
+                    <a class="card" href="ctv.html">
+                        <div class="card-media">
+                            <img class="square" src="../Personal%20Website%20Pics/ctvbuyer%20logo.jpg" alt="CTV Buyer logo">
+                        </div>
+                        <div class="card-body">
+                            <h2>CTV Buyer</h2>
+                            <div class="tags">
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">React</span>
+                                <span class="tag">Java</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a class="card" href="new-leaf.html">
+                        <div class="card-media align-start">
+                            <img class="wide smaller" src="../Personal%20Website%20Pics/NewLeafLogonobackground.png" alt="New Leaf logo">
+                        </div>
+                        <div class="card-body lowered">
+                            <h2>New Leaf</h2>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+<footer style="position: fixed; bottom: 10px; left: 0; right: 0; text-align: center; z-index: 70; font-family: 'Inter', sans-serif;">
+    <a href="../Games/games.html" style="color: #231C07; background: rgba(255,255,255,0.7); padding: 8px 14px; border-radius: 8px; text-decoration: none; border: 1px solid rgba(35,28,7,0.2);">
+        Bored? Here's something to distract you from this super interesting portfolio.
+    </a>
+</footer>
+</body>
+</html>

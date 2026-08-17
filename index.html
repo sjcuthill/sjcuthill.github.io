@@ -22,13 +22,13 @@
         }
 
         .angled-background {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, #8E3333 0%, #8E3333 50%, #E0E0E0 50%, #E0E0E0 100%);
-            z-index: -1;
+            z-index: 0;
         }
 
         .bottom-red-overlay {
@@ -153,6 +153,7 @@
             align-items: flex-end;
             position: relative;
             z-index: 10;
+            transform: translateY(-40px);
         }
 
         .main-heading {
@@ -258,7 +259,7 @@
 </head>
 <body>
     <div class="angled-background"></div>
-    
+
     <div class="split-layout">
         <img src="HomePage/Headshot.png?v=4" alt="Sierra Cuthill" class="rectangular-image">
         
@@ -280,7 +281,7 @@
             <div class="button-group">
                 <a href="About/about.html" class="nav-button">About me</a>
                 <a href="Resume/resume.html" class="nav-button">Resume</a>
-                <a href="#projects" class="nav-button">Projects</a>
+                <a href="Projects/projects.html" class="nav-button">Projects</a>
                 <a href="#showcase" class="nav-button">Showcase</a>
             </div>
         </div>
