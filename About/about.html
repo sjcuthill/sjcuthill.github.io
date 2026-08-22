@@ -43,6 +43,23 @@
         }
         .nav-links a:hover { background: rgba(255, 255, 255, 0.22); border-color: rgba(255, 255, 255, 0.6); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
 
+        .page-title {
+            position: absolute;
+            top: 48px;
+            left: 30px;
+            z-index: 10;
+            max-width: 720px;
+        }
+
+        .page-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            color: #ffffff;
+            margin: 0;
+        }
+
         .page {
             flex: 1;
             padding: calc(40vh + 40px) 24px 60px 24px;
@@ -50,35 +67,587 @@
             justify-content: center;
         }
 
-        .about-canvas {
-            max-width: 800px;
+        .about-wrap {
+            max-width: 1200px;
             width: 100%;
         }
 
-        .about-block {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 18px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            padding: 20px 22px;
-            margin-bottom: 20px;
+        .hello-collage {
+            position: relative;
+            min-height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
         }
 
-        h1 {
+        .collage-left {
+            position: absolute;
+            left: -20px;
+            top: 0;
+            width: 340px;
+            height: 380px;
+            z-index: 1;
+        }
+
+        .collage-right {
+            position: absolute;
+            right: 0;
+            top: 24px;
+            width: 230px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .collage img {
+            border: none;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+            display: block;
+            background: transparent;
+        }
+
+        .pic-13 {
+            position: absolute;
+            width: 210px;
+            height: auto;
+            top: 8px;
+            left: -80px;
+            transform: rotate(-8deg);
+            z-index: 2;
+        }
+
+        .pic-12 {
+            position: absolute;
+            width: 260px;
+            height: auto;
+            top: 168px;
+            left: 70px;
+            transform: rotate(10deg);
+            z-index: 1;
+        }
+
+        .pic-baby {
+            width: 210px;
+            height: auto;
+            transform: rotate(7deg);
+        }
+
+        .about-hello {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 0 12px;
+        }
+
+        .about-hello .hello-line {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            margin-bottom: 14px;
+            font-size: 1.85rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #231C07;
         }
 
-        .lead { font-size: 1.05rem; line-height: 1.7; }
-        .lead p { margin: 0; }
+        .about-hello .hello-sub {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: #231C07;
+        }
+
+        .blurb-center {
+            max-width: 720px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .blurb-center p {
+            font-size: 1.08rem;
+            line-height: 1.75;
+            margin-bottom: 1.15em;
+            color: #231C07;
+        }
+
+        .blurb-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            margin-top: -12px;
+            margin-bottom: 0;
+        }
+
+        .blurb-col {
+            flex: 0 0 50%;
+            max-width: 50%;
+            min-width: 0;
+        }
+
+        .blurb-text {
+            text-align: left;
+        }
+
+        .blurb-text p {
+            font-size: 1.08rem;
+            line-height: 1.75;
+            margin-bottom: 1.15em;
+            color: #231C07;
+        }
+
+        .blurb-media {
+            flex: 1;
+            position: relative;
+            min-height: 0;
+        }
+
+        .pic-bridge {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 500px;
+            max-width: 100%;
+            height: auto;
+            transform: rotate(-10deg);
+            border: none;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+            display: block;
+            background: transparent;
+            z-index: 2;
+        }
+
+        .pic-hike {
+            position: absolute;
+            width: 250px;
+            right: -40px;
+            left: auto;
+            top: 185px;
+            transform: rotate(10deg);
+            z-index: 1;
+            border: none;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+            background: transparent;
+        }
+
+        .pic-15 {
+            position: absolute;
+            width: 230px;
+            right: -90px;
+            left: auto;
+            top: 530px;
+            transform: none;
+            z-index: 3;
+            border: none;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+            background: transparent;
+        }
+
+        .hike-row {
+            position: relative;
+            display: block;
+            margin: 28px auto 32px auto;
+        }
+
+        .pic-firepit {
+            position: absolute;
+            left: -80px;
+            top: -16px;
+            width: 240px;
+            max-width: none;
+            height: auto;
+            transform: rotate(-7deg);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+            display: block;
+            z-index: 1;
+        }
+
+        .glacier-wrap {
+            text-align: center;
+            margin: 8px auto 56px auto;
+        }
+
+        .pic-glacier {
+            width: 62%;
+            max-width: 680px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+        }
+
+        .music-row {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            margin: 0 0 56px 0;
+        }
+
+        .music-media {
+            flex: 1;
+            position: relative;
+            min-height: 0;
+        }
+
+        .pic-concert {
+            position: absolute;
+            left: -50px;
+            top: -10px;
+            width: 250px;
+            height: auto;
+            transform: rotate(8deg);
+            border: none;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+            display: block;
+            z-index: 1;
+        }
+
+        .pic-linedance {
+            position: absolute;
+            left: 230px;
+            top: 90px;
+            width: 240px;
+            max-width: none;
+            overflow: hidden;
+            transform: rotate(-8deg);
+            border: none;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+            z-index: 2;
+        }
+
+        .pic-linedance video {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: -48px;
+        }
+
+        .blurb-right {
+            flex: 0 0 50%;
+            max-width: 50%;
+            width: 100%;
+            margin: 0;
+            text-align: right;
+        }
+
+        .blurb-right p {
+            font-size: 1.08rem;
+            line-height: 1.75;
+            margin-bottom: 1.15em;
+            color: #231C07;
+        }
+
+        .read-row {
+            position: relative;
+            margin: 88px auto 56px auto;
+        }
+
+        .pic-candid {
+            position: absolute;
+            left: -120px;
+            top: -20px;
+            width: 320px;
+            height: auto;
+            transform: rotate(-7deg);
+            border: none;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+            display: block;
+            z-index: 1;
+        }
+
+        .pic-reading {
+            position: absolute;
+            right: -60px;
+            top: -90px;
+            width: 230px;
+            height: auto;
+            transform: rotate(7deg);
+            border: none;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+            display: block;
+            z-index: 1;
+        }
+
+        .people-row {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            margin: 24px 0 16px 0;
+        }
+
+        .people-media {
+            flex: 1;
+            position: relative;
+            min-height: 280px;
+        }
+
+        .blurb-left {
+            flex: 0 0 50%;
+            max-width: 50%;
+            width: 100%;
+            margin: 0;
+            text-align: left;
+        }
+
+        .blurb-left p {
+            font-size: 1.08rem;
+            line-height: 1.75;
+            margin-bottom: 1.15em;
+            color: #231C07;
+        }
+
+        .pic-1,
+        .pic-hug,
+        .pic-grad {
+            position: absolute;
+            height: auto;
+            border: none;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+            display: block;
+        }
+
+        .pic-1 {
+            right: auto;
+            left: 50px;
+            top: -30px;
+            width: 250px;
+            transform: rotate(-8deg);
+            z-index: 2;
+        }
+
+        .pic-hug {
+            right: -50px;
+            top: 30px;
+            width: 210px;
+            transform: none;
+            z-index: 4;
+        }
+
+        .pic-grad {
+            right: 150px;
+            top: 280px;
+            width: 220px;
+            transform: rotate(10deg);
+            z-index: 3;
+        }
+
+        .horse-wrap {
+            text-align: left;
+            margin: -40px auto 56px auto;
+        }
+
+        .pic-horse {
+            width: 38%;
+            max-width: 420px;
+            height: auto;
+            display: block;
+            margin: 0 0 0 230px;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+        }
+
+        .yes-row {
+            position: relative;
+            margin: 0 auto 0 auto;
+            padding-bottom: 140px;
+        }
+
+        .close-row {
+            margin: 0 auto 40px auto;
+        }
+
+        .end-collage {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            margin: 0 auto 80px auto;
+        }
+
+        .pic-gradsolo,
+        .pic-headshot,
+        .pic-laugh {
+            height: auto;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+            display: block;
+        }
+
+        .pic-gradsolo {
+            width: 250px;
+            transform: rotate(-8deg);
+            margin-top: -80px;
+            margin-left: -60px;
+            z-index: 1;
+        }
+
+        .pic-headshot {
+            width: 340px;
+            max-width: 38%;
+            margin-top: 28px;
+            z-index: 2;
+        }
+
+        .pic-laugh {
+            width: 250px;
+            transform: rotate(8deg);
+            margin-top: -80px;
+            margin-right: -60px;
+            z-index: 1;
+        }
+
+        .pic-nohands,
+        .pic-9,
+        .pic-3,
+        .pic-flip {
+            position: absolute;
+            height: auto;
+            border: none;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+            display: block;
+        }
+
+        .pic-nohands {
+            left: -120px;
+            top: -30px;
+            width: 320px;
+            transform: rotate(-8deg);
+            z-index: 2;
+        }
+
+        .pic-9 {
+            left: -40px;
+            top: 140px;
+            width: 210px;
+            transform: rotate(8deg);
+            z-index: 1;
+        }
+
+        .pic-3 {
+            right: -70px;
+            top: -10px;
+            width: 200px;
+            transform: rotate(-8deg);
+            z-index: 1;
+        }
+
+        .pic-flip {
+            right: -120px;
+            top: 250px;
+            width: 330px;
+            transform: rotate(7deg);
+            z-index: 2;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 32px;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .item.landscape {
+            grid-column: span 2;
+        }
+
+        .item p {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #000000;
+            word-break: break-all;
+        }
+
+        .item img,
+        .item video {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            display: block;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+        }
 
         @media (max-width: 768px) {
             .header { top: 15px; right: 15px; }
             .nav-links { gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
             .nav-links a { padding: 8px 12px; font-size: 0.85rem; min-width: 80px; }
-            .page { padding: calc(40vh + 24px) 16px 24px 16px; }
-            .about-block { margin-bottom: 16px; }
+            .page-title { position: relative; top: auto; left: auto; padding: 90px 16px 0 16px; max-width: none; }
+            .page-title h1 { font-size: 2.2rem; }
+            .page { padding: 40px 16px 24px 16px; }
+            .hello-collage {
+                flex-direction: column;
+                min-height: 0;
+                gap: 28px;
+            }
+            .collage-left,
+            .collage-right {
+                position: relative;
+                left: auto;
+                right: auto;
+                top: auto;
+                transform: none;
+                height: auto;
+                width: 320px;
+            }
+            .about-hello { max-width: none; padding: 0; }
+            .blurb-row,
+            .hike-row,
+            .music-row,
+            .people-row {
+                flex-direction: column;
+                padding-right: 0;
+            }
+            .blurb-row { margin-bottom: 48px; }
+            .blurb-col { max-width: none; flex: 1 1 auto; }
+            .blurb-text { max-width: none; flex: 1 1 auto; }
+            .blurb-right { max-width: none; flex: 1 1 auto; }
+            .blurb-left { max-width: none; flex: 1 1 auto; }
+            .blurb-media { min-height: 0; }
+            .people-media { min-height: 0; }
+            .pic-bridge { position: relative; right: auto; width: 100%; max-width: 500px; }
+            .pic-hike,
+            .pic-15,
+            .pic-concert,
+            .pic-linedance,
+            .pic-1,
+            .pic-hug,
+            .pic-grad {
+                position: relative;
+                left: auto;
+                right: auto;
+                top: auto;
+                margin: 16px auto;
+            }
+            .pic-firepit { position: relative; right: auto; max-width: 90%; width: 320px; }
+            .pic-candid,
+            .pic-reading,
+            .pic-nohands,
+            .pic-9,
+            .pic-3,
+            .pic-flip {
+                position: relative;
+                left: auto;
+                right: auto;
+                top: auto;
+                margin: 16px auto;
+            }
+            .end-collage {
+                flex-direction: column;
+                align-items: center;
+            }
+            .pic-gradsolo,
+            .pic-headshot,
+            .pic-laugh {
+                margin-top: 16px;
+                max-width: 90%;
+            }
+            .blurb-center { max-width: none; }
         }
     </style>
 </head>
@@ -86,6 +655,10 @@
     <div class="red-band"></div>
 
     <div class="content-container">
+        <div class="page-title">
+            <h1>A Little Bit About Me</h1>
+        </div>
+
         <header class="header">
             <nav class="nav-links">
                 <a href="../">Home</a>
@@ -96,25 +669,103 @@
         </header>
 
         <main class="page">
-            <div class="about-canvas">
-                <div class="Intro1"><p>As a young girl, I grew up with in the woods of my backyard with my cousins. To us, that acre of land felt like an entire forest, and if we went far enough, I was certain we would cross the bridge right into Terabithia. We spent most of our time building forts in that woods. We arent talking about the flimsy ones where you simply lean a few branches together and toss a blanket on top. That was childs play.</p></div>
-                <div class="Intro2"><p>We went all in, sawing limbs off fallen trees from the last thunderstorm, making perfect right angles and curved archways from branches for the door, and layering leaves to make a roof that would actually hold up to the elements. Those forts were serious business to us.</p></div>
-                <div class="Intro3"><p>We didnt think about it as much back then, but we were building something that would last!</p></div>
-                <div class="Intro4"><p>Ive been building things that last ever since. I dont belive something is worth doing unless its done right, done with passion and care, and done with the purpose to make the world a better place. Whether it's my drive to hike a new trail, learning another line dance, baking something for people I care about, or growing my book collection one story at a time, Ive aways enjoyed creating things that are solid, static, and have a strong foundation.</strong></p></div>
-                <div class="Exploring"><p><strong>Exploring</strong></p></div>
-                <div class="ExploringBody"><p>Spending time outdoors has always been my reset button. There is something about the the peacefulness of a trail or the stillness of the a campsite that brings clarity to any situation. I love hiking, camping, and exploring national parks: pushing myself to new places, physicslly and mentally. Being outdoors, surronded by the trees and good company with the smell of smores roasting over the fire brings me back to the woods in my backyard.</p></div>
-                <div class="Rhythm"><p><strong>Rhythm</strong></p></div>
-                <div class="RhythmBody"><p>Line dancing is one of those things that started as "just for fun" and turned into something I can't imagine not doing. Every time I learn a new step, I feel that same mix of focus and joy — like getting one more piece to fit just right.It's not just about the movement, either. It's about the people, the laughter, the rhythm you fall into with everyone around you. It's community — and I love that.</p></div>
-                <div class="Baking"><p><strong>Baking</strong></p></div>
-                <div class="BakingBody"><p>Baking is my creative outlet. It's equal parts patience, curiosity, and comfort. There's something so satisfying about taking simple ingredients and turning them into something warm and thoughtful. I love baking for the people I care about; it's a quiet way of showing love. Plus, there's a kind of peace in the process itself. The measuring, mixing, and waiting reminds me to slow down and stay present.</p></div>
-                <div class="Reading"><p><strong>Building Knowledge</strong></p></div>
-                <div class="ReadingBody"><p>I've been slowly building my book collection over the years. And not just kindle ebook, but actual hardcover books that I can hold in my hands and read. It's one of my favorite things. Each book feels like a new perspective, a new way of seeing the world. Reading keeps me curious, grounded, and always learning. Especially becuase— even if it's just through someone else's story.</p></div>
-                <div class="Concerts"><p><strong>Building Connection</strong></p></div>
-                <div class="ConcertsBody"><p>There's just something about live music. Concerts have become one of my favorite ways to feel connected — the crowd, the energy, the kind of magic that happens when everyone's singing the same song.It's loud and messy and absolutely unforgettable — and those are the moments that stay with me the longest.</p></div>
-                <div class="Family"><p><strong>Building Roots</strong></p></div>
-                <div class="FamilyBody"><p>At the center of everything I do is family. They're the people who taught me how to build — literally and figuratively. They're the reason I push myself, laugh easily, and care deeply.They've always been the foundation, and I don't take that lightly.</p></div>
-                <div class="Outro1"><p><strong>Full Circle</strong></p></div>
-                <div class="Outro2"><p>Those forts in the backyard were more than just piles of branches and leaves — they were my first blueprints for life. Now, every hike, dance, book, bake, and memory feels like another version of the same thing: building something strong, meaningful, and built to last.</p></div>
+            <div class="about-wrap">
+            <div class="hello-collage">
+                <div class="collage-left">
+                    <img class="pic-13" src="../Personal%20Website%20Pics/13.jpg" alt="13.jpg">
+                    <img class="pic-12" src="../Personal%20Website%20Pics/12.jpg" alt="12.jpg">
+                </div>
+                <div class="about-hello">
+                    <p class="hello-line">Hi again, I'm Sierra.</p>
+                    <p class="hello-sub">Here's a chance to take a look behind the scenes and get to know a little more about how I tick</p>
+                </div>
+                <div class="collage-right">
+                    <img class="pic-baby" src="../Personal%20Website%20Pics/babypic.jpg" alt="babypic.jpg">
+                </div>
+            </div>
+            <div class="blurb-row">
+                <div class="blurb-col">
+                <div class="blurb-text">
+                    <p>I grew up with an acre of woods in my backyard and a bunch of cousins who were convinced it was much bigger than it actually was. To us, it was a whole forest. We built forts, explored every corner, and spent entire afternoons outside. And these weren't exactly the kind of forts you could throw together in five minutes. We were cutting branches, building walls, making doors, and trying to make something that would actually stay standing.</p>
+                    <p>I think I've always been like that.</p>
+                    <p>I like making things, figuring things out, and doing things well. I like having something to work toward, whether that's finishing a new trail, learning a new dance, trying a new recipe, finding my next favorite book, or planning my next adventure.</p>
+                </div>
+                </div>
+                <div class="blurb-media">
+                    <video class="pic-bridge" src="../Personal%20Website%20Pics/bridge.MP4" muted autoplay loop playsinline></video>
+                    <img class="pic-hike" src="../Personal%20Website%20Pics/hiking%202.jpg" alt="hiking 2.jpg">
+                    <img class="pic-15" src="../Personal%20Website%20Pics/15.jpg" alt="15.jpg">
+                </div>
+            </div>
+            <div class="hike-row">
+                <video class="pic-firepit" src="../Personal%20Website%20Pics/firepit.MOV" muted autoplay loop playsinline></video>
+                <div class="blurb-center">
+                    <p>Being outside has always been one of my favorite ways to reset. I love hiking, camping, exploring national parks, and finding places I've never been before. There's something about being somewhere new — especially somewhere with a good trail and a great view — that makes everything else feel a little less important.</p>
+                    <p>And yes, I will absolutely choose the trail with the better view, even if it's the harder one.</p>
+                </div>
+            </div>
+            <div class="glacier-wrap">
+                <img class="pic-glacier" src="../Personal%20Website%20Pics/Glacier.jpg" alt="Glacier.jpg">
+            </div>
+            <div class="music-row">
+                <div class="music-media">
+                    <img class="pic-concert" src="../Personal%20Website%20Pics/Concert.jpg" alt="Concert.jpg">
+                    <div class="pic-linedance">
+                        <video src="../Personal%20Website%20Pics/linedancing.MOV" muted autoplay loop playsinline></video>
+                    </div>
+                </div>
+                <div class="blurb-right">
+                    <p>Music has always been a pretty constant part of my life. Some of my fondest memories are my dad quizing me on who sings each song that came up on his playlist and random facts about them. I've always got music playing. In the car, while I'm getting ready, while I'm cooking, while I'm working, pretty much whenever there's an opportunity. And above all I love planning and dragging my friends to live music and concerts whenever I can.</p>
+                    <p>Line dancing is probably one of the more unexpected things I've ended up loving. What started as something fun quickly became something I genuinely look forward to every Wednesday. I love learning new dances, remembering the steps, and eventually getting to the point where I don't have to think about them anymore as I idly do them while talking to my roomates in my house.</p>
+                </div>
+            </div>
+            <div class="read-row">
+                <img class="pic-candid" src="../Personal%20Website%20Pics/candid.jpg" alt="candid.jpg">
+                <div class="blurb-center">
+                    <p>I've been slowly building a collection of physical books for years. I love having actual books on my shelves — especially the ones I've read, loved, and know I'll come back to.</p>
+                    <p>Reading is probably the simplest way I've found to stay curious. I like getting completely absorbed in someone else's world and coming away with a new perspective.</p>
+                    <p>Also, I have absolutely no interest in becoming a Kindle-only person.</p>
+                </div>
+                <img class="pic-reading" src="../Personal%20Website%20Pics/Reading.jpg" alt="Reading.jpg">
+            </div>
+            <div class="people-row">
+                <div class="blurb-left">
+                    <p>A lot of the things I love come back to the people I get to do them with.</p>
+                    <p>My family, my cousins, my friends, the people I meet along the way — they're a huge part of what makes all of these things meaningful. I like adventures, but I like having someone to share them with even more.</p>
+                    <p>Some of my favorite memories aren't necessarily about where I was or what I was doing, but who was there with me. The thing I value most in life is having people around me who make me laugh, challenge me, support me, and are always willing to make a memory out of whatever we happen to be doing.</p>
+                </div>
+                <div class="people-media">
+                    <img class="pic-1" src="../Personal%20Website%20Pics/1.jpg" alt="1.jpg">
+                    <video class="pic-hug" src="../Personal%20Website%20Pics/hugging.mov" muted autoplay loop playsinline></video>
+                    <img class="pic-grad" src="../Personal%20Website%20Pics/grad%20group.jpg" alt="grad group.jpg">
+                </div>
+            </div>
+            <div class="horse-wrap">
+                <img class="pic-horse" src="../Personal%20Website%20Pics/horse.jpg" alt="horse.jpg">
+            </div>
+            <div class="yes-row">
+                <video class="pic-nohands" src="../Personal%20Website%20Pics/Look%20Ma%2C%20No%20Hands!.MOV" muted autoplay loop playsinline></video>
+                <img class="pic-9" src="../Personal%20Website%20Pics/9.jpg" alt="9.jpg">
+                <div class="blurb-center">
+                    <p>I have always been someone who says yes to things just to see what happens. I like learning something I've never done before, going somewhere I've never been, and picking up hobbies that I probably didn't need but am very glad I tried. Some things stick, some don't, but I would much rather try something and decide it's not for me than wonder what it would have been like.</p>
+                    <p>I want to make the most out of the time I have. That means saying yes to the road trip, taking the picture, staying out a little later, trying the weird food, going to the concert, taking the trail, and making plans just because they sound fun. I don't think every moment needs to be productive or have a bigger purpose. Sometimes it's enough that it was a really good day.</p>
+                </div>
+                <img class="pic-3" src="../Personal%20Website%20Pics/3.jpg" alt="3.jpg">
+                <video class="pic-flip" src="../Personal%20Website%20Pics/flip%20vid.MP4" muted autoplay loop playsinline></video>
+            </div>
+            <div class="close-row">
+                <div class="blurb-center">
+                    <p>I don't think I've changed all that much since those forts in the backyard.</p>
+                    <p>I still like exploring. I still like making things. I still like learning something new just because it's fun. And I still like taking an idea and seeing if I can make it work.</p>
+                    <p>The forts just got a little more complicated.</p>
+                </div>
+            </div>
+
+            <div id="gallery" class="end-collage">
+                <img class="pic-gradsolo" src="../Personal%20Website%20Pics/grad%20solo.jpg" alt="grad solo.jpg">
+                <img class="pic-headshot" src="../Personal%20Website%20Pics/headshot%202.jpg" alt="headshot 2.jpg">
+                <img class="pic-laugh" src="../Personal%20Website%20Pics/laughing.jpg" alt="laughing.jpg">
+            </div>
             </div>
         </main>
     </div>
@@ -123,6 +774,27 @@
         Bored? Here's something to distract you from this super interesting portfolio.
     </a>
 </footer>
+<script>
+    function markOrientation(el) {
+        var w = el.naturalWidth || el.videoWidth;
+        var h = el.naturalHeight || el.videoHeight;
+        if (!w || !h) return;
+        el.parentElement.classList.toggle('landscape', w >= h);
+        el.parentElement.classList.toggle('portrait', w < h);
+    }
+    document.querySelectorAll('.item img, .item video, .pic-bridge, .pic-firepit, .pic-linedance video, .pic-hug, .pic-nohands, .pic-flip').forEach(function (el) {
+        if (el.tagName === 'VIDEO') {
+            el.addEventListener('loadedmetadata', function () { markOrientation(el); });
+            el.muted = true;
+            el.loop = true;
+            el.play().catch(function () {});
+        } else if (el.complete) {
+            markOrientation(el);
+        } else {
+            el.addEventListener('load', function () { markOrientation(el); });
+        }
+    });
+</script>
 </body>
 </html>
 
