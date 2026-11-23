@@ -3,54 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Leaf - Sierra Cuthill</title>
+    <title>New Leaf — Case Study · Sierra Cuthill</title>
     <link rel="icon" type="image/png" href="../Favicon.png">
     <link rel="shortcut icon" type="image/png" href="../Favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --red: #8E3333;
+            --ink: #1a1612;
+            --muted: #5c564c;
+            --line: rgba(26, 22, 18, 0.12);
+            --white: #ffffff;
+            --gray: #f0efed;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; min-height: 100vh; position: relative; color: #231C07; background: #E0E0E0; }
-        .red-band { position: absolute; top: 0; left: 0; width: 100%; height: 40vh; background: #8E3333; z-index: 0; }
-        .content-container { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; }
-        .header { position: absolute; top: 30px; right: 30px; z-index: 20; }
-        .nav-links { display: flex; gap: 15px; }
-        .nav-links a { color: #ffffff; text-decoration: none; font-weight: 600; padding: 12px 20px; border-radius: 25px; transition: all 0.3s ease; background: rgba(255, 255, 255, 0.12); border: 2px solid rgba(255, 255, 255, 0.35); backdrop-filter: blur(10px); text-align: center; min-width: 100px; font-size: 0.9rem; }
-        .nav-links a:hover, .nav-links a.active { background: rgba(255, 255, 255, 0.22); border-color: rgba(255, 255, 255, 0.6); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
-        .page { flex: 1; padding: calc(40vh + 40px) 24px 60px 24px; display: flex; justify-content: center; }
-        .article { max-width: 800px; width: 100%; background: rgba(255, 255, 255, 0.95); border-radius: 20px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); padding: 40px 42px; }
-        .back { display: inline-block; margin-bottom: 18px; color: #8E3333; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
-        h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 8px; }
-        .meta { color: #8E3333; font-weight: 500; margin-bottom: 22px; }
-        p { font-size: 1.02rem; line-height: 1.7; }
-        @media (max-width: 768px) {
-            .header { top: 15px; right: 15px; }
-            .nav-links { gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-            .nav-links a { padding: 8px 12px; font-size: 0.85rem; min-width: 80px; }
-            .page { padding: calc(40vh + 24px) 16px 24px 16px; }
-            .article { padding: 24px 20px; }
-            h1 { font-size: 1.8rem; }
+        body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--white); line-height: 1.65; }
+        a { color: inherit; }
+        .site-nav {
+            position: sticky; top: 0; z-index: 50; display: flex; justify-content: flex-end; gap: 10px;
+            padding: 18px 28px; background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line);
+        }
+        .site-nav a {
+            text-decoration: none; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--ink); padding: 8px 14px; border: 1px solid transparent;
+        }
+        .site-nav a:hover, .site-nav a.active { color: var(--red); border-color: rgba(142,51,51,0.35); }
+        .back {
+            display: inline-flex; align-items: center; gap: 8px; margin-bottom: 28px;
+            font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none; color: var(--red);
+        }
+        .hero {
+            max-width: 900px; margin: 0 auto; padding: 56px 28px 48px;
+        }
+        .eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+        .hero h1 {
+            font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 6vw, 4.2rem);
+            font-weight: 600; line-height: 1.02; letter-spacing: -0.03em; margin-bottom: 12px;
+        }
+        .hero .subtitle {
+            font-size: 0.85rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--muted); margin-bottom: 22px;
+        }
+        .hero .lede { font-size: 1.1rem; color: var(--muted); max-width: 48ch; }
+        .preview-wrap { background: var(--gray); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 40px 28px; }
+        .preview-frame {
+            max-width: 900px; margin: 0 auto; background: #1f2a24; border-radius: 14px; overflow: hidden;
+            box-shadow: 0 24px 50px rgba(26,22,18,0.18); color: #e8f0ea;
+        }
+        .preview-chrome {
+            display: flex; align-items: center; gap: 8px; padding: 12px 14px;
+            background: rgba(0,0,0,0.25); border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .preview-chrome .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.25); }
+        .preview-chrome .title { margin-left: 8px; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; }
+        .preview-live { margin-left: auto; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; color: #7dcea0; }
+        .preview-live::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #7dcea0; margin-right: 6px; vertical-align: middle; }
+        .preview-body { padding: 22px; }
+        .preview-head h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #fff; font-weight: 500; }
+        .preview-head span { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.55; }
+        .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0 14px; }
+        .stat { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 14px 12px; }
+        .stat .label { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.55; margin-bottom: 6px; }
+        .stat .value { font-family: 'Playfair Display', serif; font-size: 1.85rem; color: #fff; line-height: 1; }
+        .preview-panels { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 10px; }
+        .panel { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 14px; min-height: 120px; }
+        .panel-label { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.5; margin-bottom: 12px; }
+        .bars { display: flex; align-items: flex-end; gap: 6px; height: 70px; }
+        .bars span { flex: 1; background: linear-gradient(180deg, #a8c4b0, #4f7a5c); border-radius: 3px 3px 0 0; }
+        .bars span:nth-child(1){height:42%} .bars span:nth-child(2){height:68%} .bars span:nth-child(3){height:55%}
+        .bars span:nth-child(4){height:88%} .bars span:nth-child(5){height:60%} .bars span:nth-child(6){height:74%} .bars span:nth-child(7){height:48%}
+        .crew-list { display: flex; flex-direction: column; gap: 8px; }
+        .crew-list div { display: flex; justify-content: space-between; font-size: 0.72rem; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .crew-list .status { color: #7dcea0; font-size: 0.65rem; }
+        .case { max-width: 800px; margin: 0 auto; padding: 20px 28px 80px; }
+        .chapter {
+            display: grid; grid-template-columns: 88px 1fr; gap: 24px;
+            padding: 48px 0; border-bottom: 1px solid var(--line);
+        }
+        .chapter:last-of-type { border-bottom: 0; }
+        .chapter-num {
+            font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--red); line-height: 1; font-weight: 500;
+        }
+        .chapter-label {
+            display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--muted); margin-top: 8px;
+        }
+        .chapter h2 {
+            font-family: 'Playfair Display', serif; font-size: 1.65rem; font-weight: 600;
+            letter-spacing: -0.02em; margin-bottom: 14px;
+        }
+        .chapter p + p { margin-top: 12px; }
+        .chapter p, .chapter li { color: var(--muted); font-size: 1.02rem; }
+        .chapter ul { margin: 12px 0 0 18px; }
+        .chapter li + li { margin-top: 8px; }
+        .alt { background: var(--gray); margin: 0 -28px; padding: 0 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 6px 10px; list-style: none; margin: 16px 0 0; }
+        .tech-tags li {
+            font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+            color: var(--muted); border: 1px solid var(--line); padding: 4px 9px; background: var(--white);
+        }
+        @media (max-width: 700px) {
+            .chapter { grid-template-columns: 1fr; gap: 10px; }
+            .preview-panels, .stat-row { grid-template-columns: 1fr; }
+            .hero, .case, .preview-wrap { padding-left: 18px; padding-right: 18px; }
+            .alt { margin: 0 -18px; padding: 0 18px; }
         }
     </style>
 </head>
 <body>
-    <div class="red-band"></div>
-    <div class="content-container">
-        <header class="header">
-            <nav class="nav-links">
-                <a href="../index.html">Home</a>
-                <a href="../About/about.html">About</a>
-                <a href="../Resume/resume.html">Resume</a>
-                <a href="projects.html" class="active">Projects</a>
-            </nav>
-        </header>
-        <main class="page">
-            <article class="article">
-                <a class="back" href="projects.html">← All projects</a>
-                <h1>New Leaf</h1>
-                <p class="meta">Project</p>
-                <p>Full write-up coming next. Send over the overview, your role, and tech stack and I’ll drop them in here.</p>
-            </article>
-        </main>
+    <nav class="site-nav">
+        <a href="../index.html">Home</a>
+        <a href="../About/about.html">About</a>
+        <a href="../Resume/resume.html">Resume</a>
+        <a href="projects.html" class="active">Projects</a>
+    </nav>
+
+    <header class="hero">
+        <a class="back" href="projects.html">← All projects</a>
+        <p class="eyebrow">01 / Featured · Software Development</p>
+        <h1>New Leaf</h1>
+        <p class="subtitle">Operations Dashboard</p>
+        <p class="lede">A landscaping business running on spreadsheets and verbal handoffs needed a connected system—secure data, reliable APIs, and environments you can trust while you ship.</p>
+    </header>
+
+    <div class="preview-wrap">
+        <div class="preview-frame" aria-label="Conceptual New Leaf operations preview">
+            <div class="preview-chrome">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="title">Dispatch overview</span>
+                <span class="preview-live">Live System</span>
+            </div>
+            <div class="preview-body">
+                <div class="preview-head">
+                    <h3>New Leaf Operations</h3>
+                    <span>Conceptual preview — not a live screenshot</span>
+                </div>
+                <div class="stat-row">
+                    <div class="stat"><div class="label">Jobs</div><div class="value">24</div></div>
+                    <div class="stat"><div class="label">Crews</div><div class="value">06</div></div>
+                    <div class="stat"><div class="label">Trucks</div><div class="value">08</div></div>
+                </div>
+                <div class="preview-panels">
+                    <div class="panel">
+                        <div class="panel-label">Weekly load</div>
+                        <div class="bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-label">Crew status</div>
+                        <div class="crew-list">
+                            <div><span>North crew</span><span class="status">On site</span></div>
+                            <div><span>East crew</span><span class="status">En route</span></div>
+                            <div><span>Central</span><span class="status">Staging</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <article class="case">
+        <section class="chapter">
+            <div>
+                <div class="chapter-num">01</div>
+                <span class="chapter-label">The Problem</span>
+            </div>
+            <div>
+                <h2>Why did this project need to exist?</h2>
+                <p>Operations lived in manual processes—scattered updates, fragile handoffs, and no single place that reflected the real state of jobs, crews, and equipment.</p>
+                <p>Without a shared system, the business couldn’t scale how it scheduled work or trusted that everyone was looking at the same information.</p>
+            </div>
+        </section>
+
+        <section class="chapter alt">
+            <div>
+                <div class="chapter-num">02</div>
+                <span class="chapter-label">The Approach</span>
+            </div>
+            <div>
+                <h2>How did I approach it?</h2>
+                <p>I treated the database and environments as first-class product work—not afterthoughts. That meant designing for row-level security from the start, planning migrations so schemas stayed consistent, and separating sandboxes and testing from anything production-like.</p>
+                <ul>
+                    <li>Map business workflows before tables, so the schema matched how the company actually runs.</li>
+                    <li>Design API connections around the systems that already owned key data.</li>
+                    <li>Use RLS so access rules travel with the data, not only the UI.</li>
+                    <li>Keep sandboxes and test environments close enough to reality that migrations and edge cases show up early.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="chapter">
+            <div>
+                <div class="chapter-num">03</div>
+                <span class="chapter-label">The Build</span>
+            </div>
+            <div>
+                <h2>What did I actually create?</h2>
+                <p>An operations-oriented platform layer: API integrations that keep external and internal data aligned, database management with migrations for consistent tables across environments, and security policies that enforce who can see what.</p>
+                <ul>
+                    <li>API connections for business-critical data flows</li>
+                    <li>Schema design and table migrations across environments</li>
+                    <li>Row-level security for role-appropriate access</li>
+                    <li>Sandbox and testing setups for safer iteration</li>
+                    <li>Business-specific solutions when a generic pattern wouldn’t fit the workflow</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="chapter alt">
+            <div>
+                <div class="chapter-num">04</div>
+                <span class="chapter-label">The Result</span>
+            </div>
+            <div>
+                <h2>What came out of it?</h2>
+                <p>A foundation the business can operate on: consistent data across environments, secured access at the database layer, and room to ship features without guessing whether testing matches reality.</p>
+                <p>The quieter win is operational trust—people and systems looking at the same state of jobs, crews, and resources.</p>
+            </div>
+        </section>
+
+        <section class="chapter">
+            <div>
+                <div class="chapter-num">05</div>
+                <span class="chapter-label">The Technical Side</span>
+            </div>
+            <div>
+                <h2>Under the hood</h2>
+                <p>Stack and infrastructure focused on integrations, data integrity, and environment discipline.</p>
+                <ul class="tech-tags">
+                    <li>Next.js</li>
+                    <li>Supabase</li>
+                    <li>JavaScript</li>
+                    <li>API Integration</li>
+                    <li>PostgreSQL / RLS</li>
+                    <li>Schema Migrations</li>
+                    <li>Sandboxes &amp; Testing</li>
+                </ul>
+            </div>
+        </section>
+    </article>
 </body>
 </html>

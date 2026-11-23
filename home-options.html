@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page Options v2 — Sierra Cuthill</title>
+    <link rel="icon" type="image/png" href="Favicon.png?v=3">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #8E3333;
+            --ink: #1a1612;
+            --muted: #5c564c;
+            --line: rgba(26, 22, 18, 0.12);
+            --white: #ffffff;
+            --gray: #f0efed;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--ink);
+            background: #e8e6e2;
+            line-height: 1.6;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        .chooser {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
+            padding: 14px 24px;
+        }
+
+        .chooser-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 16px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chooser h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .chooser p {
+            font-size: 0.78rem;
+            color: var(--muted);
+            width: 100%;
+        }
+
+        .chooser-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .chooser-links a {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 7px 12px;
+            border: 1px solid var(--line);
+        }
+
+        .chooser-links a:hover {
+            color: var(--red);
+            border-color: rgba(142, 51, 51, 0.4);
+        }
+
+        .option-label {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px clamp(20px, 4vw, 48px) 14px;
+        }
+
+        .option-label .tag {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 6px;
+        }
+
+        .option-label h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .option-label .note {
+            font-size: 0.88rem;
+            color: var(--muted);
+            margin-top: 4px;
+            max-width: 62ch;
+        }
+
+        .mock {
+            min-height: 100vh;
+            background: var(--white);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 18px 28px;
+            border-bottom: 1px solid var(--line);
+            background: rgba(255,255,255,0.92);
+            position: relative;
+            z-index: 5;
+        }
+
+        .nav.over-dark {
+            background: transparent;
+            border-bottom-color: rgba(255,255,255,0.15);
+        }
+
+        .nav.over-dark a { color: #fff; }
+
+        .nav a {
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 8px 14px;
+            border: 1px solid transparent;
+        }
+
+        .nav a.active,
+        .nav a:hover {
+            color: var(--red);
+            border-color: rgba(142, 51, 51, 0.35);
+        }
+
+        .nav.over-dark a.active,
+        .nav.over-dark a:hover {
+            color: #fff;
+            border-color: rgba(255,255,255,0.45);
+        }
+
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 20px;
+        }
+
+        .eyebrow .line {
+            width: 40px;
+            height: 1px;
+            background: var(--red);
+        }
+
+        .btn {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 10px 18px;
+            border: 1px solid var(--line);
+            background: transparent;
+        }
+
+        .btn.primary {
+            color: var(--red);
+            border-color: rgba(142, 51, 51, 0.4);
+        }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 26px;
+        }
+
+        .social {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-top: 26px;
+        }
+
+        .social img {
+            height: 20px;
+            width: auto;
+            opacity: 0.7;
+            filter: grayscale(1);
+        }
+
+        .social .mark {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+        }
+
+        .foot {
+            text-align: center;
+            padding: 18px;
+            font-size: 0.7rem;
+        }
+
+        .foot a { color: var(--red); font-weight: 500; }
+
+        /* Shared photo helpers — crop tight, mute the red shirt a bit */
+        .face {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 18%;
+            display: block;
+            filter: saturate(0.82) contrast(1.05);
+        }
+
+        .face.bw {
+            filter: grayscale(1) contrast(1.08);
+        }
+
+        /* ===================== OPTION A: Type takeover ===================== */
+        .a-wrap {
+            min-height: calc(100vh - 60px);
+            display: grid;
+            grid-template-rows: 1fr auto;
+            padding: 24px clamp(24px, 5vw, 64px) 0;
+        }
+
+        .a-type {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            max-width: 820px;
+            padding: 40px 0 24px;
+        }
+
+        .a-type h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 12vw, 9rem);
+            font-weight: 600;
+            line-height: 0.88;
+            letter-spacing: -0.04em;
+            margin-bottom: 28px;
+        }
+
+        .a-type .sub {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+
+        .a-type p {
+            color: var(--muted);
+            max-width: 46ch;
+            margin-bottom: 12px;
+        }
+
+        .a-orb {
+            position: absolute;
+            right: 6%;
+            top: 18%;
+            width: min(320px, 34vw);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            z-index: 1;
+            box-shadow: 0 24px 50px rgba(26,22,18,0.12);
+        }
+
+        .a-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 1px solid var(--line);
+            padding: 18px 0 28px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .a-bottom .meta {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        /* ===================== OPTION B: Broken frame ===================== */
+        .b-grid {
+            min-height: calc(100vh - 60px);
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 0;
+        }
+
+        .b-copy {
+            padding: 56px clamp(28px, 5vw, 60px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--white);
+        }
+
+        .b-copy h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 5vw, 4.2rem);
+            font-weight: 600;
+            line-height: 1.02;
+            letter-spacing: -0.03em;
+            margin-bottom: 10px;
+        }
+
+        .b-copy .sub {
+            color: var(--red);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .b-copy p {
+            color: var(--muted);
+            max-width: 44ch;
+            margin-bottom: 12px;
+        }
+
+        .b-visual {
+            background: var(--gray);
+            position: relative;
+            min-height: 560px;
+            overflow: hidden;
+        }
+
+        .b-frame {
+            position: absolute;
+            width: 68%;
+            aspect-ratio: 3 / 4;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            background: #ddd;
+        }
+
+        .b-frame.main {
+            top: 12%;
+            left: 8%;
+            z-index: 2;
+            transform: rotate(-3deg);
+            box-shadow: 0 20px 40px rgba(26,22,18,0.14);
+        }
+
+        .b-frame.ghost {
+            top: 28%;
+            right: 6%;
+            width: 42%;
+            z-index: 1;
+            transform: rotate(6deg);
+            opacity: 0.55;
+            filter: grayscale(1);
+        }
+
+        .b-caption {
+            position: absolute;
+            bottom: 28px;
+            left: 24px;
+            z-index: 3;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            background: rgba(255,255,255,0.85);
+            padding: 6px 10px;
+        }
+
+        /* ===================== OPTION C: Overlay panel ===================== */
+        .c-stage {
+            min-height: calc(100vh - 60px);
+            position: relative;
+            background: #2a2622;
+        }
+
+        .c-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .c-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+            filter: grayscale(0.35) saturate(0.7) brightness(0.72);
+            transform: scale(1.05);
+        }
+
+        .c-panel {
+            position: relative;
+            z-index: 2;
+            max-width: 520px;
+            margin: 48px clamp(20px, 6vw, 80px);
+            padding: 40px 36px;
+            background: rgba(255,255,255,0.94);
+            border: 1px solid var(--line);
+            backdrop-filter: blur(8px);
+        }
+
+        .c-panel h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 4vw, 3.4rem);
+            font-weight: 600;
+            line-height: 1.05;
+            margin-bottom: 8px;
+        }
+
+        .c-panel .sub {
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+
+        .c-panel p {
+            color: var(--muted);
+            font-size: 0.98rem;
+            margin-bottom: 12px;
+        }
+
+        /* ===================== OPTION D: Index card / dossier ===================== */
+        .d-wrap {
+            min-height: calc(100vh - 60px);
+            background: var(--gray);
+            padding: 40px clamp(20px, 5vw, 64px) 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .d-card {
+            width: min(980px, 100%);
+            background: var(--white);
+            border: 1px solid var(--line);
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            box-shadow: 0 30px 60px rgba(26,22,18,0.08);
+        }
+
+        .d-photo {
+            border-right: 1px solid var(--line);
+            min-height: 420px;
+            background: #e6e2dc;
+            overflow: hidden;
+        }
+
+        .d-body {
+            padding: 36px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .d-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 14px;
+            margin-bottom: 22px;
+            gap: 16px;
+        }
+
+        .d-top .file {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--red);
+        }
+
+        .d-top .sc {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .d-body h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 4vw, 3rem);
+            font-weight: 600;
+            line-height: 1.05;
+            margin-bottom: 8px;
+        }
+
+        .d-body .sub {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+
+        .d-body p {
+            color: var(--muted);
+            margin-bottom: 12px;
+            max-width: 48ch;
+        }
+
+        .d-meta-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
+        }
+
+        .d-meta-row div {
+            font-size: 0.72rem;
+        }
+
+        .d-meta-row span {
+            display: block;
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 4px;
+        }
+
+        /* ===================== OPTION E: Marquee / strip ===================== */
+        .e-wrap {
+            min-height: calc(100vh - 60px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .e-marquee {
+            overflow: hidden;
+            border-bottom: 1px solid var(--line);
+            background: var(--ink);
+            color: #fff;
+            white-space: nowrap;
+            padding: 12px 0;
+        }
+
+        .e-marquee-track {
+            display: inline-block;
+            animation: scroll 28s linear infinite;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .e-marquee-track span {
+            display: inline-block;
+            padding: 0 28px;
+        }
+
+        .e-marquee-track .dot { color: var(--red); }
+
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .e-main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 0;
+        }
+
+        .e-photo {
+            position: relative;
+            overflow: hidden;
+            background: #d8d4ce;
+            min-height: 480px;
+        }
+
+        .e-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 12%;
+            filter: saturate(0.75) contrast(1.06);
+        }
+
+        .e-photo .badge {
+            position: absolute;
+            left: 20px;
+            bottom: 20px;
+            background: var(--white);
+            border: 1px solid var(--line);
+            padding: 10px 14px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .e-copy {
+            padding: 48px clamp(28px, 4vw, 52px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--white);
+        }
+
+        .e-copy h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.6rem, 5vw, 4rem);
+            font-weight: 600;
+            line-height: 1.02;
+            letter-spacing: -0.03em;
+            margin-bottom: 10px;
+        }
+
+        .e-copy .sub {
+            color: var(--muted);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .e-copy p {
+            color: var(--muted);
+            max-width: 42ch;
+            margin-bottom: 12px;
+        }
+
+        /* ===================== OPTION F: Offset stack ===================== */
+        .f-wrap {
+            min-height: calc(100vh - 60px);
+            padding: 32px clamp(20px, 5vw, 64px) 48px;
+            background: var(--white);
+        }
+
+        .f-rail {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 28px;
+            align-items: start;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .f-photo-col {
+            width: min(240px, 28vw);
+            padding-top: 72px;
+        }
+
+        .f-photo {
+            aspect-ratio: 3 / 4;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            transform: translateY(12px);
+        }
+
+        .f-photo.second {
+            margin-top: -40px;
+            margin-left: 48px;
+            width: 70%;
+            aspect-ratio: 1;
+            filter: grayscale(1);
+            opacity: 0.85;
+            border-color: rgba(26,22,18,0.2);
+        }
+
+        .f-copy {
+            padding-top: 24px;
+            max-width: 620px;
+        }
+
+        .f-copy .giant {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(5rem, 14vw, 10rem);
+            font-weight: 600;
+            line-height: 0.82;
+            letter-spacing: -0.05em;
+            color: rgba(26, 22, 18, 0.08);
+            margin-bottom: -0.15em;
+            user-select: none;
+        }
+
+        .f-copy h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 4vw, 3.4rem);
+            font-weight: 600;
+            line-height: 1.05;
+            margin-bottom: 8px;
+        }
+
+        .f-copy .sub {
+            color: var(--red);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .f-copy p {
+            color: var(--muted);
+            margin-bottom: 12px;
+            max-width: 46ch;
+        }
+
+        @media (max-width: 900px) {
+            .a-orb {
+                position: relative;
+                right: auto;
+                top: auto;
+                width: 180px;
+                margin: 0 0 24px auto;
+            }
+
+            .b-grid,
+            .e-main,
+            .d-card,
+            .f-rail {
+                grid-template-columns: 1fr;
+            }
+
+            .b-visual { min-height: 380px; }
+
+            .f-photo-col {
+                width: 180px;
+                padding-top: 0;
+                display: flex;
+                gap: 12px;
+            }
+
+            .f-photo.second {
+                margin: 40px 0 0 0;
+                width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chooser">
+        <div class="chooser-inner">
+            <div>
+                <h1>Home options — round 2</h1>
+                <p>Weirder layouts, tighter photo crops (less floaty), red as accent only. Pick a direction.</p>
+            </div>
+            <div class="chooser-links">
+                <a href="#a">A Type</a>
+                <a href="#b">B Frames</a>
+                <a href="#c">C Overlay</a>
+                <a href="#d">D Dossier</a>
+                <a href="#e">E Marquee</a>
+                <a href="#f">F Offset</a>
+                <a href="index.html">Current →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- A -->
+    <div class="option-label" id="a">
+        <p class="tag">Option A</p>
+        <h2>Type takeover</h2>
+        <p class="note">Giant headline first. Portrait shrinks to a circular crop so the vignette edges disappear and the red shirt doesn’t dominate the page.</p>
+    </div>
+    <section class="mock">
+        <nav class="nav">
+            <a href="#" class="active">Home</a>
+            <a href="About/about.html">About</a>
+            <a href="Resume/resume.html">Resume</a>
+            <a href="Projects/projects.html">Projects</a>
+        </nav>
+        <div class="a-wrap">
+            <div class="a-orb" aria-hidden="true">
+                <img class="face" src="HomePage/Headshot.png?v=4" alt="">
+            </div>
+            <div class="a-type">
+                <div class="eyebrow"><span class="line"></span> Portfolio / 2024—2026</div>
+                <h1>Oh Hi<br>There!</h1>
+                <p class="sub">I'm Sierra… Welcome to my portfolio!</p>
+                <p>I am a data analyst and web developer who specializes in transforming complex data into clear, actionable insights and building interactive, user-friendly web experiences. Here, you'll find a collection of my projects showcasing skills in data visualization, analytics, and front-end development.</p>
+                <p>Feel free to explore my projects, resume, and learn a little bit more about me!</p>
+                <div class="cta-row">
+                    <a class="btn primary" href="Projects/projects.html">Projects</a>
+                    <a class="btn" href="About/about.html">About me</a>
+                    <a class="btn" href="Resume/resume.html">Resume</a>
+                </div>
+            </div>
+            <div class="a-bottom">
+                <p class="meta">Data Analytics · Software · Development</p>
+                <div class="social" style="margin:0;">
+                    <span class="mark">SC</span>
+                    <a href="mailto:sjcuthil@syr.edu"><img src="HomePage/EmailIcon.png?v=5" alt="Email"></a>
+                    <a href="https://www.linkedin.com/in/sierra-cuthill"><img src="HomePage/LinkedIn%20icon.png?v=1" alt="LinkedIn"></a>
+                    <a href="tel:+14017677007"><img src="HomePage/PhoneIcon.png?v=6" alt="Phone"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- B -->
+    <div class="option-label" id="b">
+        <p class="tag">Option B</p>
+        <h2>Broken frames</h2>
+        <p class="note">Text on a clean white panel. Photos as tilted “prints” — one color, one grayscale ghost — more scrapbook/editorial than corporate split.</p>
+    </div>
+    <section class="mock">
+        <nav class="nav">
+            <a href="#" class="active">Home</a>
+            <a href="About/about.html">About</a>
+            <a href="Resume/resume.html">Resume</a>
+            <a href="Projects/projects.html">Projects</a>
+        </nav>
+        <div class="b-grid">
+            <div class="b-copy">
+                <div class="eyebrow"><span class="line"></span> Sierra Cuthill</div>
+                <h1>Oh Hi There!</h1>
+                <p class="sub">I'm Sierra… Welcome to my portfolio!</p>
+                <p>I am a data analyst and web developer who specializes in transforming complex data into clear, actionable insights and building interactive, user-friendly web experiences. Here, you'll find a collection of my projects showcasing skills in data visualization, analytics, and front-end development.</p>
+                <p>Feel free to explore my projects, resume, and learn a little bit more about me!</p>
+                <div class="cta-row">
+                    <a class="btn primary" href="Projects/projects.html">Projects</a>
+                    <a class="btn" href="About/about.html">About me</a>
+                    <a class="btn" href="Resume/resume.html">Resume</a>
+                </div>
+                <div class="social">
+                    <a href="mailto:sjcuthil@syr.edu"><img src="HomePage/EmailIcon.png?v=5" alt="Email"></a>
+                    <a href="https://www.linkedin.com/in/sierra-cuthill"><img src="HomePage/LinkedIn%20icon.png?v=1" alt="LinkedIn"></a>
+                    <a href="tel:+14017677007"><img src="HomePage/PhoneIcon.png?v=6" alt="Phone"></a>
+                </div>
+            </div>
+            <div class="b-visual">
+                <div class="b-frame main">
+                    <img class="face" src="HomePage/Headshot.png?v=4" alt="Sierra Cuthill">
+                </div>
+                <div class="b-frame ghost" aria-hidden="true">
+                    <img class="face bw" src="HomePage/Headshot.png?v=4" alt="">
+                </div>
+                <p class="b-caption">Portrait · 2025</p>
+            </div>
+        </div>
+        <div class="foot"><a href="Games/games.html">Bored? Here's something to distract you from this super interesting portfolio.</a></div>
+    </section>
+
+    <!-- C -->
+    <div class="option-label" id="c">
+        <p class="tag">Option C</p>
+        <h2>Photo field + floating card</h2>
+        <p class="note">Full-bleed portrait as atmosphere (slightly desaturated so the shirt isn’t a red wall), with your intro sitting on a floating white card.</p>
+    </div>
+    <section class="mock">
+        <div class="c-stage">
+            <div class="c-bg" aria-hidden="true">
+                <img src="HomePage/Headshot.png?v=4" alt="">
+            </div>
+            <nav class="nav over-dark">
+                <a href="#" class="active">Home</a>
+                <a href="About/about.html">About</a>
+                <a href="Resume/resume.html">Resume</a>
+                <a href="Projects/projects.html">Projects</a>
+            </nav>
+            <div class="c-panel">
+                <div class="eyebrow"><span class="line"></span> Portfolio</div>
+                <h1>Oh Hi There!</h1>
+                <p class="sub">I'm Sierra… Welcome to my portfolio!</p>
+                <p>I am a data analyst and web developer who specializes in transforming complex data into clear, actionable insights and building interactive, user-friendly web experiences. Here, you'll find a collection of my projects showcasing skills in data visualization, analytics, and front-end development.</p>
+                <p>Feel free to explore my projects, resume, and learn a little bit more about me!</p>
+                <div class="cta-row">
+                    <a class="btn primary" href="Projects/projects.html">Projects</a>
+                    <a class="btn" href="About/about.html">About me</a>
+                    <a class="btn" href="Resume/resume.html">Resume</a>
+                </div>
+                <div class="social">
+                    <span class="mark">SC</span>
+                    <a href="mailto:sjcuthil@syr.edu"><img src="HomePage/EmailIcon.png?v=5" alt="Email"></a>
+                    <a href="https://www.linkedin.com/in/sierra-cuthill"><img src="HomePage/LinkedIn%20icon.png?v=1" alt="LinkedIn"></a>
+                    <a href="tel:+14017677007"><img src="HomePage/PhoneIcon.png?v=6" alt="Phone"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- D -->
+    <div class="option-label" id="d">
+        <p class="tag">Option D</p>
+        <h2>Dossier card</h2>
+        <p class="note">One centered “file” on a gray desk. Tight portrait crop on the left, bio as a document on the right — a little archival, a little playful.</p>
+    </div>
+    <section class="mock">
+        <nav class="nav">
+            <a href="#" class="active">Home</a>
+            <a href="About/about.html">About</a>
+            <a href="Resume/resume.html">Resume</a>
+            <a href="Projects/projects.html">Projects</a>
+        </nav>
+        <div class="d-wrap">
+            <article class="d-card">
+                <div class="d-photo">
+                    <img class="face" src="HomePage/Headshot.png?v=4" alt="Sierra Cuthill">
+                </div>
+                <div class="d-body">
+                    <div class="d-top">
+                        <span class="file">File / Home</span>
+                        <span class="sc">SC</span>
+                    </div>
+                    <h1>Oh Hi There!</h1>
+                    <p class="sub">I'm Sierra… Welcome to my portfolio!</p>
+                    <p>I am a data analyst and web developer who specializes in transforming complex data into clear, actionable insights and building interactive, user-friendly web experiences. Here, you'll find a collection of my projects showcasing skills in data visualization, analytics, and front-end development.</p>
+                    <p>Feel free to explore my projects, resume, and learn a little bit more about me!</p>
+                    <div class="d-meta-row">
+                        <div><span>Focus</span>Data · Web</div>
+                        <div><span>Based</span>Available</div>
+                        <div><span>Start</span>Projects →</div>
+                    </div>
+                    <div class="cta-row">
+                        <a class="btn primary" href="Projects/projects.html">Projects</a>
+                        <a class="btn" href="About/about.html">About me</a>
+                        <a class="btn" href="Resume/resume.html">Resume</a>
+                    </div>
+                    <div class="social">
+                        <a href="mailto:sjcuthil@syr.edu"><img src="HomePage/EmailIcon.png?v=5" alt="Email"></a>
+                        <a href="https://www.linkedin.com/in/sierra-cuthill"><img src="HomePage/LinkedIn%20icon.png?v=1" alt="LinkedIn"></a>
+                        <a href="tel:+14017677007"><img src="HomePage/PhoneIcon.png?v=6" alt="Phone"></a>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <div class="foot" style="background:var(--gray);"><a href="Games/games.html">Bored? Here's something to distract you from this super interesting portfolio.</a></div>
+    </section>
+
+    <!-- E -->
+    <div class="option-label" id="e">
+        <p class="tag">Option E</p>
+        <h2>Marquee strip</h2>
+        <p class="note">A moving ticker for roles/keywords, then a hard 50/50: cropped portrait vs copy. Feels like a studio site, not a diagonal color block.</p>
+    </div>
+    <section class="mock">
+        <nav class="nav">
+            <a href="#" class="active">Home</a>
+            <a href="About/about.html">About</a>
+            <a href="Resume/resume.html">Resume</a>
+            <a href="Projects/projects.html">Projects</a>
+        </nav>
+        <div class="e-wrap">
+            <div class="e-marquee" aria-hidden="true">
+                <div class="e-marquee-track">
+                    <span>Data Analytics</span><span class="dot">●</span>
+                    <span>Web Development</span><span class="dot">●</span>
+                    <span>Visualization</span><span class="dot">●</span>
+                    <span>APIs &amp; Databases</span><span class="dot">●</span>
+                    <span>Product Thinking</span><span class="dot">●</span>
+                    <span>Data Analytics</span><span class="dot">●</span>
+                    <span>Web Development</span><span class="dot">●</span>
+                    <span>Visualization</span><span class="dot">●</span>
+                    <span>APIs &amp; Databases</span><span class="dot">●</span>
+                    <span>Product Thinking</span><span class="dot">●</span>
+                </div>
+            </div>
+            <div class="e-main">
+                <div class="e-photo">
+                    <img src="HomePage/Headshot.png?v=4" alt="Sierra Cuthill">
+                    <div class="badge">Sierra Cuthill</div>
+                </div>
+                <div class="e-copy">
+                    <div class="eyebrow"><span class="line"></span> Welcome</div>
+                    <h1>Oh Hi There!</h1>
+                    <p class="sub">I'm Sierra… Welcome to my portfolio!</p>
+                    <p>I am a data analyst and web developer who specializes in transforming complex data into clear, actionable insights and building interactive, user-friendly web experiences. Here, you'll find a collection of my projects showcasing skills in data visualization, analytics, and front-end development.</p>
+                    <p>Feel free to explore my projects, resume, and learn a little bit more about me!</p>
+                    <div class="cta-row">
+                        <a class="btn primary" href="Projects/projects.html">Projects</a>
+                        <a class="btn" href="About/about.html">About me</a>
+                        <a class="btn" href="Resume/resume.html">Resume</a>
+                    </div>
+                    <div class="social">
+                        <span class="mark">SC</span>
+                        <a href="mailto:sjcuthil@syr.edu"><img src="HomePage/EmailIcon.png?v=5" alt="Email"></a>
+                        <a href="https://www.linkedin.com/in/sierra-cuthill"><img src="HomePage/LinkedIn%20icon.png?v=1" alt="LinkedIn"></a>
+                        <a href="tel:+14017677007"><img src="HomePage/PhoneIcon.png?v=6" alt="Phone"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="foot"><a href="Games/games.html">Bored? Here's something to distract you from this super interesting portfolio.</a></div>
+    </section>
+
+    <!-- F -->
+    <div class="option-label" id="f">
+        <p class="tag">Option F</p>
+        <h2>Offset stack</h2>
+        <p class="note">Giant ghost “HI” behind the real headline. Two overlapping photo crops (one B&amp;W) stacked like a layout experiment — intentionally uneven.</p>
+    </div>
+    <section class="mock">
+        <nav class="nav">
+            <a href="#" class="active">Home</a>
+            <a href="About/about.html">About</a>
+            <a href="Resume/resume.html">Resume</a>
+            <a href="Projects/projects.html">Projects</a>
+        </nav>
+        <div class="f-wrap">
+            <div class="f-rail">
+                <div class="f-photo-col">
+                    <div class="f-photo">
+                        <img class="face" src="HomePage/Headshot.png?v=4" alt="Sierra Cuthill">
+                    </div>
+                    <div class="f-photo second" aria-hidden="true">
+                        <img class="face bw" src="HomePage/Headshot.png?v=4" alt="">
+                    </div>
+                </div>
+                <div class="f-copy">
+                    <div class="giant" aria-hidden="true">HI</div>
+                    <div class="eyebrow"><span class="line"></span> Portfolio / Sierra</div>
+                    <h1>Oh Hi There!</h1>
+                    <p class="sub">I'm Sierra… Welcome to my portfolio!</p>
+                    <p>I am a data analyst and web developer who specializes in transforming complex data into clear, actionable insights and building interactive, user-friendly web experiences. Here, you'll find a collection of my projects showcasing skills in data visualization, analytics, and front-end development.</p>
+                    <p>Feel free to explore my projects, resume, and learn a little bit more about me!</p>
+                    <div class="cta-row">
+                        <a class="btn primary" href="Projects/projects.html">Projects</a>
+                        <a class="btn" href="About/about.html">About me</a>
+                        <a class="btn" href="Resume/resume.html">Resume</a>
+                    </div>
+                    <div class="social">
+                        <span class="mark">SC</span>
+                        <a href="mailto:sjcuthil@syr.edu"><img src="HomePage/EmailIcon.png?v=5" alt="Email"></a>
+                        <a href="https://www.linkedin.com/in/sierra-cuthill"><img src="HomePage/LinkedIn%20icon.png?v=1" alt="LinkedIn"></a>
+                        <a href="tel:+14017677007"><img src="HomePage/PhoneIcon.png?v=6" alt="Phone"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="foot"><a href="Games/games.html">Bored? Here's something to distract you from this super interesting portfolio.</a></div>
+    </section>
+</body>
+</html>

@@ -6,310 +6,323 @@
     <title>Sierra Cuthill - Portfolio</title>
     <link rel="icon" type="image/png" href="Favicon.png?v=3">
     <link rel="shortcut icon" type="image/png" href="Favicon.png?v=3">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --red: #8E3333;
+            --ink: #1a1612;
+            --muted: #5c564c;
+            --line: rgba(26, 22, 18, 0.12);
+            --white: #ffffff;
+            --gray: #f0efed;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            color: var(--ink);
+            background: #e8e6e2;
+            overflow-x: hidden;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        .stage {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             position: relative;
         }
 
-        .angled-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #8E3333 0%, #8E3333 50%, #E0E0E0 50%, #E0E0E0 100%);
+        .bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
             z-index: 0;
         }
 
-        .bottom-red-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 30%;
-            background: #8E3333;
-            z-index: 60;
-            clip-path: polygon(0 0, 30% 0, 0 180%);
-            pointer-events: none;
+        .bg img {
+            width: 120%;
+            height: 100%;
+            max-width: none;
+            object-fit: cover;
+            object-position: center 12%;
+            transform: translateX(-18%);
+            filter: grayscale(0.2) saturate(0.8) brightness(0.85);
         }
 
-        .social-icons {
-            position: absolute;
-            bottom: 5%;
-            left: 8%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1.5%;
-            z-index: 25;
-        }
-
-        .logo {
-            width: 15%;
-            height: 15%;
-            margin-bottom: 1%;
-            margin-left: 1%;
-            transform: translateY(-50%) translateX(1%);
-            pointer-events: none; /* prevent blocking clicks below */
-        }
-
-        .social-icons-row {
-            display: flex;
-            flex-direction: row;
-            gap: 3%;
-            align-items: center;
-            margin-left: -9%;
-            transform: translateY(-30%);
-        }
-
-        .social-icons-row a {
+        .marquee {
             position: relative;
-            z-index: 30;          /* ensure links sit on top */
-            pointer-events: auto; /* explicitly clickable */
-            display: inline-block; /* ensure clickable box matches image */
-        }
-
-        .social-icon {
-            width: 30px;
-            height: 30px;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            pointer-events: auto;
-            cursor: pointer;
-        }
-
-        .email-icon {
-            margin-left: -1%;
-            margin-top: -1%;
-            width: 60px;
-            height: 60px;
-        }
-
-        .linkedin-icon {
-            margin-left: 0px;
-            margin-top: -1.5%;
-            width: 45px;
-            height: 45px;
-        }
-
-        .phone-icon {
-            width: 35px;
-            height: 35px;
-            margin-left: 12px;
-        }
-
-        .social-icon:hover {
-            transform: scale(1.1);
-            opacity: 0.8;
-        }
-
-        .split-layout {
-            display: flex;
-            height: 100vh;
-        }
-
-        .left-panel {
-            width: 40%;
-            background: transparent;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-        }
-
-
-
-        .rectangular-image {
-            width: 100%;
-            height: 100vh;
-            object-fit: contain;
-            position: absolute;
-            top: 0;
-            left: 0;
             z-index: 5;
-            opacity: 1;
-            clip-path: polygon(0 0, 87% 0, 0 162%);
-            transform: translateX(-20%) translateY(-5%);
-            object-position: left top;
-        }
-
-
-        .right-panel {
-            width: 60%;
-            background: transparent;
-            padding: 40px 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-end;
-            position: relative;
-            z-index: 80;
-            transform: translateY(-40px);
-        }
-
-        .main-heading {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.2rem;
-            font-weight: 600;
-            color: #231C07;
-            margin-bottom: 15px;
-            line-height: 1.1;
-            text-align: right;
-        }
-
-        .subheading {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: #231C07;
-            margin-bottom: 25px;
-            font-weight: 400;
-            text-align: right;
-        }
-
-        .description {
-            font-size: 1.1rem;
-            line-height: 1.5;
-            color: #231C07;
-            margin-bottom: 30px;
-            max-width: 450px;
-            text-align: right;
-        }
-
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            position: relative;
-            z-index: 80;
-        }
-
-        .nav-button {
-            background: rgba(35, 28, 7, 0.1);
-            border: 2px solid rgba(35, 28, 7, 0.3);
-            color: #231C07;
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            text-align: center;
-            max-width: 180px;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(10px);
+            color: var(--ink);
+            white-space: nowrap;
+            padding: 11px 0;
         }
 
-        .nav-button:hover {
-            background: rgba(35, 28, 7, 0.2);
-            border-color: rgba(35, 28, 7, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(35, 28, 7, 0.2);
+        .marquee-track {
+            display: inline-block;
+            animation: scroll 30s linear infinite;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
         }
 
-        @media (max-width: 1024px) {
-            .split-layout {
-                flex-direction: column;
+        .marquee-track span {
+            display: inline-block;
+            padding: 0 26px;
+        }
+
+        .marquee-track .dot {
+            color: var(--red);
+            padding: 0;
+        }
+
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .content {
+            position: relative;
+            z-index: 4;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 36px 18px 56px 24px;
+        }
+
+        .panel {
+            width: min(640px, 92%);
+            margin-right: 0;
+            background: rgba(255, 255, 255, 0.96);
+            border: 1px solid var(--line);
+            padding: clamp(36px, 4.5vw, 52px) clamp(30px, 4vw, 48px);
+            box-shadow: 0 28px 60px rgba(26, 22, 18, 0.18);
+        }
+
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 22px;
+        }
+
+        .eyebrow .line {
+            width: 40px;
+            height: 1px;
+            background: var(--red);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.6rem, 5vw, 3.8rem);
+            font-weight: 600;
+            line-height: 1.02;
+            letter-spacing: -0.03em;
+            margin-bottom: 10px;
+        }
+
+        .sub {
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .panel p {
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.65;
+            margin-bottom: 14px;
+            max-width: 46ch;
+        }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 28px;
+        }
+
+        .btn {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 11px 18px;
+            border: 1px solid var(--line);
+            background: transparent;
+            color: var(--ink);
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .btn.primary {
+            color: var(--red);
+            border-color: rgba(142, 51, 51, 0.4);
+        }
+
+        .btn:hover {
+            color: var(--red);
+            border-color: rgba(142, 51, 51, 0.5);
+        }
+
+        .contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 28px;
+            padding-top: 22px;
+            border-top: 1px solid var(--line);
+        }
+
+        .contact a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink);
+            border: 1px solid var(--line);
+            padding: 9px 12px;
+            transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .contact a:hover {
+            color: var(--red);
+            border-color: rgba(142, 51, 51, 0.4);
+            background: rgba(142, 51, 51, 0.04);
+        }
+
+        .contact a img {
+            height: 14px;
+            width: auto;
+            opacity: 0.75;
+            filter: grayscale(1);
+        }
+
+        .contact .handle {
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            text-transform: none;
+            color: var(--muted);
+            font-size: 0.78rem;
+        }
+
+        .foot {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            padding: 14px 16px 20px;
+        }
+
+        .foot a {
+            color: var(--red);
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid var(--line);
+            padding: 5px 10px;
+            font-size: 0.72rem;
+            font-weight: 500;
+        }
+
+        .foot a:hover {
+            background: var(--white);
+        }
+
+        @media (max-width: 700px) {
+            .bg img {
+                width: 140%;
+                transform: translateX(-22%);
             }
-            
-            .left-panel {
+
+            .content {
+                padding: 24px 12px 40px;
+                align-items: flex-end;
+                justify-content: flex-end;
+            }
+
+            .panel {
                 width: 100%;
-                height: 50vh;
+                padding: 24px 20px;
             }
-            
-            .right-panel {
-                width: 100%;
-                height: 50vh;
-                padding: 40px 30px;
-                padding-top: 60px;
-            }
-            
-            .rectangular-image {
-                height: 50vh;
-            }
-            
-            .main-heading {
-                font-size: 2.5rem;
-            }
-        }
 
-        @media (max-width: 768px) {
-            .main-heading {
-                font-size: 2rem;
-            }
-            
-            .subheading {
-                font-size: 1.2rem;
-            }
-            
-            .right-panel {
-                padding: 30px 20px;
-            }
-            
-            .rectangular-image {
-                height: 50vh;
-            }
+            h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
-    <div class="angled-background"></div>
-
-    <div class="split-layout">
-        <img src="HomePage/Headshot.png?v=4" alt="Sierra Cuthill" class="rectangular-image">
-        
-        <div class="left-panel">
+    <div class="stage">
+        <div class="bg" aria-hidden="true">
+            <img src="HomePage/Headshot.png?v=4" alt="">
         </div>
-        
-        <div class="right-panel">
-            <h1 class="main-heading">Oh Hi There!</h1>
-            <h2 class="subheading">I'm Sierra... Welcome to my portfolio!</h2>
-            
-            <p class="description">
-                I am a data analyst and web developer who specializes in transforming complex data into clear, actionable insights and building interactive, user-friendly web experiences. Here, you'll find a collection of my projects showcasing skills in data visualization, analytics, and front-end development.
-            </p>
 
-            <p class="description">
-               Feel free to explore my projects, resume, and learn a little bit more about me! 
-            </p>
-            
-            <div class="button-group">
-                <a href="About/about.html" class="nav-button">About me</a>
-                <a href="Resume/resume.html" class="nav-button">Resume</a>
-                <a href="Projects/projects.html" class="nav-button">Projects</a>
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-track">
+                <span>Data Analytics</span><span class="dot">●</span>
+                <span>Web Development</span><span class="dot">●</span>
+                <span>Visualization</span><span class="dot">●</span>
+                <span>APIs &amp; Databases</span><span class="dot">●</span>
+                <span>Product Thinking</span><span class="dot">●</span>
+                <span>Data Analytics</span><span class="dot">●</span>
+                <span>Web Development</span><span class="dot">●</span>
+                <span>Visualization</span><span class="dot">●</span>
+                <span>APIs &amp; Databases</span><span class="dot">●</span>
+                <span>Product Thinking</span><span class="dot">●</span>
             </div>
         </div>
+
+        <main class="content">
+            <section class="panel">
+                <div class="eyebrow">
+                    <span class="line" aria-hidden="true"></span>
+                    Portfolio / 2024—2026
+                </div>
+                <h1>Oh Hi There!</h1>
+                <p class="sub">Sierra Cuthill · Data Analyst &amp; Web Developer</p>
+                <p>I build tools that turn messy data into decisions people can actually use—dashboards, product features, and systems that stay reliable once they’re live.</p>
+                <p>Selected work spans analytics, full-stack development, and the operational details underneath: APIs, databases, and team delivery.</p>
+                <div class="cta-row">
+                    <a class="btn" href="About/about.html">About</a>
+                    <a class="btn" href="Resume/resume.html">Resume</a>
+                    <a class="btn primary" href="Projects/projects.html">Projects</a>
+                </div>
+                <div class="contact">
+                    <a href="mailto:sjcuthil@syr.edu" title="Email Sierra">
+                        <img src="HomePage/EmailIcon.png?v=5" alt="">
+                        <span>Email</span>
+                        <span class="handle">sjcuthil@syr.edu</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/sierra-cuthill" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                        <img src="HomePage/LinkedIn%20icon.png?v=1" alt="">
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="tel:+14017677007" title="Call Sierra">
+                        <img src="HomePage/PhoneIcon.png?v=6" alt="">
+                        <span>Phone</span>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="foot">
+            <a href="Games/games.html">Bored? Here's something to distract you from this super interesting portfolio.</a>
+        </footer>
     </div>
-    
-    <div class="bottom-red-overlay">
-        <div class="social-icons">
-            <img src="Favicon.png?v=3" alt="Sierra Cuthill Logo" class="logo">
-            <div class="social-icons-row">
-                <a href="mailto:sjcuthil@syr.edu" rel="noopener noreferrer" title="Email Sierra">
-                    <img src="HomePage/EmailIcon.png?v=5" alt="Email" class="social-icon email-icon">
-                </a>
-                <a href="https://www.linkedin.com/in/sierra-cuthill" target="_blank" rel="noopener noreferrer">
-                    <img src="HomePage/LinkedIn%20icon.png?v=1" alt="LinkedIn" class="social-icon linkedin-icon">
-                </a>
-                <a href="tel:+14017677007" rel="noopener noreferrer" title="Call Sierra">
-                    <img src="HomePage/PhoneIcon.png?v=6" alt="Phone" class="social-icon phone-icon">
-                </a>
-            </div>
-        </div>
-    </div>
-    
-    <footer style="position: fixed; bottom: 10px; left: 0; right: 0; text-align: center; z-index: 70; font-family: 'Inter', sans-serif;">
-        <a href="Games/games.html" style="color: #231C07; background: rgba(255,255,255,0.7); padding: 8px 14px; border-radius: 8px; text-decoration: none; border: 1px solid rgba(35,28,7,0.2);">
-            Bored? Here's something to distract you from this super interesting portfolio.
-        </a>
-    </footer>
 </body>
 </html>

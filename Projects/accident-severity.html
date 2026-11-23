@@ -3,239 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accident Severity Prediction - Sierra Cuthill</title>
+    <title>Accident Severity — Case Study · Sierra Cuthill</title>
     <link rel="icon" type="image/png" href="../Favicon.png">
     <link rel="shortcut icon" type="image/png" href="../Favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --red: #8E3333; --ink: #1a1612; --muted: #5c564c;
+            --line: rgba(26, 22, 18, 0.12); --white: #ffffff; --gray: #f0efed;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            position: relative;
-            color: #231C07;
-            background: #E0E0E0;
+        body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--white); line-height: 1.65; }
+        a { color: inherit; }
+        .site-nav {
+            position: sticky; top: 0; z-index: 50; display: flex; justify-content: flex-end; gap: 10px;
+            padding: 18px 28px; background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line);
         }
-
-        .red-band {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 40vh;
-            background: #8E3333;
-            z-index: 0;
+        .site-nav a {
+            text-decoration: none; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--ink); padding: 8px 14px; border: 1px solid transparent;
         }
-
-        .content-container {
-            position: relative;
-            z-index: 1;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .header { position: absolute; top: 30px; right: 30px; z-index: 20; }
-        .nav-links { display: flex; gap: 15px; }
-        .nav-links a {
-            color: #ffffff; text-decoration: none; font-weight: 600; padding: 12px 20px; border-radius: 25px;
-            transition: all 0.3s ease; background: rgba(255, 255, 255, 0.12); border: 2px solid rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(10px); text-align: center; min-width: 100px; font-size: 0.9rem;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            background: rgba(255, 255, 255, 0.22); border-color: rgba(255, 255, 255, 0.6);
-            transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .page {
-            flex: 1;
-            padding: calc(40vh + 40px) 24px 60px 24px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .article {
-            max-width: 800px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            padding: 40px 42px;
-        }
-
+        .site-nav a:hover, .site-nav a.active { color: var(--red); border-color: rgba(142,51,51,0.35); }
         .back {
-            display: inline-block;
-            margin-bottom: 18px;
-            color: #8E3333;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
+            display: inline-flex; margin-bottom: 28px; font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--red);
         }
-
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            margin-bottom: 8px;
+        .hero { max-width: 900px; margin: 0 auto; padding: 56px 28px 40px; }
+        .eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+        .hero h1 {
+            font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+            font-weight: 600; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 12px;
         }
-
-        .meta {
-            color: #8E3333;
-            font-weight: 500;
-            margin-bottom: 22px;
+        .hero .subtitle {
+            font-size: 0.85rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--muted); margin-bottom: 22px;
         }
-
-        h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.35rem;
-            margin: 28px 0 10px 0;
+        .hero .lede { font-size: 1.1rem; color: var(--muted); max-width: 52ch; }
+        .media {
+            background: var(--gray); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+            padding: 36px 28px;
         }
-
-        p, li { font-size: 1.02rem; line-height: 1.7; }
-        p + p { margin-top: 12px; }
-
-        ul {
-            margin: 8px 0 0 20px;
+        .viz-band {
+            max-width: 900px; margin: 0 auto; border-radius: 12px; overflow: hidden;
+            min-height: 280px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 14px; padding: 40px 28px; text-align: center; color: #fff;
+            background:
+                linear-gradient(160deg, rgba(26, 22, 18, 0.62), rgba(142, 51, 51, 0.5)),
+                url('../Personal%20Website%20Pics/car%20crash.jpg') center / cover;
         }
-
-        li + li { margin-top: 6px; }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 8px 0 6px 0;
+        .chart-mock { display: flex; align-items: flex-end; gap: 10px; height: 110px; width: min(280px, 80%); }
+        .chart-mock i { flex: 1; background: rgba(255,255,255,0.88); border-radius: 2px 2px 0 0; font-style: normal; }
+        .chart-mock i:nth-child(1){height:35%} .chart-mock i:nth-child(2){height:58%} .chart-mock i:nth-child(3){height:72%}
+        .chart-mock i:nth-child(4){height:48%} .chart-mock i:nth-child(5){height:90%} .chart-mock i:nth-child(6){height:62%}
+        .viz-band .caption { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.9; }
+        .graph-grid {
+            max-width: 900px; margin: 28px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
         }
-
-        .tag {
-            background: rgba(142, 51, 51, 0.12);
-            color: #8E3333;
-            border: 1px solid rgba(142, 51, 51, 0.25);
-            border-radius: 999px;
-            padding: 5px 12px;
-            font-size: 0.78rem;
-            font-weight: 500;
+        .graph-card {
+            background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 18px 16px;
         }
-
-        @media (max-width: 768px) {
-            .header { top: 15px; right: 15px; }
-            .nav-links { gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-            .nav-links a { padding: 8px 12px; font-size: 0.85rem; min-width: 80px; }
-            .page { padding: calc(40vh + 24px) 16px 24px 16px; }
-            .article { padding: 24px 20px; }
-            h1 { font-size: 1.8rem; }
+        .graph-card .g-label {
+            font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--red); margin-bottom: 12px;
+        }
+        .mini-bars { display: flex; align-items: flex-end; gap: 4px; height: 56px; }
+        .mini-bars span { flex: 1; background: var(--ink); opacity: 0.75; border-radius: 2px 2px 0 0; }
+        .mini-bars span:nth-child(1){height:40%} .mini-bars span:nth-child(2){height:70%} .mini-bars span:nth-child(3){height:55%}
+        .mini-bars span:nth-child(4){height:85%} .mini-bars span:nth-child(5){height:60%}
+        .heat {
+            display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px;
+        }
+        .heat i { aspect-ratio: 1; border-radius: 2px; font-style: normal; background: var(--red); }
+        .heat i:nth-child(odd) { opacity: 0.25; }
+        .heat i:nth-child(3n) { opacity: 0.55; }
+        .heat i:nth-child(5n) { opacity: 0.9; }
+        .scatter {
+            position: relative; height: 56px; border-left: 1px solid var(--line); border-bottom: 1px solid var(--line);
+        }
+        .scatter i {
+            position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--ink); opacity: 0.7; font-style: normal;
+        }
+        .case { max-width: 800px; margin: 0 auto; padding: 20px 28px 80px; }
+        .chapter {
+            display: grid; grid-template-columns: 88px 1fr; gap: 24px;
+            padding: 48px 0; border-bottom: 1px solid var(--line);
+        }
+        .chapter:last-of-type { border-bottom: 0; }
+        .chapter-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--red); line-height: 1; font-weight: 500; }
+        .chapter-label {
+            display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--muted); margin-top: 8px;
+        }
+        .chapter h2 {
+            font-family: 'Playfair Display', serif; font-size: 1.65rem; font-weight: 600;
+            letter-spacing: -0.02em; margin-bottom: 14px;
+        }
+        .chapter p + p { margin-top: 12px; }
+        .chapter p, .chapter li { color: var(--muted); font-size: 1.02rem; }
+        .chapter ul { margin: 12px 0 0 18px; }
+        .chapter li + li { margin-top: 8px; }
+        .alt { background: var(--gray); margin: 0 -28px; padding: 0 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 6px 10px; list-style: none; margin: 16px 0 0; }
+        .tech-tags li {
+            font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+            color: var(--muted); border: 1px solid var(--line); padding: 4px 9px; background: var(--white);
+        }
+        @media (max-width: 700px) {
+            .chapter { grid-template-columns: 1fr; gap: 10px; }
+            .graph-grid { grid-template-columns: 1fr; }
+            .hero, .case, .media { padding-left: 18px; padding-right: 18px; }
+            .alt { margin: 0 -18px; padding: 0 18px; }
         }
     </style>
 </head>
 <body>
-    <div class="red-band"></div>
+    <nav class="site-nav">
+        <a href="../index.html">Home</a>
+        <a href="../About/about.html">About</a>
+        <a href="../Resume/resume.html">Resume</a>
+        <a href="projects.html" class="active">Projects</a>
+    </nav>
 
-    <div class="content-container">
-        <header class="header">
-            <nav class="nav-links">
-                <a href="../index.html">Home</a>
-                <a href="../About/about.html">About</a>
-                <a href="../Resume/resume.html">Resume</a>
-                <a href="projects.html" class="active">Projects</a>
-            </nav>
-        </header>
+    <header class="hero">
+        <a class="back" href="projects.html">← All projects</a>
+        <p class="eyebrow">04 / Data Analytics · Machine Learning</p>
+        <h1>Accident Severity Prediction</h1>
+        <p class="subtitle">IST Project · PySpark &amp; Python</p>
+        <p class="lede">Transform a large dataset, train a model, and lead with the graphs—because insights only stick when you can see them.</p>
+    </header>
 
-        <main class="page">
-            <article class="article">
-                <a class="back" href="projects.html">← All projects</a>
-                <h1>US Accident Severity Prediction Using PySpark</h1>
-                <p class="meta">Machine learning pipeline · Distributed data processing</p>
-
-                <h2>Overview</h2>
-                <p>Developed a machine learning pipeline using PySpark to analyze and predict traffic accident severity from a large-scale U.S. accident dataset. The project combined distributed data processing, feature engineering, model tuning, and statistical analysis to identify the factors that contribute most to roadway accident severity.</p>
-
-                <h2>Problem</h2>
-                <p>Traffic accidents are influenced by a variety of environmental, roadway, and weather-related factors. The goal of this project was to determine which factors have the strongest relationship with accident severity and evaluate how accurately machine learning models can predict severity using those variables.</p>
-
-                <h2>My Role</h2>
-                <p>Designed and implemented the entire analytics workflow, including:</p>
-                <ul>
-                    <li>Data ingestion using PySpark</li>
-                    <li>Data cleaning and preprocessing</li>
-                    <li>Feature engineering</li>
-                    <li>Decision Tree model development</li>
-                    <li>Hyperparameter tuning with cross-validation</li>
-                    <li>Feature importance analysis</li>
-                    <li>Data visualization and performance evaluation</li>
-                </ul>
-
-                <h2>Technologies</h2>
-                <div class="tags">
-                    <span class="tag">PySpark</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">Pandas</span>
-                    <span class="tag">Matplotlib</span>
-                    <span class="tag">Seaborn</span>
-                    <span class="tag">Google Colab</span>
-                    <span class="tag">Machine Learning</span>
+    <div class="media">
+        <div class="viz-band" role="img" aria-label="Conceptual visualization for accident severity analytics">
+            <div class="chart-mock" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="caption">Feature importance · Residuals · Heatmaps</p>
+        </div>
+        <div class="graph-grid" aria-hidden="true">
+            <div class="graph-card">
+                <div class="g-label">Feature importance</div>
+                <div class="mini-bars"><span></span><span></span><span></span><span></span><span></span></div>
+            </div>
+            <div class="graph-card">
+                <div class="g-label">Correlation heatmap</div>
+                <div class="heat">
+                    <i></i><i></i><i></i><i></i><i></i>
+                    <i></i><i></i><i></i><i></i><i></i>
+                    <i></i><i></i><i></i><i></i><i></i>
                 </div>
-
-                <h2>Process</h2>
-                <h2>Data Engineering</h2>
-                <ul>
-                    <li>Loaded and processed a large U.S. accident dataset using PySpark.</li>
-                    <li>Cleaned inconsistent ZIP code formats.</li>
-                    <li>Converted categorical and Boolean features into machine learning compatible formats.</li>
-                    <li>Removed non-essential columns and handled missing data.</li>
-                    <li>Prepared 20+ roadway, geographic, and weather variables for modeling.</li>
-                </ul>
-
-                <h2>Machine Learning Pipeline</h2>
-                <p>Built a regression model to predict accident severity using factors such as:</p>
-                <ul>
-                    <li>Visibility</li>
-                    <li>Temperature</li>
-                    <li>Precipitation</li>
-                    <li>Road features</li>
-                    <li>Traffic control devices</li>
-                    <li>Geographic location</li>
-                    <li>Crash distance</li>
-                </ul>
-                <p>The dataset was split into training and testing sets and trained using a Decision Tree Regressor.</p>
-
-                <h2>Model Optimization</h2>
-                <p>Improved model performance through:</p>
-                <ul>
-                    <li>Hyperparameter tuning</li>
-                    <li>Grid search optimization</li>
-                    <li>3-fold cross-validation</li>
-                </ul>
-                <p>Parameters evaluated included maximum tree depth and minimum instances per node.</p>
-
-                <h2>Exploratory Analysis</h2>
-                <p>Tested several hypotheses regarding weather conditions, road infrastructure, and traffic controls. Created specialized models that isolated weather-only predictors and road feature-only predictors. This provided additional insight into how different categories of variables influence accident severity.</p>
-
-                <h2>Key Findings</h2>
-                <ul>
-                    <li>Geographic and distance-related features were significantly stronger predictors than expected.</li>
-                    <li>Many weather variables had less impact on severity than originally hypothesized.</li>
-                    <li>Separate weather-only and roadway-only models helped isolate the contribution of specific feature groups.</li>
-                    <li>Feature importance analysis revealed which variables most strongly influenced model predictions.</li>
-                </ul>
-
-                <h2>Visualizations</h2>
-                <p>Produced multiple analytical visualizations, including:</p>
-                <ul>
-                    <li>Feature importance rankings</li>
-                    <li>Correlation heatmaps</li>
-                    <li>Predicted vs. actual severity scatterplots</li>
-                    <li>Residual analysis plots</li>
-                    <li>Error distribution histograms</li>
-                </ul>
-
-                <h2>What I Learned</h2>
-                <ul>
-                    <li>Distributed data processing with PySpark</li>
-                    <li>Large-scale data cleaning techniques</li>
-                    <li>Model evaluation using RMSE</li>
-                    <li>Cross-validation and hyperparameter tuning</li>
-                    <li>Interpretation of machine learning models through feature importance analysis</li>
-                    <li>Communicating insights through data visualization</li>
-                </ul>
-            </article>
-        </main>
+            </div>
+            <div class="graph-card">
+                <div class="g-label">Predicted vs actual</div>
+                <div class="scatter">
+                    <i style="left:12%;bottom:20%"></i><i style="left:28%;bottom:40%"></i>
+                    <i style="left:42%;bottom:35%"></i><i style="left:58%;bottom:62%"></i>
+                    <i style="left:70%;bottom:55%"></i><i style="left:82%;bottom:78%"></i>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <article class="case">
+        <section class="chapter">
+            <div>
+                <div class="chapter-num">01</div>
+                <span class="chapter-label">The Problem</span>
+            </div>
+            <div>
+                <h2>Why did this project need to exist?</h2>
+                <p>Traffic severity is shaped by weather, roadway design, geography, and more—but raw accident data doesn’t explain itself. The question was which factors matter, how well a model can predict severity, and how to show that clearly in graphs.</p>
+            </div>
+        </section>
+
+        <section class="chapter alt">
+            <div>
+                <div class="chapter-num">02</div>
+                <span class="chapter-label">The Approach</span>
+            </div>
+            <div>
+                <h2>How did I approach it?</h2>
+                <p>I structured the work as three acts: transform the dataset in Python until it was model-ready, train and tune a Decision Tree pipeline, then invest heavily in visualizations that made findings readable.</p>
+                <ul>
+                    <li>Clean and encode at scale with PySpark before modeling</li>
+                    <li>Test weather-only and roadway-only models to isolate feature groups</li>
+                    <li>Treat graphs as the primary insight layer—not an appendix</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="chapter">
+            <div>
+                <div class="chapter-num">03</div>
+                <span class="chapter-label">The Build</span>
+            </div>
+            <div>
+                <h2>What did I actually create?</h2>
+                <p><strong style="color:var(--ink)">Dataset transformation.</strong> Loaded a large U.S. accident dataset; cleaned ZIP formats and missing values; converted categorical/Boolean fields; engineered 20+ roadway, geographic, and weather variables.</p>
+                <p><strong style="color:var(--ink)">Machine learning.</strong> Decision Tree Regressor with train/test split, grid search, and 3-fold cross-validation on tree depth and minimum instances per node.</p>
+                <p><strong style="color:var(--ink)">Graphs.</strong> Feature importance rankings, correlation heatmaps, predicted vs. actual scatterplots, residual plots, and error distribution histograms—the visuals that carried the story.</p>
+            </div>
+        </section>
+
+        <section class="chapter alt">
+            <div>
+                <div class="chapter-num">04</div>
+                <span class="chapter-label">The Result</span>
+            </div>
+            <div>
+                <h2>What came out of it?</h2>
+                <ul>
+                    <li>Geographic and distance features were stronger predictors than expected.</li>
+                    <li>Many weather variables mattered less for severity than hypothesized.</li>
+                    <li>Separate feature-group models clarified what each category contributed.</li>
+                    <li>Charts made model behavior interpretable for a non-tabular audience.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="chapter">
+            <div>
+                <div class="chapter-num">05</div>
+                <span class="chapter-label">The Technical Side</span>
+            </div>
+            <div>
+                <h2>Under the hood</h2>
+                <ul class="tech-tags">
+                    <li>Python</li>
+                    <li>PySpark</li>
+                    <li>Pandas</li>
+                    <li>Decision Tree</li>
+                    <li>Matplotlib</li>
+                    <li>Seaborn</li>
+                    <li>Google Colab</li>
+                </ul>
+            </div>
+        </section>
+    </article>
 </body>
 </html>
