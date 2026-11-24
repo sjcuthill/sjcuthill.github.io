@@ -107,6 +107,131 @@
 
         .cta:hover { border-bottom-color: var(--red); }
 
+        .cta-loud {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 28px;
+            padding: 14px 22px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--white);
+            background: var(--red);
+            border: 1px solid var(--red);
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .cta-loud:hover {
+            background: transparent;
+            color: var(--red);
+        }
+
+        .task-list {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            background: var(--white);
+            box-shadow: 0 12px 36px rgba(26, 22, 18, 0.12), 0 2px 8px rgba(26, 22, 18, 0.06);
+            padding: clamp(22px, 3vw, 32px) clamp(20px, 3vw, 28px);
+            justify-self: center;
+            align-self: center;
+            width: min(118%, 28rem);
+        }
+
+        .task-list-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .task-list-head h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .task-list-head span {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        .task-list ol {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .task-list li {
+            display: grid;
+            grid-template-columns: 22px 1fr auto;
+            align-items: start;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--ink);
+        }
+
+        .task-list .box {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            border: 1.5px solid var(--ink);
+            background: transparent;
+        }
+
+        .task-list .box.done {
+            background: var(--red);
+            border-color: var(--red);
+            position: relative;
+        }
+
+        .task-list .box.done::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 5px;
+            height: 9px;
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .task-list .task-meta {
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .task-list li.done .task-text {
+            text-decoration: line-through;
+            color: var(--muted);
+        }
+
+        .task-list .task-note {
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px dashed var(--line);
+            font-size: 0.78rem;
+            color: var(--muted);
+            font-style: italic;
+        }
+
         .category {
             font-size: 0.7rem;
             font-weight: 600;
@@ -204,7 +329,7 @@
             grid-template-columns: 1fr 1fr;
             grid-template-areas: "copy preview";
             gap: clamp(36px, 5vw, 64px);
-            align-items: start;
+            align-items: center;
             justify-items: stretch;
         }
 
@@ -233,6 +358,32 @@
             grid-area: preview;
             justify-self: stretch;
             width: 100%;
+        }
+
+        .shot-frame {
+            display: block;
+            border-radius: 0;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 12px 36px rgba(26, 22, 18, 0.12), 0 2px 8px rgba(26, 22, 18, 0.06);
+            background: #1a1f1c;
+            text-decoration: none;
+            justify-self: center;
+            align-self: center;
+            width: 118%;
+            max-width: none;
+        }
+
+        .shot-frame img,
+        .shot-frame video {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .shot-frame video {
+            object-fit: contain;
+            background: #1a1f1c;
         }
 
         .feature .copy .project-label,
@@ -314,7 +465,7 @@
         .preview-frame {
             display: block;
             text-decoration: none;
-            border-radius: 14px;
+            border-radius: 0;
             overflow: hidden;
             box-shadow: 0 28px 60px rgba(26, 22, 18, 0.18);
             color: #e8f0ea;
@@ -387,7 +538,7 @@
         .stat {
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
+            border-radius: 0;
             padding: 14px 12px;
         }
 
@@ -416,7 +567,7 @@
         .panel {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
+            border-radius: 0;
             padding: 14px;
             min-height: 120px;
         }
@@ -438,7 +589,7 @@
 
         .bars span {
             flex: 1;
-            border-radius: 3px 3px 0 0;
+            border-radius: 0;
             opacity: 0.85;
         }
 
@@ -499,14 +650,6 @@
         .theme-ist .preview-live::before { background: #e89a8a; }
         .theme-ist .bars span { background: linear-gradient(180deg, #e8a898, #8E3333); }
 
-        .theme-music {
-            background: #161a16;
-        }
-        .theme-music .preview-live,
-        .theme-music .list-rows .status { color: #1db954; }
-        .theme-music .preview-live::before { background: #1db954; }
-        .theme-music .bars span { background: linear-gradient(180deg, #6adf96, #1db954); }
-
         .section-foot {
             padding: 24px 28px 36px;
             text-align: center;
@@ -544,6 +687,10 @@
 
             .feature .copy {
                 max-width: none;
+            }
+
+            .shot-frame {
+                width: 100%;
             }
 
             .preview-panels { grid-template-columns: 1fr; }
@@ -613,37 +760,10 @@
                     </ul>
                     <a class="cta" href="new-leaf.html">Explore Project <span aria-hidden="true">→</span></a>
                 </div>
-                <a class="preview preview-frame theme-leaf" href="new-leaf.html" aria-label="Explore New Leaf">
-                    <div class="preview-chrome">
-                        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                        <span class="title">Dispatch overview</span>
-                        <span class="preview-live">Live System</span>
-                    </div>
-                    <div class="preview-body">
-                        <div class="preview-head">
-                            <h3>New Leaf Operations</h3>
-                            <span>Conceptual preview</span>
-                        </div>
-                        <div class="stat-row">
-                            <div class="stat"><div class="label">Jobs</div><div class="value">24</div></div>
-                            <div class="stat"><div class="label">Crews</div><div class="value">06</div></div>
-                            <div class="stat"><div class="label">Trucks</div><div class="value">08</div></div>
-                        </div>
-                        <div class="preview-panels">
-                            <div class="panel">
-                                <div class="panel-label">Weekly load</div>
-                                <div class="bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-                            </div>
-                            <div class="panel">
-                                <div class="panel-label">Crew status</div>
-                                <div class="list-rows">
-                                    <div><span>North crew</span><span class="status">On site</span></div>
-                                    <div><span>East crew</span><span class="status">En route</span></div>
-                                    <div><span>Central</span><span class="status">Staging</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <a class="preview shot-frame" href="new-leaf.html" aria-label="Explore New Leaf">
+                    <video autoplay muted loop playsinline poster="../Personal%20Website%20Pics/newleaf/tracker-wide.png">
+                        <source src="../newleafscreenrecord.mp4" type="video/mp4">
+                    </video>
                 </a>
             </div>
         </div>
@@ -671,37 +791,8 @@
                     </ul>
                     <a class="cta" href="ctv.html">View Case Study <span aria-hidden="true">↗</span></a>
                 </div>
-                <a class="preview preview-frame theme-ctv" href="ctv.html" aria-label="Explore CTV Buyer">
-                    <div class="preview-chrome">
-                        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                        <span class="title">Campaign hub</span>
-                        <span class="preview-live">Team Live</span>
-                    </div>
-                    <div class="preview-body">
-                        <div class="preview-head">
-                            <h3>CTV Buyer Workspace</h3>
-                            <span>Conceptual preview</span>
-                        </div>
-                        <div class="stat-row">
-                            <div class="stat"><div class="label">PRs</div><div class="value">18</div></div>
-                            <div class="stat"><div class="label">Workers</div><div class="value">04</div></div>
-                            <div class="stat"><div class="label">Roles</div><div class="value">05</div></div>
-                        </div>
-                        <div class="preview-panels">
-                            <div class="panel">
-                                <div class="panel-label">Notification volume</div>
-                                <div class="bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-                            </div>
-                            <div class="panel">
-                                <div class="panel-label">Issue board</div>
-                                <div class="list-rows">
-                                    <div><span>Webhook pipeline</span><span class="status">Review</span></div>
-                                    <div><span>Email digests</span><span class="status">Shipped</span></div>
-                                    <div><span>Role views</span><span class="status">In prog</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <a class="preview shot-frame" href="ctv.html" aria-label="Explore CTV Buyer">
+                    <img src="../ctvlanding.png" alt="CTV Buyer Health Check dashboard with station monitoring and bid request charts">
                 </a>
             </div>
         </div>
@@ -728,37 +819,8 @@
                     </ul>
                     <a class="cta" href="capstone.html">View Case Study <span aria-hidden="true">↗</span></a>
                 </div>
-                <a class="preview preview-frame theme-cap" href="capstone.html" aria-label="Explore Capstone">
-                    <div class="preview-chrome">
-                        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                        <span class="title">Pitch deck</span>
-                        <span class="preview-live">Presented</span>
-                    </div>
-                    <div class="preview-body">
-                        <div class="preview-head">
-                            <h3>EcoLoop Narrative</h3>
-                            <span>Conceptual preview</span>
-                        </div>
-                        <div class="stat-row">
-                            <div class="stat"><div class="label">Ideas</div><div class="value">12</div></div>
-                            <div class="stat"><div class="label">Drafts</div><div class="value">07</div></div>
-                            <div class="stat"><div class="label">Pitch</div><div class="value">01</div></div>
-                        </div>
-                        <div class="preview-panels">
-                            <div class="panel">
-                                <div class="panel-label">Milestone pace</div>
-                                <div class="bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-                            </div>
-                            <div class="panel">
-                                <div class="panel-label">Deliverables</div>
-                                <div class="list-rows">
-                                    <div><span>Business plan</span><span class="status">Final</span></div>
-                                    <div><span>Deck</span><span class="status">Final</span></div>
-                                    <div><span>Live pitch</span><span class="status">Done</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <a class="preview shot-frame" href="capstone.html" aria-label="Explore Capstone">
+                    <img src="../capstonelanding.png" alt="EcoLoop 3-year Gantt chart spanning formation through national retail expansion">
                 </a>
             </div>
         </div>
@@ -786,93 +848,62 @@
                     </ul>
                     <a class="cta" href="accident-severity.html">View Case Study <span aria-hidden="true">↗</span></a>
                 </div>
-                <a class="preview preview-frame theme-ist" href="accident-severity.html" aria-label="Explore Accident Severity">
-                    <div class="preview-chrome">
-                        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                        <span class="title">Insight graphs</span>
-                        <span class="preview-live">Modeled</span>
-                    </div>
-                    <div class="preview-body">
-                        <div class="preview-head">
-                            <h3>Severity Insights</h3>
-                            <span>Conceptual preview</span>
-                        </div>
-                        <div class="stat-row">
-                            <div class="stat"><div class="label">Features</div><div class="value">20+</div></div>
-                            <div class="stat"><div class="label">Folds</div><div class="value">03</div></div>
-                            <div class="stat"><div class="label">Graphs</div><div class="value">05</div></div>
-                        </div>
-                        <div class="preview-panels">
-                            <div class="panel">
-                                <div class="panel-label">Feature importance</div>
-                                <div class="bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-                            </div>
-                            <div class="panel">
-                                <div class="panel-label">Chart set</div>
-                                <div class="list-rows">
-                                    <div><span>Heatmap</span><span class="status">Ready</span></div>
-                                    <div><span>Residuals</span><span class="status">Ready</span></div>
-                                    <div><span>Pred vs actual</span><span class="status">Ready</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <a class="preview shot-frame" href="accident-severity.html" aria-label="Explore Accident Severity">
+                    <img src="../accidentprojectlanding.png" alt="Accident Severity Colab notebook setting up PySpark and loading the US accidents dataset">
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- 05 Music — writing left -->
+    <!-- 05 Secret — writing left -->
     <section class="feature band-gray" aria-labelledby="p5">
         <div class="feature-inner">
             <div class="feature-grid">
                 <div class="copy">
                     <div class="project-label">
                         <span class="num">05</span>
-                        <span class="eyebrow">Side Project</span>
+                        <span class="eyebrow">Shhhh…</span>
                     </div>
-                    <p class="category">Data Visualization</p>
-                    <h2 id="p5">Music Visualisations</h2>
-                    <p class="subtitle">Listening Data, Made Visible</p>
-                    <p class="desc">Exploring listening data through visual form—turning playlists and patterns into something you can see.</p>
+                    <p class="category">Just for Fun</p>
+                    <h2 id="p5">Side Quests</h2>
+                    <p class="subtitle">Secret 5th Project</p>
+                    <p class="desc">A wedding site with a custom RSVP list, Instagram for a nonprofit club (@osnkunited), and—yes—this portfolio. Side projects I do because I like making things people actually use.</p>
                     <ul class="tech-tags">
-                        <li>Visualization</li>
-                        <li>JavaScript</li>
-                        <li>Data</li>
+                        <li>Wedding + RSVP</li>
+                        <li>Instagram</li>
+                        <li>This Portfolio</li>
+                        <li>For Fun</li>
                     </ul>
-                    <a class="cta" href="music-visualisations.html">View Case Study <span aria-hidden="true">↗</span></a>
+                    <a class="cta-loud" href="for-fun.html">Peek the secrets <span aria-hidden="true">→</span></a>
                 </div>
-                <a class="preview preview-frame theme-music" href="music-visualisations.html" aria-label="Explore Music Visualisations">
-                    <div class="preview-chrome">
-                        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                        <span class="title">Listening map</span>
-                        <span class="preview-live">Playing</span>
+                <a class="preview task-list" href="for-fun.html" aria-label="After-work task list — peek the secrets">
+                    <div class="task-list-head">
+                        <h3>After work</h3>
+                        <span>Tonight’s list</span>
                     </div>
-                    <div class="preview-body">
-                        <div class="preview-head">
-                            <h3>Playlist Patterns</h3>
-                            <span>Conceptual preview</span>
-                        </div>
-                        <div class="stat-row">
-                            <div class="stat"><div class="label">Tracks</div><div class="value">64</div></div>
-                            <div class="stat"><div class="label">Moods</div><div class="value">08</div></div>
-                            <div class="stat"><div class="label">Views</div><div class="value">03</div></div>
-                        </div>
-                        <div class="preview-panels">
-                            <div class="panel">
-                                <div class="panel-label">Energy by week</div>
-                                <div class="bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-                            </div>
-                            <div class="panel">
-                                <div class="panel-label">Now showing</div>
-                                <div class="list-rows">
-                                    <div><span>Tempo map</span><span class="status">Active</span></div>
-                                    <div><span>Genre rings</span><span class="status">Active</span></div>
-                                    <div><span>Replay arcs</span><span class="status">Draft</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <ol>
+                        <li class="done">
+                            <span class="box done" aria-hidden="true"></span>
+                            <span class="task-text">Ship wedding RSVP tweaks</span>
+                            <span class="task-meta">Done</span>
+                        </li>
+                        <li>
+                            <span class="box" aria-hidden="true"></span>
+                            <span class="task-text">Post for @osnkunited</span>
+                            <span class="task-meta">Club</span>
+                        </li>
+                        <li>
+                            <span class="box" aria-hidden="true"></span>
+                            <span class="task-text">Fiddle with this portfolio</span>
+                            <span class="task-meta">Again</span>
+                        </li>
+                        <li>
+                            <span class="box" aria-hidden="true"></span>
+                            <span class="task-text">Pretend I’ll stop at one task</span>
+                            <span class="task-meta">Lol</span>
+                        </li>
+                    </ol>
+                    <p class="task-note">Optional: sleep. (Unchecked, as usual.)</p>
                 </a>
             </div>
         </div>

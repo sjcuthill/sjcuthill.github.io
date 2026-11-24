@@ -47,35 +47,22 @@
         }
         .hero .lede { font-size: 1.1rem; color: var(--muted); max-width: 48ch; }
         .preview-wrap { background: var(--gray); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 40px 28px; }
-        .preview-frame {
-            max-width: 900px; margin: 0 auto; background: #1f2a24; border-radius: 14px; overflow: hidden;
-            box-shadow: 0 24px 50px rgba(26,22,18,0.18); color: #e8f0ea;
+        .shot-hero {
+            max-width: 980px; margin: 0 auto 18px; border-radius: 14px; overflow: hidden;
+            border: 1px solid var(--line); box-shadow: 0 24px 50px rgba(26,22,18,0.16); background: #111;
         }
-        .preview-chrome {
-            display: flex; align-items: center; gap: 8px; padding: 12px 14px;
-            background: rgba(0,0,0,0.25); border-bottom: 1px solid rgba(255,255,255,0.08);
+        .shot-hero img { display: block; width: 100%; height: auto; }
+        .shot-grid {
+            max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 14px;
         }
-        .preview-chrome .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.25); }
-        .preview-chrome .title { margin-left: 8px; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; }
-        .preview-live { margin-left: auto; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; color: #7dcea0; }
-        .preview-live::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #7dcea0; margin-right: 6px; vertical-align: middle; }
-        .preview-body { padding: 22px; }
-        .preview-head h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #fff; font-weight: 500; }
-        .preview-head span { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.55; }
-        .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0 14px; }
-        .stat { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 14px 12px; }
-        .stat .label { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.55; margin-bottom: 6px; }
-        .stat .value { font-family: 'Playfair Display', serif; font-size: 1.85rem; color: #fff; line-height: 1; }
-        .preview-panels { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 10px; }
-        .panel { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 14px; min-height: 120px; }
-        .panel-label { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.5; margin-bottom: 12px; }
-        .bars { display: flex; align-items: flex-end; gap: 6px; height: 70px; }
-        .bars span { flex: 1; background: linear-gradient(180deg, #a8c4b0, #4f7a5c); border-radius: 3px 3px 0 0; }
-        .bars span:nth-child(1){height:42%} .bars span:nth-child(2){height:68%} .bars span:nth-child(3){height:55%}
-        .bars span:nth-child(4){height:88%} .bars span:nth-child(5){height:60%} .bars span:nth-child(6){height:74%} .bars span:nth-child(7){height:48%}
-        .crew-list { display: flex; flex-direction: column; gap: 8px; }
-        .crew-list div { display: flex; justify-content: space-between; font-size: 0.72rem; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-        .crew-list .status { color: #7dcea0; font-size: 0.65rem; }
+        .shot-card {
+            border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: #111;
+        }
+        .shot-card img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; min-height: 220px; }
+        .shot-caption {
+            max-width: 980px; margin: 14px auto 0; font-size: 0.78rem; color: var(--muted);
+            letter-spacing: 0.04em;
+        }
         .case { max-width: 800px; margin: 0 auto; padding: 20px 28px 80px; }
         .chapter {
             display: grid; grid-template-columns: 88px 1fr; gap: 24px;
@@ -105,7 +92,7 @@
         }
         @media (max-width: 700px) {
             .chapter { grid-template-columns: 1fr; gap: 10px; }
-            .preview-panels, .stat-row { grid-template-columns: 1fr; }
+            .shot-grid { grid-template-columns: 1fr; }
             .hero, .case, .preview-wrap { padding-left: 18px; padding-right: 18px; }
             .alt { margin: 0 -18px; padding: 0 18px; }
         }
@@ -128,38 +115,18 @@
     </header>
 
     <div class="preview-wrap">
-        <div class="preview-frame" aria-label="Conceptual New Leaf operations preview">
-            <div class="preview-chrome">
-                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                <span class="title">Dispatch overview</span>
-                <span class="preview-live">Live System</span>
-            </div>
-            <div class="preview-body">
-                <div class="preview-head">
-                    <h3>New Leaf Operations</h3>
-                    <span>Conceptual preview — not a live screenshot</span>
-                </div>
-                <div class="stat-row">
-                    <div class="stat"><div class="label">Jobs</div><div class="value">24</div></div>
-                    <div class="stat"><div class="label">Crews</div><div class="value">06</div></div>
-                    <div class="stat"><div class="label">Trucks</div><div class="value">08</div></div>
-                </div>
-                <div class="preview-panels">
-                    <div class="panel">
-                        <div class="panel-label">Weekly load</div>
-                        <div class="bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-                    </div>
-                    <div class="panel">
-                        <div class="panel-label">Crew status</div>
-                        <div class="crew-list">
-                            <div><span>North crew</span><span class="status">On site</span></div>
-                            <div><span>East crew</span><span class="status">En route</span></div>
-                            <div><span>Central</span><span class="status">Staging</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <figure class="shot-hero">
+            <img src="../Personal%20Website%20Pics/newleaf/tracker-wide.png" alt="New Leaf live truck tracker with map of Rhode Island and fleet positions">
+        </figure>
+        <div class="shot-grid">
+            <figure class="shot-card">
+                <img src="../Personal%20Website%20Pics/newleaf/dispatch-crews.png" alt="New Leaf dispatch board with unassigned jobs and Crew A day list">
+            </figure>
+            <figure class="shot-card">
+                <img src="../Personal%20Website%20Pics/newleaf/dispatch-wide.png" alt="New Leaf dispatch work day controls and crew assignment">
+            </figure>
         </div>
+        <p class="shot-caption">Live truck tracker · Dispatch day lists · Crew assignment</p>
     </div>
 
     <article class="case">
@@ -199,13 +166,13 @@
             </div>
             <div>
                 <h2>What did I actually create?</h2>
-                <p>An operations-oriented platform layer: API integrations that keep external and internal data aligned, database management with migrations for consistent tables across environments, and security policies that enforce who can see what.</p>
+                <p>A live operations platform for New Leaf Landscape—dispatch, crew day lists, work records, and a truck tracker that refreshes in the field.</p>
                 <ul>
-                    <li>API connections for business-critical data flows</li>
-                    <li>Schema design and table migrations across environments</li>
-                    <li>Row-level security for role-appropriate access</li>
-                    <li>Sandbox and testing setups for safer iteration</li>
-                    <li>Business-specific solutions when a generic pattern wouldn’t fit the workflow</li>
+                    <li>Live truck tracker with map positions refreshing every 30 seconds</li>
+                    <li>Dispatch boards for unassigned work and per-crew day lists (route order, send to crew, roll unfinished)</li>
+                    <li>Work records with invoice status and QuickBooks line-item mapping</li>
+                    <li>API connections, schema migrations, and row-level security across environments</li>
+                    <li>Business-specific workflows when a generic tool wouldn’t fit how the company runs</li>
                 </ul>
             </div>
         </section>

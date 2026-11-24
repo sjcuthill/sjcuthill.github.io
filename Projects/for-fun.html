@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Fun — Side Projects · Sierra Cuthill</title>
+    <link rel="icon" type="image/png" href="../Favicon.png">
+    <link rel="shortcut icon" type="image/png" href="../Favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #8E3333; --ink: #1a1612; --muted: #5c564c;
+            --line: rgba(26, 22, 18, 0.12); --white: #ffffff; --gray: #f0efed;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--white); line-height: 1.65; }
+        a { color: inherit; }
+        .site-nav {
+            position: sticky; top: 0; z-index: 50; display: flex; justify-content: flex-end; gap: 10px;
+            padding: 18px 28px; background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line);
+        }
+        .site-nav a {
+            text-decoration: none; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+            color: var(--ink); padding: 8px 14px; border: 1px solid transparent;
+        }
+        .site-nav a:hover, .site-nav a.active { color: var(--red); border-color: rgba(142,51,51,0.35); }
+        .back {
+            display: inline-flex; margin-bottom: 28px; font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--red);
+        }
+        .hero { max-width: 900px; margin: 0 auto; padding: 56px 28px 40px; }
+        .eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+        .hero h1 {
+            font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 6vw, 4.2rem);
+            font-weight: 600; line-height: 1.02; letter-spacing: -0.03em; margin-bottom: 12px;
+        }
+        .hero .subtitle {
+            font-size: 0.85rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--muted); margin-bottom: 22px;
+        }
+        .hero .lede { font-size: 1.1rem; color: var(--muted); max-width: 48ch; }
+
+        .block {
+            border-top: 1px solid var(--line);
+            padding: 64px clamp(18px, 4vw, 28px);
+        }
+        .block.band-gray { background: var(--gray); }
+        .block-inner { max-width: 960px; margin: 0 auto; }
+        .block-kicker {
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--red); margin-bottom: 12px;
+        }
+        .block h2 {
+            font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+            font-weight: 600; letter-spacing: -0.02em; margin-bottom: 14px;
+        }
+        .block p { color: var(--muted); font-size: 1.02rem; max-width: 54ch; }
+        .block p + p { margin-top: 12px; }
+        .cta-row { display: flex; flex-wrap: wrap; gap: 12px 18px; margin-top: 22px; }
+        .cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--red); text-decoration: none;
+        }
+        .cta:hover { text-decoration: underline; }
+        .cta.ghost {
+            color: var(--muted);
+            border: 1px solid var(--line);
+            padding: 8px 12px;
+        }
+        .cta.ghost:hover { color: var(--red); border-color: rgba(142,51,51,0.35); text-decoration: none; }
+
+        .ig-wrap {
+            margin-top: 28px;
+            max-width: 540px;
+            background: var(--white);
+            box-shadow: 0 12px 36px rgba(26, 22, 18, 0.12), 0 2px 8px rgba(26, 22, 18, 0.06);
+        }
+        .ig-wrap iframe {
+            display: block;
+            width: 100%;
+            min-height: 680px;
+            border: 0;
+            background: #fff;
+        }
+
+        .portfolio-frame {
+            margin-top: 28px;
+            box-shadow: 0 12px 36px rgba(26, 22, 18, 0.12), 0 2px 8px rgba(26, 22, 18, 0.06);
+            background: #1a1f1c;
+            overflow: hidden;
+        }
+        .portfolio-frame video {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .foot {
+            padding: 28px; text-align: center; font-size: 0.75rem; color: var(--muted);
+            border-top: 1px solid var(--line);
+        }
+
+        @media (max-width: 700px) {
+            .ig-wrap iframe { min-height: 560px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="site-nav">
+        <a href="../index.html">Home</a>
+        <a href="../About/about.html">About</a>
+        <a href="../Resume/resume.html">Resume</a>
+        <a href="projects.html" class="active">Projects</a>
+    </nav>
+
+    <header class="hero">
+        <a class="back" href="projects.html">← All projects</a>
+        <p class="eyebrow">05 / Shhhh… · Just for Fun</p>
+        <h1>Side quests</h1>
+        <p class="subtitle">Secret 5th Project</p>
+        <p class="lede">Not every build needs a case study deck. Some things I make because someone asked, a club needed a hand, or I just wanted to.</p>
+    </header>
+
+    <section class="block band-gray" id="wedding">
+        <div class="block-inner">
+            <p class="block-kicker">01 · Wedding website</p>
+            <h2>Alyssa &amp; Liam — with a custom RSVP list</h2>
+            <p>A full wedding site for friends: story, details, gallery, registry—and a custom RSVP flow that keeps the guest list actually usable (not “hope the spreadsheet survives”).</p>
+            <div class="cta-row">
+                <a class="cta" href="https://sierracuthill03.github.io/Alyssa-Wedding/pages/home.html" target="_blank" rel="noopener noreferrer">Open the wedding site <span aria-hidden="true">↗</span></a>
+                <a class="cta ghost" href="https://sierracuthill03.github.io/Alyssa-Wedding/pages/rsvp.html" target="_blank" rel="noopener noreferrer">Peek the RSVP page <span aria-hidden="true">↗</span></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="block" id="osnk">
+        <div class="block-inner">
+            <p class="block-kicker">02 · Nonprofit club · Social</p>
+            <h2>OSNK United on Instagram</h2>
+            <p>Social media for a nonprofit club—posts, presence, and keeping the feed looking like an actual organization lives there.</p>
+            <div class="cta-row">
+                <a class="cta" href="https://www.instagram.com/osnkunited/" target="_blank" rel="noopener noreferrer">@osnkunited <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="ig-wrap">
+                <iframe
+                    title="OSNK United Instagram"
+                    src="https://www.instagram.com/osnkunited/embed"
+                    loading="lazy"
+                    allowtransparency="true"
+                    allowfullscreen="true"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="block band-gray" id="portfolio">
+        <div class="block-inner">
+            <p class="block-kicker">03 · This portfolio</p>
+            <h2>The site you’re on right now</h2>
+            <p>Built it myself. You’re already inside it—so consider this the demo. Shhhh.</p>
+            <div class="portfolio-frame">
+                <video autoplay muted loop playsinline>
+                    <source src="../portfolio-recording.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="cta-row">
+                <a class="cta" href="projects.html">Back to projects <span aria-hidden="true">→</span></a>
+            </div>
+        </div>
+    </section>
+
+    <p class="foot">Built for fun. Official résumé energy lives elsewhere.</p>
+</body>
+</html>
