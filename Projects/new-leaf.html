@@ -34,7 +34,7 @@
             text-decoration: none; color: var(--red);
         }
         .hero {
-            max-width: 900px; margin: 0 auto; padding: 56px 28px 48px;
+            max-width: 900px; margin: 0; padding: 56px 28px 48px;
         }
         .eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
         .hero h1 {
@@ -45,56 +45,112 @@
             font-size: 0.85rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
             color: var(--muted); margin-bottom: 22px;
         }
-        .hero .lede { font-size: 1.1rem; color: var(--muted); max-width: 48ch; }
+        .hero .lede { font-size: 1.1rem; color: var(--muted); max-width: 52ch; }
         .preview-wrap { background: var(--gray); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 40px 28px; }
         .shot-hero {
-            max-width: 980px; margin: 0 auto 18px; border-radius: 14px; overflow: hidden;
+            max-width: 980px; margin: 0 auto; border-radius: 14px; overflow: hidden;
             border: 1px solid var(--line); box-shadow: 0 24px 50px rgba(26,22,18,0.16); background: #111;
         }
-        .shot-hero img { display: block; width: 100%; height: auto; }
-        .shot-grid {
-            max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 14px;
+        .shot-hero video { display: block; width: 100%; height: auto; }
+
+        .case {
+            max-width: 860px; margin: 0 auto; padding: 48px 28px 96px;
         }
-        .shot-card {
-            border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: #111;
+        .origin {
+            max-width: 58ch; margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid var(--line);
         }
-        .shot-card img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; min-height: 220px; }
-        .shot-caption {
-            max-width: 980px; margin: 14px auto 0; font-size: 0.78rem; color: var(--muted);
-            letter-spacing: 0.04em;
-        }
-        .case { max-width: 800px; margin: 0 auto; padding: 20px 28px 80px; }
-        .chapter {
-            display: grid; grid-template-columns: 88px 1fr; gap: 24px;
-            padding: 48px 0; border-bottom: 1px solid var(--line);
-        }
-        .chapter:last-of-type { border-bottom: 0; }
-        .chapter-num {
-            font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--red); line-height: 1; font-weight: 500;
-        }
-        .chapter-label {
-            display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-            color: var(--muted); margin-top: 8px;
-        }
-        .chapter h2 {
-            font-family: 'Playfair Display', serif; font-size: 1.65rem; font-weight: 600;
+        .origin h2 {
+            font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 600;
             letter-spacing: -0.02em; margin-bottom: 14px;
         }
-        .chapter p + p { margin-top: 12px; }
-        .chapter p, .chapter li { color: var(--muted); font-size: 1.02rem; }
-        .chapter ul { margin: 12px 0 0 18px; }
-        .chapter li + li { margin-top: 8px; }
-        .alt { background: var(--gray); margin: 0 -28px; padding: 0 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 6px 10px; list-style: none; margin: 16px 0 0; }
-        .tech-tags li {
-            font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
-            color: var(--muted); border: 1px solid var(--line); padding: 4px 9px; background: var(--white);
+        .origin p { color: var(--muted); font-size: 1.02rem; }
+        .origin p + p { margin-top: 12px; }
+
+        .timeline-label {
+            font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--red); margin-bottom: 28px;
         }
+
+        .timeline {
+            position: relative;
+            display: flex; flex-direction: column; gap: 0;
+        }
+        .timeline::before {
+            content: "";
+            position: absolute; left: 19px; top: 8px; bottom: 8px;
+            width: 1px; background: var(--line);
+        }
+
+        .step {
+            position: relative;
+            display: grid; grid-template-columns: 40px 1fr; gap: 22px;
+            padding: 0 0 56px;
+        }
+        .step:last-child { padding-bottom: 0; }
+        .step-marker {
+            position: relative; z-index: 1;
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600;
+            color: var(--red); background: var(--white); border: 1px solid var(--line);
+        }
+        .step-body { padding-top: 4px; min-width: 0; }
+        .step-phase {
+            font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--muted); margin-bottom: 8px;
+        }
+        .step h3 {
+            font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 600;
+            letter-spacing: -0.02em; margin-bottom: 22px;
+        }
+
+        .block { margin-bottom: 20px; }
+        .block:last-of-type { margin-bottom: 0; }
+        .block-label {
+            display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--ink); margin-bottom: 8px;
+        }
+        .block.problem .block-label { color: var(--red); }
+        .block p { color: var(--muted); font-size: 1.02rem; }
+        .block p + p { margin-top: 10px; }
+        .block ul { margin: 8px 0 0 18px; color: var(--muted); font-size: 1.02rem; }
+        .block li + li { margin-top: 6px; }
+
+        .tech-tags {
+            display: flex; flex-wrap: wrap; gap: 6px 8px; list-style: none; margin: 0;
+        }
+        .tech-tags li {
+            font-size: 0.68rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+            color: var(--muted); border: 1px solid var(--line); padding: 4px 9px; background: var(--gray);
+        }
+        .block .tech-note { margin-top: 12px; }
+
+        .step-shot {
+            margin: 22px 0 8px; border-radius: 12px; overflow: hidden;
+            border: 1px solid var(--line); background: #111; box-shadow: 0 16px 36px rgba(26,22,18,0.12);
+        }
+        .step-shot img { display: block; width: 100%; height: auto; }
+        .step-shot + .step-shot { margin-top: 14px; }
+        .shot-note {
+            font-size: 0.78rem; color: var(--muted); letter-spacing: 0.03em; margin: 10px 0 18px;
+        }
+
+        .closing {
+            margin-top: 56px; padding-top: 36px; border-top: 1px solid var(--line);
+            max-width: 58ch;
+        }
+        .closing h2 {
+            font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 600;
+            letter-spacing: -0.02em; margin-bottom: 12px;
+        }
+        .closing p { color: var(--muted); font-size: 1.02rem; }
+        .closing p + p { margin-top: 12px; }
+
         @media (max-width: 700px) {
-            .chapter { grid-template-columns: 1fr; gap: 10px; }
-            .shot-grid { grid-template-columns: 1fr; }
             .hero, .case, .preview-wrap { padding-left: 18px; padding-right: 18px; }
-            .alt { margin: 0 -18px; padding: 0 18px; }
+            .timeline::before { left: 15px; }
+            .step { grid-template-columns: 32px 1fr; gap: 14px; padding-bottom: 44px; }
+            .step-marker { width: 32px; height: 32px; font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -111,102 +167,147 @@
         <p class="eyebrow">01 / Featured · Software Development</p>
         <h1>New Leaf</h1>
         <p class="subtitle">Operations Dashboard</p>
-        <p class="lede">A landscaping business running on spreadsheets and verbal handoffs needed a connected system—secure data, reliable APIs, and environments you can trust while you ship.</p>
+        <p class="lede">My parents’ landscaping company, rebuilt as software—so the knowledge in their heads and spreadsheets can become a system they can actually hand off.</p>
     </header>
 
     <div class="preview-wrap">
         <figure class="shot-hero">
-            <img src="../Personal%20Website%20Pics/newleaf/tracker-wide.png" alt="New Leaf live truck tracker with map of Rhode Island and fleet positions">
+            <video autoplay muted loop playsinline poster="../Personal%20Website%20Pics/newleaf/tracker-wide.png" aria-label="New Leaf live truck tracker with map of Rhode Island and fleet positions">
+                <source src="../newleafscreenrecord.mp4" type="video/mp4">
+            </video>
         </figure>
-        <div class="shot-grid">
-            <figure class="shot-card">
-                <img src="../Personal%20Website%20Pics/newleaf/dispatch-crews.png" alt="New Leaf dispatch board with unassigned jobs and Crew A day list">
-            </figure>
-            <figure class="shot-card">
-                <img src="../Personal%20Website%20Pics/newleaf/dispatch-wide.png" alt="New Leaf dispatch work day controls and crew assignment">
-            </figure>
-        </div>
-        <p class="shot-caption">Live truck tracker · Dispatch day lists · Crew assignment</p>
     </div>
 
     <article class="case">
-        <section class="chapter">
-            <div>
-                <div class="chapter-num">01</div>
-                <span class="chapter-label">The Problem</span>
-            </div>
-            <div>
-                <h2>Why did this project need to exist?</h2>
-                <p>Operations lived in manual processes—scattered updates, fragile handoffs, and no single place that reflected the real state of jobs, crews, and equipment.</p>
-                <p>Without a shared system, the business couldn’t scale how it scheduled work or trusted that everyone was looking at the same information.</p>
-            </div>
+        <section class="origin">
+            <h2>How this started</h2>
+            <p>This is my parents’ company—one they’ve been trying to get me to take over since I was little. Running the landscaping business was never the path I saw for myself. I like building software: systems, data, and interfaces that make messy work clearer.</p>
+            <p>But this was a way I could help. I started by consulting with them on what the business actually needed. As they’re getting older they want an exit strategy, and the hard truth is the business still depends on the knowledge, memory, and manual work they put in every day. They needed a way to automate, make things consistent, and build better, easier processes than the ones they were stuck with.</p>
         </section>
 
-        <section class="chapter alt">
-            <div>
-                <div class="chapter-num">02</div>
-                <span class="chapter-label">The Approach</span>
-            </div>
-            <div>
-                <h2>How did I approach it?</h2>
-                <p>I treated the database and environments as first-class product work—not afterthoughts. That meant designing for row-level security from the start, planning migrations so schemas stayed consistent, and separating sandboxes and testing from anything production-like.</p>
-                <ul>
-                    <li>Map business workflows before tables, so the schema matched how the company actually runs.</li>
-                    <li>Design API connections around the systems that already owned key data.</li>
-                    <li>Use RLS so access rules travel with the data, not only the UI.</li>
-                    <li>Keep sandboxes and test environments close enough to reality that migrations and edge cases show up early.</li>
-                </ul>
-            </div>
-        </section>
+        <p class="timeline-label">Build timeline</p>
 
-        <section class="chapter">
-            <div>
-                <div class="chapter-num">03</div>
-                <span class="chapter-label">The Build</span>
-            </div>
-            <div>
-                <h2>What did I actually create?</h2>
-                <p>A live operations platform for New Leaf Landscape—dispatch, crew day lists, work records, and a truck tracker that refreshes in the field.</p>
-                <ul>
-                    <li>Live truck tracker with map positions refreshing every 30 seconds</li>
-                    <li>Dispatch boards for unassigned work and per-crew day lists (route order, send to crew, roll unfinished)</li>
-                    <li>Work records with invoice status and QuickBooks line-item mapping</li>
-                    <li>API connections, schema migrations, and row-level security across environments</li>
-                    <li>Business-specific workflows when a generic tool wouldn’t fit how the company runs</li>
-                </ul>
-            </div>
-        </section>
+        <div class="timeline">
+            <section class="step">
+                <div class="step-marker" aria-hidden="true">1</div>
+                <div class="step-body">
+                    <p class="step-phase">Phase 01 · Foundation</p>
+                    <h3>Reporting &amp; a real database</h3>
 
-        <section class="chapter alt">
-            <div>
-                <div class="chapter-num">04</div>
-                <span class="chapter-label">The Result</span>
-            </div>
-            <div>
-                <h2>What came out of it?</h2>
-                <p>A foundation the business can operate on: consistent data across environments, secured access at the database layer, and room to ship features without guessing whether testing matches reality.</p>
-                <p>The quieter win is operational trust—people and systems looking at the same state of jobs, crews, and resources.</p>
-            </div>
-        </section>
+                    <div class="block problem">
+                        <span class="block-label">Problem</span>
+                        <p>They went into each season mostly blind—printed spreadsheets of pricing, houses, and worker hours, with no clean way to compare one year to the next. Critical numbers lived in folders and printouts, not in a system.</p>
+                    </div>
 
-        <section class="chapter">
-            <div>
-                <div class="chapter-num">05</div>
-                <span class="chapter-label">The Technical Side</span>
-            </div>
-            <div>
-                <h2>Under the hood</h2>
-                <p>Stack and infrastructure focused on integrations, data integrity, and environment discipline.</p>
-                <ul class="tech-tags">
-                    <li>Next.js</li>
-                    <li>Supabase</li>
-                    <li>JavaScript</li>
-                    <li>API Integration</li>
-                    <li>PostgreSQL / RLS</li>
-                    <li>Schema Migrations</li>
-                    <li>Sandboxes &amp; Testing</li>
-                </ul>
-            </div>
+                    <div class="block">
+                        <span class="block-label">Solution</span>
+                        <p>I connected their QuickBooks account, stood up a database shaped around how the business actually runs, and built a reporting tab that joins customers, invoices, and line-item prices to work-record hours by invoice number. Year-over-year labor and billed amounts show up in one place—per job, per service.</p>
+                    </div>
+
+                    <figure class="step-shot">
+                        <img src="../Personal%20Website%20Pics/newleaf/jobs-report.png" alt="Jobs report showing year-over-year hours and billed totals grouped by service, with percent change badges">
+                    </figure>
+                    <p class="shot-note">Jobs report · hours and billed · year over year</p>
+
+                    <div class="block">
+                        <span class="block-label">Tech</span>
+                        <ul class="tech-tags">
+                            <li>Supabase / Postgres</li>
+                            <li>Schema migrations</li>
+                            <li>RLS (staff read / office write)</li>
+                            <li>QuickBooks OAuth + sync</li>
+                            <li>Dev vs prod projects</li>
+                            <li>Next.js / TypeScript</li>
+                        </ul>
+                        <p class="tech-note">Grants and RLS policies land together; QuickBooks tokens stay service-role only and encrypted. Nothing hits production until migrations have run on a separate dev project.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="step">
+                <div class="step-marker" aria-hidden="true">2</div>
+                <div class="step-body">
+                    <p class="step-phase">Phase 02 · Record keeping</p>
+                    <h3>Work records that don’t fall through cracks</h3>
+
+                    <div class="block problem">
+                        <span class="block-label">Problem</span>
+                        <p>Their master spreadsheet—no real column names, treated like scripture—was the bible for everything. Jobs with open questions, unbilled work, and incomplete rows were easy to lose. Entering data was error-prone and disconnected from invoicing.</p>
+                    </div>
+
+                    <div class="block">
+                        <span class="block-label">Solution</span>
+                        <p>I imported that history into the database, then built a work-record view so they can filter by date and invoice status, flag needs-attention jobs, and see what still needs billing. Next came a structured input flow: batch by crew, enforce cleaner fields, and suggest QuickBooks line items so invoicing gets easier instead of restarting from scratch each week.</p>
+                    </div>
+
+                    <figure class="step-shot">
+                        <img src="../Personal%20Website%20Pics/newleaf/work-record-view.png" alt="Work record view with date filters, invoice status, hours, line items, and needs-attention flags">
+                    </figure>
+                    <p class="shot-note">Work record view · filters, invoice status, needs attention</p>
+
+                    <figure class="step-shot">
+                        <img src="../Personal%20Website%20Pics/newleaf/work-record-input.png" alt="Work record input batched by crew with QuickBooks line item suggestion and save for later">
+                    </figure>
+                    <p class="shot-note">Work record input · crew batching · QuickBooks line items</p>
+
+                    <div class="block">
+                        <span class="block-label">Tech</span>
+                        <ul class="tech-tags">
+                            <li>Supabase work_records table</li>
+                            <li>RLS insert/update policies</li>
+                            <li>Spreadsheet import → DB</li>
+                            <li>QuickBooks item catalog</li>
+                            <li>Line-item suggestion</li>
+                            <li>Server actions / writes</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="step">
+                <div class="step-marker" aria-hidden="true">3</div>
+                <div class="step-body">
+                    <p class="step-phase">Phase 03 · Field ops · in progress</p>
+                    <h3>Dispatch instead of verbal directions</h3>
+
+                    <div class="block problem">
+                        <span class="block-label">Problem</span>
+                        <p>Crews depended on my parents for direction—what to do, where to go, and in what order. Schedules lived in conversation. There was no shared day list tying employees to crews, crews to trucks, and trucks to stops.</p>
+                    </div>
+
+                    <div class="block">
+                        <span class="block-label">Solution</span>
+                        <p>I built a dispatch board: assign employees to crews, crews to trucks, and trucks to ordered day lists. Pull up a service like spring cleanup, drag stops from an unassigned parking lot onto a crew, reorder mid-day, and send lists to the field.</p>
+                        <p>Still building next:</p>
+                        <ul>
+                            <li>Location-aware ordering by property lat/long for more efficient routes</li>
+                            <li>Field work records pre-filled from dispatch—workers only enter arrival and departure times</li>
+                        </ul>
+                    </div>
+
+                    <figure class="step-shot">
+                        <img src="../Personal%20Website%20Pics/newleaf/dispatch-day.png" alt="Dispatch board with unassigned parking lot, crew day lists, truck assignments, and send-to-crew actions">
+                    </figure>
+                    <p class="shot-note">Dispatch · parking lot, crew lists, send to field</p>
+
+                    <div class="block">
+                        <span class="block-label">Tech</span>
+                        <ul class="tech-tags">
+                            <li>Crews / trucks / day lists</li>
+                            <li>Drag-and-drop board UI</li>
+                            <li>Geocoding (next)</li>
+                            <li>OneStepGPS truck map</li>
+                            <li>Dispatch → work records (next)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="closing">
+            <h2>Where this leaves them</h2>
+            <p>Year-over-year visibility, work records that match how invoicing actually works, and dispatch that turns a day of stops into something you can send and reorder—in the same system.</p>
+            <p>The quieter win is optionality: an exit strategy that doesn’t require the next owner to inherit unlabeled spreadsheets and tribal knowledge.</p>
         </section>
     </article>
 </body>

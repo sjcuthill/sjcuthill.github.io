@@ -9,8 +9,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --red: #8E3333; --ink: #1a1612; --muted: #5c564c;
-            --line: rgba(26, 22, 18, 0.12); --white: #ffffff; --gray: #f0efed;
+            --red: #8E3333;
+            --ink: #1a1612;
+            --muted: #5c564c;
+            --line: rgba(26, 22, 18, 0.12);
+            --white: #ffffff;
+            --gray: #f0efed;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--white); line-height: 1.65; }
@@ -25,10 +29,11 @@
         }
         .site-nav a:hover, .site-nav a.active { color: var(--red); border-color: rgba(142,51,51,0.35); }
         .back {
-            display: inline-flex; margin-bottom: 28px; font-size: 0.75rem; font-weight: 600;
-            letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--red);
+            display: inline-flex; align-items: center; gap: 8px; margin-bottom: 28px;
+            font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none; color: var(--red);
         }
-        .hero { max-width: 900px; margin: 0 auto; padding: 56px 28px 40px; }
+        .hero { max-width: 900px; margin: 0; padding: 56px 28px 48px; }
         .eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
         .hero h1 {
             font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 6vw, 4.2rem);
@@ -38,46 +43,75 @@
             font-size: 0.85rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
             color: var(--muted); margin-bottom: 22px;
         }
-        .hero .lede { font-size: 1.1rem; color: var(--muted); max-width: 50ch; }
-        .media {
+        .hero .lede { font-size: 1.1rem; color: var(--muted); max-width: 54ch; }
+        .preview-wrap {
             background: var(--gray); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-            padding: 36px 28px;
+            padding: 40px 28px;
         }
-        .media-frame {
-            max-width: 900px; margin: 0 auto; border-radius: 12px; overflow: hidden;
-            background: #111; border: 1px solid var(--line); aspect-ratio: 16 / 9;
-            display: flex; align-items: center; justify-content: center;
+        .shot-hero {
+            max-width: 980px; margin: 0 auto; overflow: hidden; background: #111;
         }
-        .media-frame img { width: 100%; height: 100%; object-fit: cover; }
-        .case { max-width: 800px; margin: 0 auto; padding: 20px 28px 80px; }
-        .chapter {
-            display: grid; grid-template-columns: 88px 1fr; gap: 24px;
-            padding: 48px 0; border-bottom: 1px solid var(--line);
+        .shot-hero img { display: block; width: 100%; height: auto; }
+        .case { max-width: 800px; margin: 0 auto; padding: 48px 28px 96px; }
+        .section { padding: 44px 0; border-bottom: 1px solid var(--line); }
+        .section:last-child { border-bottom: 0; padding-bottom: 0; }
+        .section-label {
+            font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--red); margin-bottom: 10px;
         }
-        .chapter:last-of-type { border-bottom: 0; }
-        .chapter-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--red); line-height: 1; font-weight: 500; }
-        .chapter-label {
-            display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em;
-            text-transform: uppercase; color: var(--muted); margin-top: 8px;
-        }
-        .chapter h2 {
+        .section h2 {
             font-family: 'Playfair Display', serif; font-size: 1.65rem; font-weight: 600;
             letter-spacing: -0.02em; margin-bottom: 14px;
         }
-        .chapter p + p { margin-top: 12px; }
-        .chapter p, .chapter li { color: var(--muted); font-size: 1.02rem; }
-        .chapter ul { margin: 12px 0 0 18px; }
-        .chapter li + li { margin-top: 8px; }
-        .alt { background: var(--gray); margin: 0 -28px; padding: 0 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 6px 10px; list-style: none; margin: 16px 0 0; }
-        .tech-tags li {
-            font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
-            color: var(--muted); border: 1px solid var(--line); padding: 4px 9px; background: var(--white);
+        .section p { color: var(--muted); font-size: 1.02rem; }
+        .section p + p { margin-top: 12px; }
+        .section ul { margin: 12px 0 0 18px; color: var(--muted); font-size: 1.02rem; }
+        .section li + li { margin-top: 8px; }
+
+        .process-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 28px 32px; margin-top: 22px;
         }
+        .process-item h3 {
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--ink); margin-bottom: 8px;
+        }
+        .process-item p { font-size: 0.95rem; color: var(--muted); }
+
+        .block { margin: 22px 0 0; }
+        .block-label {
+            display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--ink); margin-bottom: 8px;
+        }
+        .block.problem .block-label { color: var(--red); }
+        .block p { color: var(--muted); font-size: 1.02rem; }
+        .block p + p { margin-top: 10px; }
+        .block ul { margin: 8px 0 0 18px; color: var(--muted); font-size: 1.02rem; }
+        .block li + li { margin-top: 6px; }
+
+        .metric-list { list-style: none; margin: 14px 0 0; padding: 0; }
+        .metric-list li {
+            padding: 12px 0; border-top: 1px solid var(--line);
+            color: var(--muted); font-size: 0.98rem;
+        }
+        .metric-list li:last-child { border-bottom: 1px solid var(--line); }
+        .metric-list strong {
+            display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+            text-transform: uppercase; color: var(--ink); margin-bottom: 4px;
+        }
+
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 6px 8px; list-style: none; margin: 12px 0 0; }
+        .tech-tags li {
+            font-size: 0.68rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+            color: var(--muted); border: 1px solid var(--line); padding: 4px 9px; background: var(--gray);
+        }
+        .tech-note { margin-top: 12px; }
+        code {
+            font-size: 0.88em; background: var(--gray); padding: 0.1em 0.35em; border-radius: 3px;
+        }
+
         @media (max-width: 700px) {
-            .chapter { grid-template-columns: 1fr; gap: 10px; }
-            .hero, .case, .media { padding-left: 18px; padding-right: 18px; }
-            .alt { margin: 0 -18px; padding: 0 18px; }
+            .hero, .case, .preview-wrap { padding-left: 18px; padding-right: 18px; }
+            .process-grid { grid-template-columns: 1fr; gap: 20px; }
         }
     </style>
 </head>
@@ -94,92 +128,114 @@
         <p class="eyebrow">02 / Full Stack · Team Collaboration</p>
         <h1>CTV Buyer</h1>
         <p class="subtitle">Web Developer Intern · March 2025–Present</p>
-        <p class="lede">Shipping inside a real product team—issues, PRs, full-stack features, workers, and the communication that keeps delivery moving.</p>
+        <p class="lede">My current role: shipping full-stack pieces of a connected-TV buying platform with two other engineers—where the work isn’t only the feature, it’s the PR, the CI, and the environments that keep a shared product safe to change.</p>
     </header>
 
-    <div class="media">
-        <div class="media-frame">
-            <img src="../Personal%20Website%20Pics/ctvbuyer%20logo.jpg" alt="CTV Buyer branding">
-        </div>
+    <div class="preview-wrap">
+        <figure class="shot-hero">
+            <img src="../ctvlanding.png" alt="CTV Buyer Health Check dashboard with per-station heatmaps, bid request charts, and inventory alerts">
+        </figure>
     </div>
 
     <article class="case">
-        <section class="chapter">
-            <div>
-                <div class="chapter-num">01</div>
-                <span class="chapter-label">The Problem</span>
-            </div>
-            <div>
-                <h2>Why did this project need to exist?</h2>
-                <p>Campaign and operations teams needed clearer visibility into performance, and the product needed systems that could react to events—not only display them. Manual updates and one-size-fits-all views left people hunting for the signal that mattered to their role.</p>
+        <section class="section">
+            <p class="section-label">01 · The role</p>
+            <h2>Limited agency, real ownership</h2>
+            <p>Unlike New Leaf, I don’t set the product roadmap here. I work inside an existing codebase and process with a small team—two other people—where tickets, reviews, and release discipline matter as much as the code I write.</p>
+            <p>I’ve still owned substantial dashboard surfaces end-to-end. The through-line of this case study is that collaboration: how a feature moves from branch to review to the right environment without breaking what everyone else is building.</p>
+        </section>
+
+        <section class="section">
+            <p class="section-label">02 · How we ship</p>
+            <h2>Process is part of the craft</h2>
+            <p>On a three-person team, “done” means the change survives someone else’s eyes and the pipeline—not just that it runs on my laptop.</p>
+            <div class="process-grid">
+                <div class="process-item">
+                    <h3>Pull requests</h3>
+                    <p>Features land as reviewable PRs with clear scope. Bigger work gets broken into commits that are easy to reason about—UI, worker scoring, migrations—so reviewers can follow the story.</p>
+                </div>
+                <div class="process-item">
+                    <h3>CI checks</h3>
+                    <p>Nothing merges on vibes. Automated checks catch breakage before it hits shared branches, which matters when multiple people touch the same dashboard and data paths.</p>
+                </div>
+                <div class="process-item">
+                    <h3>Environments</h3>
+                    <p>Dev and production stay intentional. Schema work is preflighted against <code>origin/dev</code>; duplicate or already-landed migrations get cleaned up so environments don’t drift.</p>
+                </div>
+                <div class="process-item">
+                    <h3>Shared ownership</h3>
+                    <p>I build full slices when I own a ticket, but I still design for the next person reading the PR—naming, migration hygiene, and not leaving half-applied schema on someone else’s day.</p>
+                </div>
             </div>
         </section>
 
-        <section class="chapter alt">
-            <div>
-                <div class="chapter-num">02</div>
-                <span class="chapter-label">The Approach</span>
-            </div>
-            <div>
-                <h2>How did I approach it?</h2>
-                <p>I worked the way the team works: track issues, communicate blockers and tradeoffs, open and review pull requests, and ship full-stack changes that include background workers—not just UI.</p>
-                <ul>
-                    <li>Own tickets end-to-end with clear status and review habits</li>
-                    <li>Design for role-specific views so each user sees what they need</li>
-                    <li>Prefer event-driven paths (webhooks, notifications, email) over manual refresh loops</li>
-                    <li>Use agentic workflows with tools—not ML—to automate repeatable actions</li>
-                </ul>
-            </div>
-        </section>
+        <section class="section">
+            <p class="section-label">03 · Featured build</p>
+            <h2>Per-station Health Check</h2>
+            <p>In CTV advertising, stations (publishers / inventory sources) continuously send <strong>bid requests</strong>—signals that there’s an ad opportunity available. Winning an auction isn’t enough: the creative has to <strong>render</strong>, and the station needs healthy <strong>inventory</strong> so buyers aren’t bidding into a dead pipe. Ops needed a way to see, per station, when those signals drifted from normal—before a campaign quietly under-delivered.</p>
 
-        <section class="chapter">
-            <div>
-                <div class="chapter-num">03</div>
-                <span class="chapter-label">The Build</span>
+            <div class="block problem">
+                <span class="block-label">Problem</span>
+                <p>Station health was hard to spot at a glance. Bid-request volume, render rate, and inventory could dip for a day or a week without a clear baseline or alert surface. Admins needed thresholds, day-by-day context, and controls to hide or streamline noisy stations—not another raw metrics dump.</p>
             </div>
-            <div>
-                <h2>What did I actually create?</h2>
-                <ul>
-                    <li>Full-stack features across TypeScript/React UI and Java services</li>
-                    <li>Background workers for jobs that shouldn’t block the request path</li>
-                    <li>Webhook integrations that respond to external and internal events</li>
-                    <li>Automatic emails and a notification center for timely, role-aware signals</li>
-                    <li>Agentic tool-based workflows that take actions on behalf of users</li>
-                    <li>Dashboards, API-driven campaign tracking, and interactive regional maps</li>
-                </ul>
-            </div>
-        </section>
 
-        <section class="chapter alt">
-            <div>
-                <div class="chapter-num">04</div>
-                <span class="chapter-label">The Result</span>
+            <div class="block">
+                <span class="block-label">Solution</span>
+                <p>I built the admin Health Check page: each station is scored against a rolling baseline for bid requests, render rate, and inventory. A day heatmap shows status over the range; charts compare live performance to the baseline; flagged stations call out why (e.g. low bid requests for N days). Thresholds drive inventory alerting. Manage-stations and hide controls, plus a Streamline toggle, keep the board usable when the station list is long.</p>
+                <p>Scoring runs after daily aggregation in a worker—not on every page load—so the UI reads precomputed health instead of recomputing history in the request path.</p>
             </div>
-            <div>
-                <h2>What came out of it?</h2>
-                <p>Features that fit how the team actually delivers software: reviewable PRs, tracked issues, and product surfaces that differ by role. Users get notified when something matters; workers and webhooks keep systems current without constant manual babysitting.</p>
-                <p>The other outcome is practice—communicating inside a team, not only coding alone.</p>
-            </div>
-        </section>
 
-        <section class="chapter">
-            <div>
-                <div class="chapter-num">05</div>
-                <span class="chapter-label">The Technical Side</span>
-            </div>
-            <div>
-                <h2>Under the hood</h2>
+            <ul class="metric-list">
+                <li>
+                    <strong>Bid requests (BR)</strong>
+                    Volume of ad opportunities from the station, scored from <code>channel_device_metrics_daily</code>. A sustained drop usually means less supply reaching the auction.
+                </li>
+                <li>
+                    <strong>Render rate (RR)</strong>
+                    How often won ads actually play. Separates “we bought it” from “the viewer saw it”—critical for diagnosing player or delivery issues vs. auction issues.
+                </li>
+                <li>
+                    <strong>Inventory</strong>
+                    Health of available opportunities over time, with threshold limits so multi-day inventory problems flag louder than a one-day blip.
+                </li>
+                <li>
+                    <strong>Pod clear rate (PCR)</strong>
+                    Σfilled / Σrequested from Publica auction totals (<code>channel_pod_clear_daily</code>, UTC). Shows how completely ad pods clear—ingest, worker <code>pod_clear_rate</code>, chart, and API wired through daily aggregation and backfill.
+                </li>
+            </ul>
+
+            <div class="block">
+                <span class="block-label">Tech</span>
                 <ul class="tech-tags">
-                    <li>TypeScript</li>
-                    <li>React</li>
-                    <li>Java</li>
-                    <li>Workers</li>
-                    <li>Webhooks</li>
-                    <li>Notifications</li>
-                    <li>APIs</li>
-                    <li>JSON</li>
+                    <li>Health Check UI + API</li>
+                    <li>Daily aggregation worker</li>
+                    <li>Rolling baseline scoring</li>
+                    <li>Heatmap / charts</li>
+                    <li>Inventory alert thresholds</li>
+                    <li>PCR ingest (Publica)</li>
+                    <li>channel_pod_clear_daily</li>
+                    <li>channel_device_metrics_daily</li>
+                    <li>Supabase migrations</li>
+                    <li>Backfill wiring</li>
                 </ul>
+                <p class="tech-note">Migration hygiene was part of the ship: after preflighting against <code>origin/dev</code>, I dropped duplicate dated copies of migrations that had already landed under later timestamps so dev stayed clean for the rest of the team.</p>
             </div>
+        </section>
+
+        <section class="section">
+            <p class="section-label">04 · What I take from it</p>
+            <h2>Shipping with other people</h2>
+            <p>I’ve owned full dashboard slices—Health Check is the clearest example—but the skill this role trains is different from solo product work: communicate scope in a PR, respect CI and environments, leave schema in a state the next person can trust, and still deliver something ops can use the same week.</p>
+            <ul class="tech-tags">
+                <li>TypeScript</li>
+                <li>React</li>
+                <li>Workers</li>
+                <li>Supabase</li>
+                <li>CI / PRs</li>
+                <li>Dev &amp; prod environments</li>
+                <li>CTV ad metrics</li>
+                <li>APIs</li>
+            </ul>
         </section>
     </article>
 </body>
