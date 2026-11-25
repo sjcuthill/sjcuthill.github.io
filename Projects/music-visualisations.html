@@ -25,10 +25,11 @@
         }
         .site-nav a:hover, .site-nav a.active { color: var(--red); border-color: rgba(142,51,51,0.35); }
         .back {
-            display: inline-flex; margin-bottom: 28px; font-size: 0.75rem; font-weight: 600;
-            letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--red);
+            display: inline-flex; align-items: center; gap: 8px; margin-bottom: 28px;
+            font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none; color: var(--red);
         }
-        .hero { max-width: 900px; margin: 0 auto; padding: 56px 28px 40px; }
+        .hero { max-width: 900px; margin: 0; padding: 56px 28px 48px; }
         .eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
         .hero h1 {
             font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 6vw, 4.2rem);
@@ -44,7 +45,7 @@
             padding: 48px 28px;
         }
         .media-frame {
-            max-width: 900px; margin: 0 auto; border-radius: 12px; overflow: hidden;
+            max-width: 900px; margin: 0 auto; overflow: hidden;
             background: linear-gradient(135deg, #191414 0%, #1db954 120%);
             min-height: 240px; display: flex; align-items: center; justify-content: center; padding: 48px;
         }
@@ -65,14 +66,16 @@
             letter-spacing: -0.02em; margin-bottom: 14px;
         }
         .chapter p + p { margin-top: 12px; }
-        .chapter p, .chapter li { color: var(--muted); font-size: 1.02rem; }
-        .chapter ul { margin: 12px 0 0 18px; }
-        .chapter li + li { margin-top: 8px; }
+        .chapter p, .chapter ul:not(.tech-tags) li { color: var(--muted); font-size: 1.02rem; }
+        .chapter ul:not(.tech-tags) { margin: 12px 0 0 18px; }
+        .chapter ul:not(.tech-tags) li + li { margin-top: 8px; }
         .alt { background: var(--gray); margin: 0 -28px; padding: 0 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 6px 10px; list-style: none; margin: 16px 0 0; }
+        .tech-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; list-style: none; margin: 16px 0 0; }
         .tech-tags li {
-            font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
-            color: var(--muted); border: 1px solid var(--line); padding: 4px 9px; background: var(--white);
+            display: inline-flex; align-items: center;
+            font-size: 0.68rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+            line-height: 1.25; color: var(--muted); white-space: nowrap; margin: 0;
+            border: 1px solid var(--line); border-radius: 0; padding: 4px 9px; background: var(--gray);
         }
         @media (max-width: 700px) {
             .chapter { grid-template-columns: 1fr; gap: 10px; }

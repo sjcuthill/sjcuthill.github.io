@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capstone — EcoLoop · Case Study · Sierra Cuthill</title>
+    <title>EcoLoop — Capstone Case Study · Sierra Cuthill</title>
     <link rel="icon" type="image/png" href="../Favicon.png">
     <link rel="shortcut icon" type="image/png" href="../Favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --red: #8E3333; --ink: #1a1612; --muted: #5c564c;
-            --line: rgba(26, 22, 18, 0.12); --white: #ffffff; --gray: #f0efed;
+            --red: #8E3333;
+            --ink: #1a1612;
+            --muted: #5c564c;
+            --line: rgba(26, 22, 18, 0.12);
+            --white: #ffffff;
+            --gray: #f0efed;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--white); line-height: 1.65; }
@@ -25,10 +29,11 @@
         }
         .site-nav a:hover, .site-nav a.active { color: var(--red); border-color: rgba(142,51,51,0.35); }
         .back {
-            display: inline-flex; margin-bottom: 28px; font-size: 0.75rem; font-weight: 600;
-            letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--red);
+            display: inline-flex; align-items: center; gap: 8px; margin-bottom: 28px;
+            font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+            text-decoration: none; color: var(--red);
         }
-        .hero { max-width: 900px; margin: 0 auto; padding: 56px 28px 40px; }
+        .hero { max-width: 900px; margin: 0; padding: 56px 28px 48px; }
         .eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
         .hero h1 {
             font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 6vw, 4.2rem);
@@ -38,46 +43,57 @@
             font-size: 0.85rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
             color: var(--muted); margin-bottom: 22px;
         }
-        .hero .lede { font-size: 1.1rem; color: var(--muted); max-width: 50ch; }
-        .media {
+        .hero .lede { font-size: 1.1rem; color: var(--muted); max-width: 54ch; }
+        .preview-wrap {
             background: var(--gray); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-            padding: 48px 28px;
+            padding: 40px 28px;
         }
-        .media-frame {
-            max-width: 520px; margin: 0 auto; border-radius: 12px; overflow: hidden;
-            background: #fafaf8; border: 1px solid var(--line); padding: 48px;
-            display: flex; align-items: center; justify-content: center;
+        .shot-hero {
+            max-width: 980px; margin: 0 auto; overflow: hidden; background: #fafaf8;
+            display: flex; align-items: center; justify-content: center; padding: 48px 28px;
         }
-        .media-frame img { max-height: 260px; max-width: 100%; width: auto; height: auto; object-fit: contain; }
-        .case { max-width: 800px; margin: 0 auto; padding: 20px 28px 80px; }
-        .chapter {
-            display: grid; grid-template-columns: 88px 1fr; gap: 24px;
-            padding: 48px 0; border-bottom: 1px solid var(--line);
+        .shot-hero img { display: block; max-height: 280px; max-width: 100%; width: auto; height: auto; object-fit: contain; }
+        .case { max-width: 800px; margin: 0 auto; padding: 48px 28px 96px; }
+        .section { padding: 44px 0; border-bottom: 1px solid var(--line); }
+        .section:last-child { border-bottom: 0; padding-bottom: 0; }
+        .section-label {
+            font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--red); margin-bottom: 10px;
         }
-        .chapter:last-of-type { border-bottom: 0; }
-        .chapter-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--red); line-height: 1; font-weight: 500; }
-        .chapter-label {
-            display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em;
-            text-transform: uppercase; color: var(--muted); margin-top: 8px;
-        }
-        .chapter h2 {
+        .section h2 {
             font-family: 'Playfair Display', serif; font-size: 1.65rem; font-weight: 600;
             letter-spacing: -0.02em; margin-bottom: 14px;
         }
-        .chapter p + p { margin-top: 12px; }
-        .chapter p, .chapter li { color: var(--muted); font-size: 1.02rem; }
-        .chapter ul { margin: 12px 0 0 18px; }
-        .chapter li + li { margin-top: 8px; }
-        .alt { background: var(--gray); margin: 0 -28px; padding: 0 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 6px 10px; list-style: none; margin: 16px 0 0; }
+        .section p { color: var(--muted); font-size: 1.02rem; }
+        .section p + p { margin-top: 12px; }
+        .section ul:not(.tech-tags) { margin: 12px 0 0 18px; color: var(--muted); font-size: 1.02rem; }
+        .section ul:not(.tech-tags) li + li { margin-top: 8px; }
+        .result-callout {
+            margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line);
+            font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 600;
+            letter-spacing: -0.02em; color: var(--ink);
+        }
+        .result-callout span { display: block; font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+        .links {
+            display: inline-flex; flex-direction: column; align-items: stretch; gap: 12px;
+            margin-top: 22px; list-style: none;
+        }
+        .links li { display: block; }
+        .links a {
+            display: flex; align-items: center; gap: 8px; width: 100%; box-sizing: border-box;
+            font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--red); text-decoration: none; border-bottom: 1px solid transparent;
+        }
+        .links a:hover { border-bottom-color: var(--red); }
+        .tech-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; list-style: none; margin: 16px 0 0; }
         .tech-tags li {
-            font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
-            color: var(--muted); border: 1px solid var(--line); padding: 4px 9px; background: var(--white);
+            display: inline-flex; align-items: center;
+            font-size: 0.68rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+            line-height: 1.25; color: var(--muted); white-space: nowrap; margin: 0;
+            border: 1px solid var(--line); border-radius: 0; padding: 4px 9px; background: var(--gray);
         }
         @media (max-width: 700px) {
-            .chapter { grid-template-columns: 1fr; gap: 10px; }
-            .hero, .case, .media { padding-left: 18px; padding-right: 18px; }
-            .alt { margin: 0 -18px; padding: 0 18px; }
+            .hero, .case, .preview-wrap { padding-left: 18px; padding-right: 18px; }
         }
     </style>
 </head>
@@ -91,91 +107,70 @@
 
     <header class="hero">
         <a class="back" href="projects.html">← All projects</a>
-        <p class="eyebrow">03 / Strategy · Creative Collaboration</p>
-        <h1>Capstone — EcoLoop</h1>
-        <p class="subtitle">Syracuse University</p>
-        <p class="lede">From idea to business plan to a presentation that could hold a room—creative collaboration under real deadlines.</p>
+        <p class="eyebrow">03 / Capstone · Strategic &amp; Entrepreneurial Management</p>
+        <h1>EcoLoop</h1>
+        <p class="subtitle">Whitman School · Syracuse University</p>
+        <p class="lede">A random team of five, one novel product idea, and a 15-minute pitch in front of real-world business judges—plus live questions on validity, how it works, and the numbers.</p>
     </header>
 
-    <div class="media">
-        <div class="media-frame">
-            <img src="../Personal%20Website%20Pics/EcoLoopLogo.png" alt="EcoLoop capstone logo">
-        </div>
+    <div class="preview-wrap">
+        <figure class="shot-hero">
+            <img src="../Personal%20Website%20Pics/EcoLoopLogo.png" alt="EcoLoop Filtration Solutions logo">
+        </figure>
     </div>
 
     <article class="case">
-        <section class="chapter">
-            <div>
-                <div class="chapter-num">01</div>
-                <span class="chapter-label">The Problem</span>
-            </div>
-            <div>
-                <h2>Why did this project need to exist?</h2>
-                <p>Capstone wasn’t a coding sprint—it was a requirement to take a vague opportunity and turn it into a coherent venture story: who it’s for, why it matters, and how you’d defend it in front of people who ask hard questions.</p>
-            </div>
+        <section class="section">
+            <p class="section-label">01 · The brief</p>
+            <h2>Five strangers, one venture</h2>
+            <p>For EEE 457 at Syracuse’s Whitman School, we were thrown into a random team of five and asked to invent something new—then prove it could hold up as a business. Not a class project that only needed slides: a full business profile, a working story for the product, and a live defense.</p>
+            <p>Our team: Jack Foster, Daniel Arougheti, Nathan Daniels, Sophia Russo, and me. I was team captain and project manager—organizing the group, keeping everyone on task, and delegating work so the project actually moved—while also serving as COO for operations, analytics, and the web side of how we’d show the brand online.</p>
         </section>
 
-        <section class="chapter alt">
-            <div>
-                <div class="chapter-num">02</div>
-                <span class="chapter-label">The Approach</span>
-            </div>
-            <div>
-                <h2>How did I approach it?</h2>
-                <p>I leaned into ideation and structure early—so creative energy had a container—and treated writing and presentation as product work with deadlines, not leftovers.</p>
-                <ul>
-                    <li>Brainstorm and refine until the idea could survive a one-sentence pitch</li>
-                    <li>Build a business plan that connected problem, value, and feasibility</li>
-                    <li>Collaborate creatively on narrative, visuals, and how the room should feel</li>
-                    <li>Schedule deliverables so polish wasn’t a last-night scramble</li>
-                </ul>
-            </div>
+        <section class="section">
+            <p class="section-label">02 · The product</p>
+            <h2>EcoLoop Filtration Solutions</h2>
+            <p>EcoLoop is a design-forward planter that folds air purification, dehumidification, automated plant irrigation, and a self-powering hydrogen conversion loop into one appliance for small, poorly ventilated apartments.</p>
+            <p>The dehumidifier pulls moisture from the room and stores it to water the plant. HEPA and activated carbon filters capture dust, pollen, mold, and other particles. A two-chamber membrane system—developed with academic guidance—converts captured particle waste into hydrogen using sunlight, so the device can power itself while the condensed water keeps the plant alive. One object instead of a stack of single-purpose machines eating floor space and airflow.</p>
+            <p>We backed that with a full plan: industry and market analysis, marketing, operations and sourcing, financials, risks, and a proposed raise—targeting urban renters 23–35 who want cleaner air without another bulky box in the corner.</p>
+            <ul class="links">
+                <li><a href="https://sjcuthill.github.io/EcoLoop/" target="_blank" rel="noopener">EcoLoop website ↗</a></li>
+                <li><a href="EcoLoop_Filtration_Solutions_Full.pdf" target="_blank" rel="noopener">Full business profile (PDF) ↗</a></li>
+            </ul>
         </section>
 
-        <section class="chapter">
-            <div>
-                <div class="chapter-num">03</div>
-                <span class="chapter-label">The Build</span>
-            </div>
-            <div>
-                <h2>What did I actually create?</h2>
-                <ul>
-                    <li>Contribution to the core EcoLoop concept and positioning</li>
-                    <li>Business-plan content and professional written deliverables</li>
-                    <li>Creative collaboration on how the story was shown and said</li>
-                    <li>Presentation materials and delivery practice for live critique</li>
-                </ul>
-            </div>
+        <section class="section">
+            <p class="section-label">03 · The pitch</p>
+            <h2>Fifteen minutes, five judges, no softballs</h2>
+            <p>We had 15 minutes to present the idea to five judges from real businesses—then take live questions on the spot. They pushed on whether the product was valid, how the tech and operations would actually work, and financial questions we had to answer without hiding behind the slide deck.</p>
+            <p>That meant the business plan couldn’t be theater. Market sizing, unit economics, break-even, competitive positioning against brands like Dyson and Honeywell, and the ask all had to survive people who evaluate ventures for a living.</p>
+            <p class="result-callout">
+                <span>Outcome</span>
+                2nd place in our room
+            </p>
         </section>
 
-        <section class="chapter alt">
-            <div>
-                <div class="chapter-num">04</div>
-                <span class="chapter-label">The Result</span>
-            </div>
-            <div>
-                <h2>What came out of it?</h2>
-                <p>A finished capstone narrative the team could present with confidence—and personal practice in ideation, planning, writing, and standing up to explain the work under time pressure.</p>
-            </div>
-        </section>
-
-        <section class="chapter">
-            <div>
-                <div class="chapter-num">05</div>
-                <span class="chapter-label">The Technical Side</span>
-            </div>
-            <div>
-                <h2>Under the hood</h2>
-                <p>This case study is about process and communication more than a single tech stack.</p>
-                <ul class="tech-tags">
-                    <li>Ideation</li>
-                    <li>Business Planning</li>
-                    <li>Creative Collaboration</li>
-                    <li>Professional Writing</li>
-                    <li>Presentation</li>
-                    <li>Deadline Management</li>
-                </ul>
-            </div>
+        <section class="section">
+            <p class="section-label">04 · What I owned</p>
+            <h2>Captain, PM, and COO</h2>
+            <p>On a five-person founding roster that didn’t choose each other, someone had to make the machine run. As team captain and project manager I organized the work, delegated sections of the plan and pitch, chased deadlines, and kept people aligned so we weren’t five parallel drafts colliding the night before judges.</p>
+            <p>My functional lane was still COO—operations and measurement: how the venture would run day to day, how we’d track what mattered, and how the brand showed up digitally—including the EcoLoop site and marketplace mock.</p>
+            <ul>
+                <li>Team captain / project management: organize, delegate, keep the group on task</li>
+                <li>Operations thinking for a hardware + consumables model (device sales + filter replacements)</li>
+                <li>Analytics framing for campaign tracking and geographic targeting</li>
+                <li>Web presence for the concept and online marketplace</li>
+                <li>Collaborating on the written business profile and the live pitch under a hard clock</li>
+            </ul>
+            <ul class="tech-tags">
+                <li>Team captain</li>
+                <li>Project management</li>
+                <li>Delegation</li>
+                <li>Business plan</li>
+                <li>Live pitch &amp; Q&amp;A</li>
+                <li>Operations / COO</li>
+                <li>Web / analytics</li>
+            </ul>
         </section>
     </article>
 </body>

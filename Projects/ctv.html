@@ -65,8 +65,8 @@
         }
         .section p { color: var(--muted); font-size: 1.02rem; }
         .section p + p { margin-top: 12px; }
-        .section ul { margin: 12px 0 0 18px; color: var(--muted); font-size: 1.02rem; }
-        .section li + li { margin-top: 8px; }
+        .section ul:not(.tech-tags) { margin: 12px 0 0 18px; color: var(--muted); font-size: 1.02rem; }
+        .section ul:not(.tech-tags) li + li { margin-top: 8px; }
 
         .process-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 28px 32px; margin-top: 22px;
@@ -85,8 +85,8 @@
         .block.problem .block-label { color: var(--red); }
         .block p { color: var(--muted); font-size: 1.02rem; }
         .block p + p { margin-top: 10px; }
-        .block ul { margin: 8px 0 0 18px; color: var(--muted); font-size: 1.02rem; }
-        .block li + li { margin-top: 6px; }
+        .block ul:not(.tech-tags) { margin: 8px 0 0 18px; color: var(--muted); font-size: 1.02rem; }
+        .block ul:not(.tech-tags) li + li { margin-top: 6px; }
 
         .metric-list { list-style: none; margin: 14px 0 0; padding: 0; }
         .metric-list li {
@@ -99,14 +99,16 @@
             text-transform: uppercase; color: var(--ink); margin-bottom: 4px;
         }
 
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 6px 8px; list-style: none; margin: 12px 0 0; }
+        .tech-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; list-style: none; margin: 12px 0 0; }
         .tech-tags li {
+            display: inline-flex; align-items: center;
             font-size: 0.68rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
-            color: var(--muted); border: 1px solid var(--line); padding: 4px 9px; background: var(--gray);
+            line-height: 1.25; color: var(--muted); white-space: nowrap; margin: 0;
+            border: 1px solid var(--line); border-radius: 0; padding: 4px 9px; background: var(--gray);
         }
         .tech-note { margin-top: 12px; }
         code {
-            font-size: 0.88em; background: var(--gray); padding: 0.1em 0.35em; border-radius: 3px;
+            font-size: 0.88em; background: var(--gray); padding: 0.1em 0.35em; border-radius: 0;
         }
 
         @media (max-width: 700px) {

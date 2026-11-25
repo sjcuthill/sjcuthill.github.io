@@ -76,18 +76,23 @@
         .tech-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px 10px;
+            gap: 6px 8px;
             list-style: none;
         }
 
         .tech-tags li {
-            font-size: 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.68rem;
             font-weight: 500;
             letter-spacing: 0.04em;
             text-transform: uppercase;
+            line-height: 1.25;
             color: var(--muted);
             border: 1px solid var(--line);
+            border-radius: 0;
             padding: 4px 9px;
+            background: var(--white);
         }
 
         .cta {
@@ -110,8 +115,8 @@
         .cta-loud {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            margin-top: 28px;
+            gap: 8px;
+            margin-top: 22px;
             padding: 14px 22px;
             font-size: 0.85rem;
             font-weight: 600;
@@ -339,6 +344,9 @@
 
         .feature .copy {
             grid-area: copy;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
             text-align: left;
             justify-self: start;
             align-self: start;
@@ -350,6 +358,7 @@
 
         /* Even projects (flip): text sits on the right, so right-align it */
         .feature.flip .copy {
+            align-items: flex-end;
             text-align: right;
             justify-self: end;
         }
@@ -365,24 +374,26 @@
             border-radius: 0;
             overflow: hidden;
             border: none;
-            box-shadow: 0 12px 36px rgba(26, 22, 18, 0.12), 0 2px 8px rgba(26, 22, 18, 0.06);
+            box-shadow: none;
             background: #1a1f1c;
             text-decoration: none;
             justify-self: center;
             align-self: center;
             width: 118%;
             max-width: none;
+            aspect-ratio: 2 / 1;
         }
 
         .shot-frame img,
         .shot-frame video {
             display: block;
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
         }
 
         .shot-frame video {
-            object-fit: contain;
             background: #1a1f1c;
         }
 
@@ -392,16 +403,30 @@
         .feature .copy .subtitle,
         .feature .copy .desc,
         .feature .copy .cta,
+        .feature .copy .cta-loud,
         .feature .copy p {
             text-align: inherit;
             margin-left: 0;
             margin-right: 0;
+            align-self: stretch;
+        }
+
+        .feature .copy .cta,
+        .feature .copy .cta-loud {
+            align-self: flex-start;
+        }
+
+        .feature.flip .copy .cta,
+        .feature.flip .copy .cta-loud {
+            align-self: flex-end;
         }
 
         .feature .copy .tech-tags {
             display: flex;
+            flex-wrap: wrap;
             justify-content: flex-start;
             align-items: flex-start;
+            align-self: stretch;
         }
 
         .feature.flip .copy .tech-tags {
@@ -685,8 +710,26 @@
                 justify-items: stretch;
             }
 
-            .feature .copy {
+            .feature .copy,
+            .feature.flip .copy {
                 max-width: none;
+                width: 100%;
+                align-items: flex-start;
+                text-align: left;
+                justify-self: stretch;
+            }
+
+            .feature.flip .copy .cta,
+            .feature.flip .copy .cta-loud {
+                align-self: flex-start;
+            }
+
+            .feature.flip .copy .tech-tags {
+                justify-content: flex-start;
+            }
+
+            .feature.flip .project-label {
+                align-items: flex-start;
             }
 
             .shot-frame {
@@ -758,7 +801,7 @@
                         <li>API Integration</li>
                         <li>RLS</li>
                     </ul>
-                    <a class="cta" href="new-leaf.html">Explore Project <span aria-hidden="true">→</span></a>
+                    <a class="cta" href="new-leaf.html">View Case Study <span aria-hidden="true">→</span></a>
                 </div>
                 <a class="preview shot-frame" href="new-leaf.html" aria-label="Explore New Leaf">
                     <video autoplay muted loop playsinline poster="../Personal%20Website%20Pics/newleaf/tracker-wide.png">
@@ -789,7 +832,7 @@
                         <li>CI / PRs</li>
                         <li>Supabase</li>
                     </ul>
-                    <a class="cta" href="ctv.html">View Case Study <span aria-hidden="true">↗</span></a>
+                    <a class="cta" href="ctv.html">View Case Study <span aria-hidden="true">→</span></a>
                 </div>
                 <a class="preview shot-frame" href="ctv.html" aria-label="Explore CTV Buyer">
                     <img src="../ctvlanding.png" alt="CTV Buyer Health Check dashboard with station monitoring and bid request charts">
@@ -810,14 +853,14 @@
                     <p class="category">Strategy · Creative Collaboration</p>
                     <h2 id="p3">EcoLoop</h2>
                     <p class="subtitle">Capstone Project</p>
-                    <p class="desc">Ideation through business plan and presentation—creative collaboration under deadlines, with professional writing that could stand in front of a room.</p>
+                    <p class="desc">Team captain for a random group of five—project-managed the plan and pitch, then defended a novel hardware concept to real judges. 2nd place in the room.</p>
                     <ul class="tech-tags">
-                        <li>Ideation</li>
-                        <li>Business Plan</li>
-                        <li>Presentation</li>
-                        <li>Writing</li>
+                        <li>Team Captain</li>
+                        <li>Project Mgmt</li>
+                        <li>Live Pitch</li>
+                        <li>COO</li>
                     </ul>
-                    <a class="cta" href="capstone.html">View Case Study <span aria-hidden="true">↗</span></a>
+                    <a class="cta" href="capstone.html">View Case Study <span aria-hidden="true">→</span></a>
                 </div>
                 <a class="preview shot-frame" href="capstone.html" aria-label="Explore Capstone">
                     <img src="../capstonelanding.png" alt="EcoLoop 3-year Gantt chart spanning formation through national retail expansion">
@@ -846,7 +889,7 @@
                         <li>Matplotlib</li>
                         <li>Seaborn</li>
                     </ul>
-                    <a class="cta" href="accident-severity.html">View Case Study <span aria-hidden="true">↗</span></a>
+                    <a class="cta" href="accident-severity.html">View Case Study <span aria-hidden="true">→</span></a>
                 </div>
                 <a class="preview shot-frame" href="accident-severity.html" aria-label="Explore Accident Severity">
                     <img src="../accidentprojectlanding.png" alt="Accident Severity Colab notebook setting up PySpark and loading the US accidents dataset">

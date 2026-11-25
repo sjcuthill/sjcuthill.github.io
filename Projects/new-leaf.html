@@ -48,8 +48,7 @@
         .hero .lede { font-size: 1.1rem; color: var(--muted); max-width: 52ch; }
         .preview-wrap { background: var(--gray); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 40px 28px; }
         .shot-hero {
-            max-width: 980px; margin: 0 auto; border-radius: 14px; overflow: hidden;
-            border: 1px solid var(--line); box-shadow: 0 24px 50px rgba(26,22,18,0.16); background: #111;
+            max-width: 980px; margin: 0 auto; overflow: hidden; background: #111;
         }
         .shot-hero video { display: block; width: 100%; height: auto; }
 
@@ -113,21 +112,22 @@
         .block.problem .block-label { color: var(--red); }
         .block p { color: var(--muted); font-size: 1.02rem; }
         .block p + p { margin-top: 10px; }
-        .block ul { margin: 8px 0 0 18px; color: var(--muted); font-size: 1.02rem; }
-        .block li + li { margin-top: 6px; }
+        .block ul:not(.tech-tags) { margin: 8px 0 0 18px; color: var(--muted); font-size: 1.02rem; }
+        .block ul:not(.tech-tags) li + li { margin-top: 6px; }
 
         .tech-tags {
-            display: flex; flex-wrap: wrap; gap: 6px 8px; list-style: none; margin: 0;
+            display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; list-style: none; margin: 0;
         }
         .tech-tags li {
+            display: inline-flex; align-items: center;
             font-size: 0.68rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
-            color: var(--muted); border: 1px solid var(--line); padding: 4px 9px; background: var(--gray);
+            line-height: 1.25; color: var(--muted); white-space: nowrap; margin: 0;
+            border: 1px solid var(--line); border-radius: 0; padding: 4px 9px; background: var(--gray);
         }
         .block .tech-note { margin-top: 12px; }
 
         .step-shot {
-            margin: 22px 0 8px; border-radius: 12px; overflow: hidden;
-            border: 1px solid var(--line); background: #111; box-shadow: 0 16px 36px rgba(26,22,18,0.12);
+            margin: 22px 0 8px; overflow: hidden; background: #111;
         }
         .step-shot img { display: block; width: 100%; height: auto; }
         .step-shot + .step-shot { margin-top: 14px; }
