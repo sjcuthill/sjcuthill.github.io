@@ -19,12 +19,18 @@
         button { padding:8px 12px; border:none; background:#8E3333; color:white; border-radius:6px; cursor:pointer; margin-left:8px; }
         button:disabled { opacity: 0.6; cursor: default; }
         .message { margin-top:12px; min-height:24px; }
-        a.back { margin-top: 16px; color:#231C07; text-decoration:none; }
+        .navlinks { display:flex; justify-content:center; flex-wrap:wrap; gap:8px 20px; margin-top:8px; }
+        .navlinks a { color:white; text-decoration:none; font-size:0.9rem; opacity:0.9; }
+        .navlinks a:hover { text-decoration:underline; opacity:1; }
     </style>
 </head>
 <body>
     <header>
         <h2>Wordle</h2>
+        <nav class="navlinks">
+            <a href="games.html">← Back to Games</a>
+            <a href="../index.html">← Back to Portfolio</a>
+        </nav>
     </header>
     <div class="board" id="board"></div>
     <div class="controls">
@@ -32,11 +38,6 @@
         <button id="enter">Enter</button>
     </div>
     <div class="message" id="message"></div>
-    <div style="display:flex; gap:12px; margin-top: 16px;">
-        <a class="back" href="games.html">← Back to Games</a>
-        <a class="back" href="../index.html">← Back to Portfolio</a>
-    </div>
-
     <script>
         // Common 5-letter English answers
         const answers = [

@@ -14,23 +14,24 @@
         .cell.revealed { background: #eaeaea; cursor: default; }
         .panel { margin-top: 14px; display: flex; gap: 10px; align-items: center; }
         button { background: #8E3333; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; }
-        a.back { margin-top: 16px; color: #231C07; text-decoration: none; }
+        .navlinks { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 20px; margin-top: 8px; }
+        .navlinks a { color: white; text-decoration: none; font-size: 0.9rem; opacity: 0.9; }
+        .navlinks a:hover { text-decoration: underline; opacity: 1; }
     </style>
 </head>
 <body>
     <header>
         <h2>Minesweeper</h2>
+        <nav class="navlinks">
+            <a href="games.html">← Back to Games</a>
+            <a href="../index.html">← Back to Portfolio</a>
+        </nav>
     </header>
     <div class="panel">
         <span>16x16 • 40 mines</span>
         <button id="reset">Reset</button>
     </div>
     <div id="board" class="board"></div>
-    <div style="display:flex; gap:12px; margin-top: 16px;">
-        <a class="back" href="games.html">← Back to Games</a>
-        <a class="back" href="../index.html">← Back to Portfolio</a>
-    </div>
-
     <script>
         const rows = 16, cols = 16, minesCount = 40;
         let board, mineSet, revealedCount, gameOver, minesPlaced;
