@@ -15,8 +15,9 @@
         .tile.present { background:#c9b458; color:white; border-color:#c9b458; }
         .tile.absent { background:#787c7e; color:white; border-color:#787c7e; }
         .controls { margin-top:16px; }
-        input { padding:8px 10px; border-radius:6px; border:1px solid #ccc; width:160px; }
+        input { padding:8px 10px; border-radius:6px; border:1px solid #ccc; width:160px; text-transform: uppercase; }
         button { padding:8px 12px; border:none; background:#8E3333; color:white; border-radius:6px; cursor:pointer; margin-left:8px; }
+        button:disabled { opacity: 0.6; cursor: default; }
         .message { margin-top:12px; min-height:24px; }
         a.back { margin-top: 16px; color:#231C07; text-decoration:none; }
     </style>
@@ -27,7 +28,7 @@
     </header>
     <div class="board" id="board"></div>
     <div class="controls">
-        <input id="guess" maxlength="5" placeholder="type 5 letters" />
+        <input id="guess" maxlength="5" placeholder="type 5 letters" autocomplete="off" spellcheck="false" />
         <button id="enter">Enter</button>
     </div>
     <div class="message" id="message"></div>
@@ -37,43 +38,115 @@
     </div>
 
     <script>
-        const words = [
-            'APPLE','ROBOT','TRAIN','SHARE','QUEST','BERRY','MUSIC','LIGHT','EARTH','CLOUD',
-            'WATER','HONEY','STONE','PLANT','DREAM','NURSE','SMILE','GRAPE','RIVER','MOUNT'
-        ];
-        const answer = words[Math.floor(Math.random()*words.length)];
+        // Common 5-letter English answers
+        const answers = [
+            'ABOUT','ABOVE','ABUSE','ACTOR','ACUTE','ADMIT','ADOPT','ADULT','AFTER','AGAIN',
+            'AGENT','AGREE','AHEAD','ALARM','ALBUM','ALERT','ALIEN','ALIGN','ALIKE','ALIVE',
+            'ALLOW','ALONE','ALONG','ALTER','AMONG','ANGER','ANGLE','ANGRY','APART','APPLE',
+            'APPLY','ARENA','ARGUE','ARISE','ARRAY','ARROW','ASIDE','ASSET','AUDIO','AUDIT',
+            'AVOID','AWAKE','AWARD','AWARE','BADLY','BAKER','BASIC','BASIS','BEACH','BEGAN',
+            'BEGIN','BEING','BELOW','BENCH','BIRTH','BLACK','BLAME','BLIND','BLOCK','BLOOD',
+            'BOARD','BOOST','BOOTH','BOUND','BRAIN','BRAND','BREAD','BREAK','BREED','BRIEF',
+            'BRING','BROAD','BROKE','BROWN','BUILD','BUILT','BUYER','CABLE','CANDY','CARRY',
+            'CATCH','CAUSE','CHAIN','CHAIR','CHAOS','CHARM','CHART','CHASE','CHEAP','CHECK',
+            'CHESS','CHEST','CHIEF','CHILD','CHINA','CHOSE','CIVIL','CLAIM','CLASS','CLEAN',
+            'CLEAR','CLICK','CLIFF','CLIMB','CLOCK','CLOSE','CLOUD','CLOWN','COACH','COAST',
+            'COBRA','COMET','CORAL','COULD','COUNT','COURT','COVER','CRAFT','CRANE','CRASH',
+            'CRAZY','CREAM','CRIME','CRISP','CROSS','CROWD','CROWN','CRUDE','CURVE','CYCLE',
+            'DAILY','DAISY','DANCE','DEATH','DEBUT','DELAY','DELTA','DEPTH','DIARY','DONOR',
+            'DOUBT','DOZEN','DRAFT','DRAMA','DRAWN','DREAM','DRESS','DRILL','DRINK','DRIVE',
+            'DROVE','EAGER','EAGLE','EARLY','EARTH','EIGHT','ELBOW','ELITE','EMAIL','EMPTY',
+            'ENEMY','ENJOY','ENTER','ENTRY','EQUAL','ERROR','EVENT','EVERY','EXACT','EXIST',
+            'EXTRA','FAITH','FALSE','FAULT','FEAST','FIBER','FIELD','FIFTH','FIFTY','FIGHT',
+            'FINAL','FIRST','FIXED','FLAME','FLASH','FLEET','FLOOR','FLUID','FLUTE','FOCUS',
+            'FORCE','FORTH','FORTY','FORUM','FOUND','FRAME','FRAUD','FRESH','FRONT','FROST',
+            'FRUIT','FULLY','FUNNY','GHOST','GIANT','GIVEN','GLASS','GLOBE','GLORY','GOING',
+            'GRACE','GRADE','GRAND','GRANT','GRAPE','GRASS','GRAVE','GRAVY','GREAT','GREEN',
+            'GROSS','GROUP','GROWN','GUARD','GUESS','GUEST','GUIDE','GUILD','HAPPY','HEART',
+            'HEAVY','HENCE','HONEY','HORSE','HOTEL','HOUSE','HUMAN','IDEAL','IMAGE','INDEX',
+            'INNER','INPUT','ISSUE','IVORY','JELLY','JOINT','JOKER','JUDGE','KNIFE','KNOWN',
+            'LABEL','LARGE','LASER','LATER','LAUGH','LAYER','LEARN','LEASE','LEAST','LEAVE',
+            'LEGAL','LEMON','LEVEL','LIGHT','LIMIT','LINKS','LIVER','LIVES','LOCAL','LOOSE',
+            'LOWER','LUCKY','LUNCH','LYING','MAGIC','MAJOR','MAKER','MANGO','MAPLE','MARCH',
+            'MATCH','MAYBE','MAYOR','MEANT','MEDIA','MELON','MERCY','METAL','MIGHT','MINOR',
+            'MINUS','MIRTH','MIXED','MODEL','MONEY','MONTH','MORAL','MOTOR','MOUNT','MOUSE',
+            'MOUTH','MOVED','MOVIE','MUSIC','NEEDS','NEVER','NEWLY','NICHE','NIGHT','NOBLE',
+            'NOISE','NORTH','NOTED','NOVEL','NURSE','OCCUR','OCEAN','OFFER','OFTEN','OLIVE',
+            'ONION','OPERA','ORBIT','ORDER','ORGAN','OTHER','OTTER','OUGHT','OVERT','PAINT',
+            'PANDA','PANEL','PAPER','PARTY','PASTA','PEACE','PEACH','PEARL','PHASE','PHONE',
+            'PHOTO','PIANO','PIECE','PILOT','PITCH','PIXEL','PIZZA','PLACE','PLAIN','PLANE',
+            'PLANT','PLATE','PLAZA','PLUSH','POINT','POKER','POUND','POWER','PRESS','PRICE',
+            'PRIDE','PRIME','PRINT','PRIOR','PRISM','PRIZE','PROOF','PROUD','PROVE','QUEEN',
+            'QUICK','QUIET','QUILT','QUIRK','QUITE','RADIO','RAISE','RANCH','RANGE','RAPID',
+            'RATIO','RAVEN','REACH','READY','REBEL','REFER','RIDER','RIDGE','RIGHT','RIVAL',
+            'RIVER','ROBOT','ROUGH','ROUND','ROUTE','ROYAL','RURAL','SALAD','SALSA','SAUCE',
+            'SCALE','SCENE','SCOPE','SCORE','SCOUT','SENSE','SERVE','SEVEN','SHALL','SHAPE',
+            'SHARE','SHARK','SHARP','SHEEP','SHEET','SHELF','SHELL','SHIFT','SHIRT','SHOCK',
+            'SHOOT','SHORE','SHORT','SHOWN','SIGHT','SINCE','SIXTH','SIXTY','SKATE','SKILL',
+            'SKULL','SLEEP','SLIDE','SLOPE','SMALL','SMART','SMILE','SMOKE','SNAKE','SOLAR',
+            'SOLID','SOLVE','SORRY','SOUND','SOUTH','SPACE','SPARE','SPARK','SPEAK','SPEED',
+            'SPEND','SPENT','SPICE','SPIKE','SPLIT','SPOKE','SPOON','SPORT','SQUID','STAFF',
+            'STAGE','STAKE','STAMP','STAND','START','STATE','STEAK','STEAM','STEEL','STICK',
+            'STILL','STOCK','STONE','STOOD','STORE','STORK','STORM','STORY','STRIP','STUCK',
+            'STUDY','STUFF','STYLE','SUGAR','SUITE','SUNNY','SUPER','SWEET','SWIRL','SWORD',
+            'SYRUP','TABLE','TAKEN','TASTE','TEACH','TEMPO','THANK','THEFT','THEIR','THEME',
+            'THERE','THESE','THICK','THING','THINK','THIRD','THORN','THOSE','THREE','THREW',
+            'THROW','TIGER','TIGHT','TIMES','TIRED','TITLE','TOAST','TODAY','TOKEN','TOOTH',
+            'TOPIC','TORSO','TOTAL','TOUCH','TOUGH','TOWER','TOXIC','TRACK','TRADE','TRAIL',
+            'TRAIN','TRASH','TREAT','TREND','TRIAL','TRIED','TRIES','TRUCK','TRULY','TRUST',
+            'TRUTH','TULIP','TWEET','TWICE','ULTRA','UNCLE','UNDER','UNION','UNITY','UNTIL',
+            'UPPER','UPSET','URBAN','USAGE','USUAL','VAGUE','VALID','VALUE','VAPOR','VAULT',
+            'VENOM','VIDEO','VILLA','VIRUS','VISIT','VITAL','VIVID','VOCAL','VOGUE','VOICE',
+            'WAFER','WAGON','WASTE','WATCH','WATER','WALTZ','WHALE','WHEAT','WHEEL','WHERE',
+            'WHICH','WHILE','WHITE','WHOLE','WHOSE','WIDOW','WIDTH','WITCH','WOMAN','WOMEN',
+            'WORLD','WORRY','WORSE','WORST','WORTH','WOULD','WOUND','WOVEN','WRITE','WRONG',
+            'WROTE','WRIST','YOUNG','YOUTH','ZEBRA'
+        ].filter((w, i, arr) => w.length === 5 && arr.indexOf(w) === i);
+
+        const answer = answers[Math.floor(Math.random() * answers.length)];
         const rows = 6, cols = 5;
         let currentRow = 0;
+        let busy = false;
         const boardEl = document.getElementById('board');
         const guessEl = document.getElementById('guess');
         const enterBtn = document.getElementById('enter');
         const messageEl = document.getElementById('message');
+        const validCache = new Map(answers.map((w) => [w, true]));
 
-        // setup grid
-        for (let i=0;i<rows*cols;i++) {
+        for (let i = 0; i < rows * cols; i++) {
             const div = document.createElement('div');
             div.className = 'tile';
             boardEl.appendChild(div);
         }
 
-        function setMessage(msg){ messageEl.textContent = msg; }
+        function setMessage(msg) { messageEl.textContent = msg; }
+
+        async function isEnglishWord(word) {
+            if (validCache.has(word)) return validCache.get(word);
+            try {
+                const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word.toLowerCase()}`);
+                const ok = res.ok;
+                validCache.set(word, ok);
+                return ok;
+            } catch (err) {
+                return answers.includes(word);
+            }
+        }
 
         function evaluate(guess) {
             const res = Array(cols).fill('absent');
             const answerCounts = {};
-            for (let i=0;i<cols;i++) {
+            for (let i = 0; i < cols; i++) {
                 const ch = answer[i];
-                answerCounts[ch] = (answerCounts[ch]||0)+1;
+                answerCounts[ch] = (answerCounts[ch] || 0) + 1;
             }
-            // first pass: correct
-            for (let i=0;i<cols;i++) {
+            for (let i = 0; i < cols; i++) {
                 if (guess[i] === answer[i]) {
                     res[i] = 'correct';
                     answerCounts[guess[i]]--;
                 }
             }
-            // second pass: present
-            for (let i=0;i<cols;i++) {
+            for (let i = 0; i < cols; i++) {
                 if (res[i] === 'correct') continue;
                 const ch = guess[i];
                 if (answerCounts[ch] > 0) {
@@ -84,24 +157,46 @@
             return res;
         }
 
-        function submit() {
-            const raw = guessEl.value.trim().toUpperCase();
+        async function submit() {
+            if (busy) return;
+            const raw = guessEl.value.trim().toUpperCase().replace(/[^A-Z]/g, '');
+            guessEl.value = raw;
             if (raw.length !== 5) { setMessage('Enter a 5-letter word'); return; }
-            const tiles = Array.from(boardEl.children).slice(currentRow*cols, currentRow*cols+cols);
+
+            busy = true;
+            enterBtn.disabled = true;
+            setMessage('Checking dictionary…');
+            const ok = await isEnglishWord(raw);
+            if (!ok) {
+                setMessage('Not in the English dictionary');
+                enterBtn.disabled = false;
+                busy = false;
+                return;
+            }
+
+            const tiles = Array.from(boardEl.children).slice(currentRow * cols, currentRow * cols + cols);
             const result = evaluate(raw);
-            for (let i=0;i<cols;i++) {
+            for (let i = 0; i < cols; i++) {
                 tiles[i].textContent = raw[i];
                 tiles[i].classList.add(result[i]);
             }
-            if (raw === answer) { setMessage('You got it! 🎉'); enterBtn.disabled = true; guessEl.disabled = true; return; }
+            if (raw === answer) {
+                setMessage('You got it!');
+                guessEl.disabled = true;
+                busy = false;
+                return;
+            }
             currentRow++;
             guessEl.value = '';
             if (currentRow === rows) {
                 setMessage(`Answer was ${answer}`);
-                enterBtn.disabled = true; guessEl.disabled = true;
+                guessEl.disabled = true;
             } else {
                 setMessage('');
+                enterBtn.disabled = false;
             }
+            busy = false;
+            guessEl.focus();
         }
 
         enterBtn.addEventListener('click', submit);
@@ -110,5 +205,3 @@
     </script>
 </body>
 </html>
-
-

@@ -71,6 +71,31 @@
         }
         .cta.ghost:hover { color: var(--red); border-color: rgba(142,51,51,0.35); text-decoration: none; }
 
+        .block .lead-wide { max-width: 70ch; }
+        .points {
+            list-style: none; margin-top: 28px; display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px;
+            border: 1px solid var(--line); background: var(--line);
+        }
+        .points li { padding: 18px 20px; background: var(--white); }
+        .points h3 {
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--red); margin-bottom: 6px;
+        }
+        .points p { font-size: 0.95rem; max-width: none; }
+        .flow {
+            list-style: none; margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+            font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink);
+        }
+        .flow li { padding: 8px 12px; border: 1px solid var(--line); background: var(--white); }
+        .flow li.arrow { border: 0; background: none; padding: 0; color: var(--red); }
+        .sheet-cols { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px 8px; list-style: none; }
+        .sheet-cols li {
+            font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 4px 9px; border: 1px solid var(--line); background: var(--gray); color: var(--muted); white-space: nowrap;
+        }
+        .band-gray .sheet-cols li { background: var(--white); }
+
         .ig-wrap {
             margin-top: 28px;
             max-width: 540px;
@@ -126,7 +151,33 @@
         <div class="block-inner">
             <p class="block-kicker">01 · Wedding website</p>
             <h2>Alyssa &amp; Liam — with a custom RSVP list</h2>
-            <p>A full wedding site for friends: story, details, gallery, registry—and a custom RSVP flow that keeps the guest list actually usable (not “hope the spreadsheet survives”).</p>
+            <p class="lead-wide">A full wedding site for friends: story, details, gallery, registry, and a custom RSVP flow that keeps the guest list actually usable (not “hope the spreadsheet survives”).</p>
+
+            <ul class="points">
+                <li>
+                    <h3>RSVP → Google Sheets</h3>
+                    <p>When a guest submits the RSVP, the sheet updates on its own. Nobody has to copy answers over by hand, so the couple just opens the sheet and it’s current.</p>
+                </li>
+                <li>
+                    <h3>Autofill name</h3>
+                    <p>Guests start typing and their name autofills from the guest list. It cuts down on typos and duplicate entries, and the answers land on the right row.</p>
+                </li>
+            </ul>
+
+            <ul class="flow" aria-label="RSVP flow">
+                <li>Guest submits RSVP</li>
+                <li class="arrow" aria-hidden="true">→</li>
+                <li>Google Sheet updates</li>
+                <li class="arrow" aria-hidden="true">→</li>
+                <li>Hands-off</li>
+            </ul>
+            <ul class="sheet-cols" aria-label="Columns written to the sheet">
+                <li>Decision</li>
+                <li>Meal choice</li>
+                <li>Song requests</li>
+                <li>Notes</li>
+            </ul>
+
             <div class="cta-row">
                 <a class="cta" href="https://sierracuthill03.github.io/Alyssa-Wedding/pages/home.html" target="_blank" rel="noopener noreferrer">Open the wedding site <span aria-hidden="true">↗</span></a>
                 <a class="cta ghost" href="https://sierracuthill03.github.io/Alyssa-Wedding/pages/rsvp.html" target="_blank" rel="noopener noreferrer">Peek the RSVP page <span aria-hidden="true">↗</span></a>
@@ -134,11 +185,53 @@
         </div>
     </section>
 
-    <section class="block" id="osnk">
+    <section class="block" id="coaching">
         <div class="block-inner">
-            <p class="block-kicker">02 · Nonprofit club · Social</p>
-            <h2>OSNK United on Instagram</h2>
-            <p>Social media for a nonprofit club—posts, presence, and keeping the feed looking like an actual organization lives there.</p>
+            <p class="block-kicker">02 · Coaching</p>
+            <h2>Coaching a U11 girls soccer team</h2>
+            <p class="lead-wide">I coach an under-11 girls team. It’s a project like any other: plan the work, run the schedule, work with other people, and change course when something isn’t working.</p>
+
+            <ul class="points">
+                <li>
+                    <h3>Practice plans</h3>
+                    <p>I write each week’s plan around what the team needs to work on, so every session has a point.</p>
+                </li>
+                <li>
+                    <h3>Schedules &amp; game time</h3>
+                    <p>I manage the practice and game schedule and the playing time, so the girls get fair minutes and everyone knows where to be.</p>
+                </li>
+                <li>
+                    <h3>Other coaches</h3>
+                    <p>I stay in contact with the other coaches about fields, times, and changes, so nothing surprises us on game day.</p>
+                </li>
+                <li>
+                    <h3>Pivoting on the fly</h3>
+                    <p>When a drill flops or the lineup changes at the last minute, I switch to something that works in the moment.</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="block band-gray" id="osnk">
+        <div class="block-inner">
+            <p class="block-kicker">03 · Nonprofit club · Board &amp; social</p>
+            <h2>OSNK United</h2>
+            <p class="lead-wide">OSNK United is a nonprofit club, and I’m on its board. I run its Instagram and help make the decisions that decide where the club goes.</p>
+
+            <ul class="points">
+                <li>
+                    <h3>On the board</h3>
+                    <p>I’m a board member of a nonprofit, which means I share responsibility for how the club runs, not just for its posts.</p>
+                </li>
+                <li>
+                    <h3>Voting on decisions</h3>
+                    <p>I vote on decisions for the club and weigh the options with the rest of the board.</p>
+                </li>
+                <li>
+                    <h3>Social media</h3>
+                    <p>I handle the posts and presence, so the feed looks like the organization it is.</p>
+                </li>
+            </ul>
             <div class="cta-row">
                 <a class="cta" href="https://www.instagram.com/osnkunited/" target="_blank" rel="noopener noreferrer">@osnkunited <span aria-hidden="true">↗</span></a>
             </div>
@@ -153,9 +246,9 @@
         </div>
     </section>
 
-    <section class="block band-gray" id="portfolio">
+    <section class="block" id="portfolio">
         <div class="block-inner">
-            <p class="block-kicker">03 · This portfolio</p>
+            <p class="block-kicker">04 · This portfolio</p>
             <h2>The site you’re on right now</h2>
             <p>Built it myself. You’re already inside it—so consider this the demo. Shhhh.</p>
             <div class="portfolio-frame">
@@ -169,6 +262,5 @@
         </div>
     </section>
 
-    <p class="foot">Built for fun. Official résumé energy lives elsewhere.</p>
 </body>
 </html>

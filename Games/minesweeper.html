@@ -30,70 +30,83 @@
         <a class="back" href="games.html">← Back to Games</a>
         <a class="back" href="../index.html">← Back to Portfolio</a>
     </div>
-    
+
     <script>
         const rows = 16, cols = 16, minesCount = 40;
-        let board, mineSet, revealedCount, gameOver;
+        let board, mineSet, revealedCount, gameOver, minesPlaced;
 
         const boardEl = document.getElementById('board');
         const resetBtn = document.getElementById('reset');
         boardEl.style.gridTemplateColumns = `repeat(${cols}, 32px)`;
 
         function init() {
-            board = Array.from({ length: rows }, () => Array.from({ length: cols }, () => ({ mine:false, adj:0, el:null, revealed:false, flagged:false })));
+            board = Array.from({ length: rows }, () => Array.from({ length: cols }, () => ({
+                mine: false, adj: 0, el: null, revealed: false, flagged: false
+            })));
             mineSet = new Set();
             revealedCount = 0;
             gameOver = false;
+            minesPlaced = false;
             boardEl.innerHTML = '';
 
-            // place mines
-            while (mineSet.size < minesCount) {
-                const r = Math.floor(Math.random()*rows);
-                const c = Math.floor(Math.random()*cols);
-                const key = `${r},${c}`;
-                if (!mineSet.has(key)) {
-                    mineSet.add(key);
-                    board[r][c].mine = true;
-                }
-            }
-
-            // compute adjacents
-            for (let r=0;r<rows;r++) {
-                for (let c=0;c<cols;c++) {
-                    if (board[r][c].mine) continue;
-                    board[r][c].adj = neighbors(r,c).filter(([nr,nc]) => board[nr][nc].mine).length;
-                }
-            }
-
-            // render
-            for (let r=0;r<rows;r++) {
-                for (let c=0;c<cols;c++) {
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
                     const div = document.createElement('div');
                     div.className = 'cell';
-                    div.addEventListener('click', () => onReveal(r,c));
-                    div.addEventListener('contextmenu', (e) => { e.preventDefault(); onFlag(r,c); });
+                    div.addEventListener('click', () => onReveal(r, c));
+                    div.addEventListener('contextmenu', (e) => { e.preventDefault(); onFlag(r, c); });
                     board[r][c].el = div;
                     boardEl.appendChild(div);
                 }
             }
         }
 
-        function neighbors(r,c) {
+        function neighbors(r, c) {
             const res = [];
-            for (let dr=-1; dr<=1; dr++) {
-                for (let dc=-1; dc<=1; dc++) {
-                    if (dr===0 && dc===0) continue;
-                    const nr=r+dr, nc=c+dc;
-                    if (nr>=0 && nr<rows && nc>=0 && nc<cols) res.push([nr,nc]);
+            for (let dr = -1; dr <= 1; dr++) {
+                for (let dc = -1; dc <= 1; dc++) {
+                    if (dr === 0 && dc === 0) continue;
+                    const nr = r + dr, nc = c + dc;
+                    if (nr >= 0 && nr < rows && nc >= 0 && nc < cols) res.push([nr, nc]);
                 }
             }
             return res;
         }
 
-        function onReveal(r,c) {
+        // First click is always a blank (0) — keep that cell and its neighbors mine-free
+        function placeMines(safeR, safeC) {
+            const forbidden = new Set([`${safeR},${safeC}`]);
+            neighbors(safeR, safeC).forEach(([nr, nc]) => forbidden.add(`${nr},${nc}`));
+
+            mineSet = new Set();
+            while (mineSet.size < minesCount) {
+                const r = Math.floor(Math.random() * rows);
+                const c = Math.floor(Math.random() * cols);
+                const key = `${r},${c}`;
+                if (forbidden.has(key) || mineSet.has(key)) continue;
+                mineSet.add(key);
+                board[r][c].mine = true;
+            }
+
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    if (board[r][c].mine) {
+                        board[r][c].adj = 0;
+                        continue;
+                    }
+                    board[r][c].adj = neighbors(r, c).filter(([nr, nc]) => board[nr][nc].mine).length;
+                }
+            }
+            minesPlaced = true;
+        }
+
+        function onReveal(r, c) {
             if (gameOver) return;
             const cell = board[r][c];
             if (cell.revealed || cell.flagged) return;
+
+            if (!minesPlaced) placeMines(r, c);
+
             cell.revealed = true;
             cell.el.classList.add('revealed');
             if (cell.mine) {
@@ -105,16 +118,15 @@
             if (cell.adj > 0) {
                 cell.el.textContent = cell.adj;
             } else {
-                // flood fill
-                neighbors(r,c).forEach(([nr,nc]) => {
-                    if (!board[nr][nc].revealed) onReveal(nr,nc);
+                neighbors(r, c).forEach(([nr, nc]) => {
+                    if (!board[nr][nc].revealed) onReveal(nr, nc);
                 });
             }
             checkWin();
         }
 
-        function onFlag(r,c) {
-            if (gameOver) return;
+        function onFlag(r, c) {
+            if (gameOver || !minesPlaced) return;
             const cell = board[r][c];
             if (cell.revealed) return;
             cell.flagged = !cell.flagged;
@@ -123,8 +135,7 @@
 
         function endGame(win) {
             gameOver = true;
-            // reveal all mines
-            board.flat().forEach(cell => {
+            board.flat().forEach((cell) => {
                 if (cell.mine) {
                     cell.el.textContent = '💣';
                     cell.el.classList.add('revealed');
@@ -134,7 +145,7 @@
         }
 
         function checkWin() {
-            if (revealedCount === rows*cols - minesCount) endGame(true);
+            if (revealedCount === rows * cols - minesCount) endGame(true);
         }
 
         resetBtn.addEventListener('click', init);
@@ -142,5 +153,3 @@
     </script>
 </body>
 </html>
-
-
